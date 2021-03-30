@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS internaluser (
   email_user varchar(100) NOT NULL,
   password varchar(100) NOT NULL,
   username varchar(100) NULL,
-  idrole varchar(100) NULL,
+  idrole int(11) NULL,
   PRIMARY KEY (iduser),
   FOREIGN KEY (idrole) REFERENCES role(idrole)
 );
