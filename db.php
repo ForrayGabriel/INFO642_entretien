@@ -1,10 +1,5 @@
 <?php
 
-// Tables à créer
-//
-// brewery(idbrewery, name, #country)
-// beer(idbeer, name, degree, #idbrewery)
-//
 
 // Modifier la dbname (votre login), login et mot de passe
 
