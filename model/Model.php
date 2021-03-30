@@ -20,8 +20,8 @@ class Model {
 				throw new Exception("Not in table: ".$table." id: ".$id );
 			} else {
 				$row = $st->fetch(PDO::FETCH_ASSOC);
-				foreach($row as $field=>$value) {
-					if (substr($field, 0,2) == "id") {
+				foreach($row as $field => $value) {
+					if ($field == "id".strtolower(get_class($this))) {
 						$linkedField = substr($field, 2);
 						$linkedClass = ucfirst($linkedField);
 						if ($linkedClass != get_class($this))
