@@ -36,6 +36,33 @@ class Model {
 
 	}
 
+	public function insert(){
+		$fields = [];
+		$values = [];
+		foreach($this as $field=>$value) {
+			if (stristr($field, '_id') === FALSE) {
+				$fields[] = substr($field, 1);
+				$values[] = $value;
+			}
+		}
+
+		try{		
+			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
+			$request->execute();
+		} catch(PDOException $e) {
+  			echo $e->getMessage();
+		}
+	}
+
+	public function delete($id){
+		try{
+			$request = db()->prepare("DELETE FROM " . strtolower(get_class($this)) . " WHERE id". strtolower(get_class($this)). " = " . $id);
+			$request->execute();
+		} catch(PDOException $e) {
+  			echo $e->getMessage();
+		}
+	}
+
 	public static function findAll() {
 		$class = get_called_class();
 		$table = strtolower($class);
