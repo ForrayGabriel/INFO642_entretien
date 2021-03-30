@@ -7,11 +7,13 @@ class Model {
 		$class = get_class($this);
 		$table = strtolower($class);
 		if ($id == null) {
-			$st = db()->prepare("insert into $table default values returning id$table");
-			$st->execute();
-			$row = $st->fetch();
-			$field = "id".$table;
-			$this->$field = $row[$field];
+			throw new Exception("id can't be null");
+			// $st = db()->prepare("select * from $table where 0");
+			// $st->execute();
+			// $row = $st->fetch();
+			// var_dump($row);
+			// $field = "id".$table;
+			// $this->$field = $row[$field];
 		} else {
 			$st = db()->prepare("select * from $table where id$table=:id");
 			$st->bindValue(":id", $id);
