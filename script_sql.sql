@@ -46,16 +46,16 @@ INSERT INTO student (idstudent,num_INE,num_student,iduser) VALUES
 (1,"1445D8854","8985444447",1),
 (2,"14E5D8854","8944589447",2);
 
-DROP TABLE IF EXISTS time_slot;
-CREATE TABLE IF NOT EXISTS time_slot (
-  idtime_slot int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS timeslot;
+CREATE TABLE IF NOT EXISTS timeslot (
+  idtimeslot int(11) NOT NULL AUTO_INCREMENT,
   date_day DATETIME NULL,
   start_time TIME NULL,
   end_time TIME NULL,
-  PRIMARY KEY (idtime_slot)
+  PRIMARY KEY (idtimeslot)
 );
 
-INSERT INTO time_slot (idtime_slot,date_day,start_time,end_time) VALUES
+INSERT INTO timeslot (idtimeslot,date_day,start_time,end_time) VALUES
 (1,"2010-04-02","",""),
 (2,"2010-04-02","",""),
 (3,"2010-04-02","",""),
@@ -65,14 +65,14 @@ DROP TABLE IF EXISTS availability;
 CREATE TABLE IF NOT EXISTS availability (
   idavailability int(11) NOT NULL AUTO_INCREMENT,
   iduser int(11) NOT NULL,
-  idtime_slot int(11) NOT NULL,
+  idtimeslot int(11) NOT NULL,
   comment varchar(2048) NULL,
   PRIMARY KEY (idavailability),
   FOREIGN KEY (iduser) REFERENCES internaluser(iduser),
-  FOREIGN KEY (idtime_slot) REFERENCES time_slot(idtime_slot)
+  FOREIGN KEY (idtimeslot) REFERENCES timeslot(idtimeslot)
 ); 
 
-INSERT INTO availability (idavailability,iduser,idtime_slot,comment) VALUES
+INSERT INTO availability (idavailability,iduser,idtimeslot,comment) VALUES
 (1,3,1,"Dispo vraiment si besoin"),
 (2,4,1,""),
 (3,4,3,"Disponible");
@@ -97,14 +97,14 @@ DROP TABLE IF EXISTS jury;
 CREATE TABLE IF NOT EXISTS jury (
   idjury int(11) NOT NULL AUTO_INCREMENT,
   idclassroom int(11) NOT NULL,
-  idtime_slot int(11) NOT NULL,
+  idtimeslot int(11) NOT NULL,
   name_jury varchar(2048) NULL,
   PRIMARY KEY (idjury),
   FOREIGN KEY (idclassroom) REFERENCES classroom(idclassroom),
-  FOREIGN KEY (idtime_slot) REFERENCES time_slot(idtime_slot)
+  FOREIGN KEY (idtimeslot) REFERENCES timeslot(idtimeslot)
 );
 
-INSERT INTO jury(idjury,idclassroom,idtime_slot,name_jury) VALUES
+INSERT INTO jury(idjury,idclassroom,idtimeslot,name_jury) VALUES
 (1,1,1,"Jury de la honte"),
 (2,2,2,"Jury des bg");
 
@@ -159,37 +159,37 @@ INSERT INTO prestation(idprestation,idstudent,idjury,idevent,start_time,end_time
 (1,1,1,1,"","","Super incroyablement nickel"),
 (2,2,1,1,"","","Finalement pas incroyable");
 
-DROP TABLE IF EXISTS evaluation_criteria;
-CREATE TABLE IF NOT EXISTS evaluation_criteria (
-  idevaluation_criteria int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS evaluationcriteria;
+CREATE TABLE IF NOT EXISTS evaluationcriteria (
+  idevaluationcriteria int(11) NOT NULL AUTO_INCREMENT,
   idevent int(11) NOT NULL,
   description_criteria varchar(2048) NULL,
   scale_criteria varchar(2048) NULL,
-  PRIMARY KEY (idevaluation_criteria),
+  PRIMARY KEY (idevaluationcriteria),
   FOREIGN KEY (idevent) REFERENCES event(idevent)
 );
 
-INSERT INTO evaluation_criteria(idevaluation_criteria,idevent,description_criteria,scale_criteria) VALUES
+INSERT INTO evaluationcriteria(idevaluationcriteria,idevent,description_criteria,scale_criteria) VALUES
 (1,1,"Contenu du diaporama","{A,B,C}"),
 (2,1,"Communication","{0:20}");
 
 
-DROP TABLE IF EXISTS individual_evaluation;
-CREATE TABLE IF NOT EXISTS individual_evaluation (
-  idindividual_evaluation int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS indivualevaluation;
+CREATE TABLE IF NOT EXISTS indivualevaluation (
+  idindivualevaluation int(11) NOT NULL AUTO_INCREMENT,
   idprestation int(11) NOT NULL,
-  idevaluation_criteria int(11) NOT NULL,
+  idevaluationcriteria int(11) NOT NULL,
   idcompose int(11) NOT NULL,
   individual_note varchar(25) NOT NULL,
   individual_comment varchar(255) NULL,
-  PRIMARY KEY (idindividual_evaluation),
+  PRIMARY KEY (idindivualevaluation),
   FOREIGN KEY (idprestation) REFERENCES prestation(idprestation),
-  FOREIGN KEY (idevaluation_criteria) REFERENCES evaluation_criteria(idevaluation_criteria),
+  FOREIGN KEY (idevaluationcriteria) REFERENCES evaluationcriteria(idevaluationcriteria),
   FOREIGN KEY (idcompose) REFERENCES compose(idcompose)
 );
 
 
-INSERT INTO individual_evaluation(idindividual_evaluation,idprestation,idevaluation_criteria,idcompose,individual_note,individual_comment) VALUES
+INSERT INTO indivualevaluation(idindivualevaluation,idprestation,idevaluationcriteria,idcompose,individual_note,individual_comment) VALUES
 (1,1,2,1,"20","Un peu lent dans la présentation"),
 (2,1,1,1,"A","Finalement, surpris de ce sujet oral");
 
