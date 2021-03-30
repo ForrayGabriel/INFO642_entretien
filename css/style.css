@@ -1,0 +1,62 @@
+* { margin: 0px; padding:0px; position: relative; }
+body {
+	background-color: white;
+	font-family: sans-serif, arial;
+}
+header {
+	padding: 10px;
+	border-bottom: solid 1px #888888;
+}
+
+
+a:link, a:visited {
+	font-weight: bold;
+	text-decoration: none;
+	color: Chocolate;
+	border: dotted 1px white;
+	transition: all 0.5s ease;
+}
+a:hover {
+	border-bottom: dotted 1px Chocolate;
+}
+
+nav li {
+	list-style-type: none;
+	display: inline-block;
+}
+nav a:link, nav a:visited{
+	display: block;
+	padding: 10px;h
+	border: none;
+}
+nav a:hover  {
+	border: none;
+	background-color: Chocolate;
+	color: white;	
+}
+section {
+	padding: 10px;
+	min-height: 300px;
+}
+section table {
+	margin: 20px;
+	border-collapse: collapse;
+}
+section td {
+	border-bottom: solid 1px #888888;
+	padding: 10px;
+}
+section p {
+	margin: 20px;
+}
+
+footer {
+	border-top: solid 1px #888888;
+	padding: 10px;
+	font-size: 0.8em;
+}
+
+
+
+
+
