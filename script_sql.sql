@@ -13,20 +13,20 @@ INSERT INTO role (idrole,name_role) VALUES
 
 DROP TABLE IF EXISTS internaluser;
 CREATE TABLE IF NOT EXISTS internaluser (
-  iduser int(11) NOT NULL AUTO_INCREMENT,
-  nom_user varchar(100) NOT NULL,
-  prenom_user varchar(100) NOT NULL,
-  email_user varchar(100) NOT NULL,
+  idinternaluser int(11) NOT NULL AUTO_INCREMENT,
+  nom_internaluser varchar(100) NOT NULL,
+  prenom_internaluser varchar(100) NOT NULL,
+  email_internaluser varchar(100) NOT NULL,
   password varchar(100) NOT NULL,
   username varchar(100) NULL,
   idrole int(11) NULL,
-  PRIMARY KEY (iduser),
+  PRIMARY KEY (idinternaluser),
   FOREIGN KEY (idrole) REFERENCES role(idrole)
 );
 
-INSERT INTO internaluser (iduser,nom_user,prenom_user,email_user,password,username,idrole) VALUES
+INSERT INTO internaluser (idinternaluser,nom_internaluser,prenom_internaluser,email_internaluser,password,username,idrole) VALUES
 (1,"CAULLIREAU","Dorian","caullireau.dorian@gmail.com","password","caullird",1),
-(2,"PERROLLAZ","Maverick","perrollaz.maverick@gmail.com","password","perollaz",1),
+(2,"PERROLLAZ","Maverick","perrollaz.maverick@pm.com","password","perrollm",1),
 (3,"BASCOP","Alexandre","bascop.alexandre@gmail.com","password","bascopa",2),
 (4,"PROF2","PROF2","PROF2.PROF2@gmail.com","password","PROF2",2),
 (5,"admin","admin","admin@admin.admin","password","admin",3);
@@ -37,12 +37,12 @@ CREATE TABLE IF NOT EXISTS student (
   idstudent int(11) NOT NULL AUTO_INCREMENT,
   num_INE varchar(100) NULL,
   num_student varchar(100) NULL,
-  iduser int(11) NOT NULL,
+  idinternaluser int(11) NOT NULL,
   PRIMARY KEY (idstudent),
-  FOREIGN KEY (iduser) REFERENCES internaluser(iduser)
+  FOREIGN KEY (idinternaluser) REFERENCES internaluser(idinternaluser)
 );
 
-INSERT INTO student (idstudent,num_INE,num_student,iduser) VALUES
+INSERT INTO student (idstudent,num_INE,num_student,idinternaluser) VALUES
 (1,"1445D8854","8985444447",1),
 (2,"14E5D8854","8944589447",2);
 
@@ -64,15 +64,15 @@ INSERT INTO timeslot (idtimeslot,date_day,start_time,end_time) VALUES
 DROP TABLE IF EXISTS availability;
 CREATE TABLE IF NOT EXISTS availability (
   idavailability int(11) NOT NULL AUTO_INCREMENT,
-  iduser int(11) NOT NULL,
+  idinternaluser int(11) NOT NULL,
   idtimeslot int(11) NOT NULL,
   comment varchar(2048) NULL,
   PRIMARY KEY (idavailability),
-  FOREIGN KEY (iduser) REFERENCES internaluser(iduser),
+  FOREIGN KEY (idinternaluser) REFERENCES internaluser(idinternaluser),
   FOREIGN KEY (idtimeslot) REFERENCES timeslot(idtimeslot)
 ); 
 
-INSERT INTO availability (idavailability,iduser,idtimeslot,comment) VALUES
+INSERT INTO availability (idavailability,idinternaluser,idtimeslot,comment) VALUES
 (1,3,1,"Dispo vraiment si besoin"),
 (2,4,1,""),
 (3,4,3,"Disponible");
@@ -111,14 +111,14 @@ INSERT INTO jury(idjury,idclassroom,idtimeslot,name_jury) VALUES
 DROP TABLE IF EXISTS compose;
 CREATE TABLE IF NOT EXISTS compose (
   idcompose int(11) NOT NULL AUTO_INCREMENT,
-  iduser int(11) NOT NULL,
+  idinternaluser int(11) NOT NULL,
   idjury int(11) NOT NULL,
   PRIMARY KEY (idcompose),
-  FOREIGN KEY (iduser) REFERENCES internaluser(iduser),
+  FOREIGN KEY (idinternaluser) REFERENCES internaluser(idinternaluser),
   FOREIGN KEY (idjury) REFERENCES jury(idjury)
 );
 
-INSERT INTO compose(idcompose,iduser,idjury) VALUES
+INSERT INTO compose(idcompose,idinternaluser,idjury) VALUES
 (1,1,1),
 (2,2,2);
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS event (
   start_date DATETIME NOT NULL,
   end_date DATETIME NOT NULL,
   PRIMARY KEY (idevent),
-  FOREIGN KEY (idevent_creator) REFERENCES internaluser(iduser)
+  FOREIGN KEY (idevent_creator) REFERENCES internaluser(idinternaluser)
 );
 
 INSERT INTO event(idevent,entitled_event,description_event,idevent_creator,start_date,end_date) VALUES
@@ -192,22 +192,3 @@ CREATE TABLE IF NOT EXISTS indivualevaluation (
 INSERT INTO indivualevaluation(idindivualevaluation,idprestation,idevaluationcriteria,idcompose,individual_note,individual_comment) VALUES
 (1,1,2,1,"20","Un peu lent dans la présentation"),
 (2,1,1,1,"A","Finalement, surpris de ce sujet oral");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
