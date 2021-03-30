@@ -11,8 +11,8 @@ INSERT INTO role (idrole,name_role) VALUES
 (2,"Professeur"),
 (3,"Administrateur");
 
-DROP TABLE IF EXISTS internal_user;
-CREATE TABLE IF NOT EXISTS internal_user (
+DROP TABLE IF EXISTS internaluser;
+CREATE TABLE IF NOT EXISTS internaluser (
   iduser int(11) NOT NULL AUTO_INCREMENT,
   nom_user varchar(100) NOT NULL,
   prenom_user varchar(100) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS internal_user (
   FOREIGN KEY (idrole) REFERENCES role(idrole)
 );
 
-INSERT INTO internal_user (iduser,nom_user,prenom_user,email_user,password,username,idrole) VALUES
+INSERT INTO internaluser (iduser,nom_user,prenom_user,email_user,password,username,idrole) VALUES
 (1,"CAULLIREAU","Dorian","caullireau.dorian@gmail.com","password","caullird",1),
 (2,"PERROLLAZ","Maverick","perrollaz.maverick@gmail.com","password","perollaz",1),
 (3,"BASCOP","Alexandre","bascop.alexandre@gmail.com","password","bascopa",2),
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS student (
   num_student varchar(100) NULL,
   iduser int(11) NOT NULL,
   PRIMARY KEY (idstudent),
-  FOREIGN KEY (iduser) REFERENCES internal_user(iduser)
+  FOREIGN KEY (iduser) REFERENCES internaluser(iduser)
 );
 
 INSERT INTO student (idstudent,num_INE,num_student,iduser) VALUES
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS availability (
   idtime_slot int(11) NOT NULL,
   comment varchar(2048) NULL,
   PRIMARY KEY (idavailability),
-  FOREIGN KEY (iduser) REFERENCES internal_user(iduser),
+  FOREIGN KEY (iduser) REFERENCES internaluser(iduser),
   FOREIGN KEY (idtime_slot) REFERENCES time_slot(idtime_slot)
 ); 
 
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS compose (
   iduser int(11) NOT NULL,
   idjury int(11) NOT NULL,
   PRIMARY KEY (idcompose),
-  FOREIGN KEY (iduser) REFERENCES internal_user(iduser),
+  FOREIGN KEY (iduser) REFERENCES internaluser(iduser),
   FOREIGN KEY (idjury) REFERENCES jury(idjury)
 );
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS event (
   start_date DATETIME NOT NULL,
   end_date DATETIME NOT NULL,
   PRIMARY KEY (idevent),
-  FOREIGN KEY (idevent_creator) REFERENCES internal_user(iduser)
+  FOREIGN KEY (idevent_creator) REFERENCES internaluser(iduser)
 );
 
 INSERT INTO event(idevent,entitled_event,description_event,idevent_creator,start_date,end_date) VALUES
