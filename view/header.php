@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css"/>
-	<?php echo (file_exists('./css/'.parameters()["r"].'.css')) ? "<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/".parameters()["r"].".css\"/>" : ""; ?>
+	<?php echo isset(parameters()["r"]) && file_exists('./css/'.parameters()["r"].'.css') ? "<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/".parameters()["r"].".css\"/>" : ""; ?>
 </head>
 <body>
 	<main>
