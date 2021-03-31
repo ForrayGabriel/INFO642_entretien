@@ -3,20 +3,19 @@
 class LoginController extends Controller {
 
 	public function index() {
-		$this->render("index");
-	}
-
-    public function attempt() {
-      // TODO hash password
-      $internaluser = new Internaluser(parameters()["uname"], parameters()["psw"]);
-      if ($internaluser->idinternaluser) {
-        header('Location: .?r=classroom');
+    if (isset(parameters()["uname"]) && parameters()["psw"]) {
+      $internaluser = Internaluser::attempt(parameters()["uname"], parameters()["psw"]);
+      if ($internaluser) {
+        $_SESSION["user"] = [];
+        $_SESSION["user"]["idinternaluser"] = $internaluser;
+        header('Location: .');
       } else {
-        // TODO add error 
+        // TODO add error
         $this->render("index");
       }
-      
-      $_SESSION["user"] = $internaluser;
+    }
+
+		$this->render("index", "aze");
 	}
 
 }
