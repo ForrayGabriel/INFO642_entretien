@@ -6,8 +6,7 @@ class LoginController extends Controller {
     if (isset(parameters()["uname"]) && parameters()["psw"]) {
       $internaluser = Internaluser::attempt(parameters()["uname"], parameters()["psw"]);
       if ($internaluser) {
-        $_SESSION["user"] = [];
-        $_SESSION["user"]["idinternaluser"] = $internaluser;
+        $_SESSION["user"] = $internaluser;
         header('Location: .');
       } else {
         // TODO add error
