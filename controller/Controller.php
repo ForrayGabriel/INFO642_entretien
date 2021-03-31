@@ -9,16 +9,17 @@ class Controller {
 	}
 
 	public function render($view, $d=null) {
-		global $data;
-		include_once "view/header.php";
+		global $data, $css;
 
 		$controller = get_class($this);  // SiteController
 		$model = substr($controller, 0, 
-			        strpos($controller, "Controller")); // Site
-		$data = $d;
-		include_once "view/".strtolower($model)."/".$view.".php";
-		// view/site/index.php
+		strpos($controller, "Controller")); // Site
 
+		$data = $d;
+		$css = strtolower($model);
+
+		include_once "view/header.php";
+		include_once "view/".strtolower($model)."/".$view.".php";
 		include_once "view/footer.php";
 	}
 

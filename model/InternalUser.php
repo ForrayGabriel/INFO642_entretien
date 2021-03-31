@@ -13,18 +13,15 @@ class InternalUser extends Model {
 		return get_class($this).": ".$this->name_user;
 	}
 
-	public function __construct($username, $password) {
-		$st = db()->prepare("select idinternaluser, nom_internaluser, prenom_internaluser,email_internaluser,username,idrole from internaluser where username=:username and password=:password");
+	public static function attempt($username, $password) {
+		$st = db()->prepare("select idinternaluser from internaluser where username=:username and password=:password limit 1");
 		$st->bindValue(":username", $username);
 		$st->bindValue(":password", $password);
 		$st->execute();
 		if ($st->rowCount() != 1) {
 			return false;
 		} else {
-			$row = $st->fetch(PDO::FETCH_ASSOC);
-			foreach($row as $field=>$value) {
-					$this->$field = $value;
-			}
+			return  $st->fetchColumn();
 		}	
 	}
 }
