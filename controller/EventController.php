@@ -3,7 +3,7 @@
 class EventController extends Controller {
 
 	public function index() {
-		$this->render("index", Event::findAll());
+		$this->render("index", array('event' => Event::findAll(),'classroom' => Classroom::findAll()));
 	}
 
 	public function view() {
@@ -14,6 +14,10 @@ class EventController extends Controller {
 			(new SiteController())->render("index");
 			// $this->render("error");
 		}
+	}
+
+	public function add(){
+		$this->render("add", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll()));
 	}
 
 }
