@@ -10,7 +10,7 @@ class InternalUser extends Model {
  	protected $_idrole;
 
 	public function __toString() {
-		return get_class($this).": ".$this->name_user;
+		return get_class($this).": ".$this->nom_internaluser;
 	}
 
 

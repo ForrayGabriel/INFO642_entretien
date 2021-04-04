@@ -7,7 +7,7 @@ class Model {
 		$class = get_class($this);
 		$table = strtolower($class);
 		if ($id == null) {
-			throw new Exception("id can't be null");
+			//throw new Exception("id can't be null");
 			// $st = db()->prepare("select * from $table where 0");
 			// $st->execute();
 			// $row = $st->fetch();
@@ -43,6 +43,7 @@ class Model {
 		$values = [];
 		foreach($this as $field=>$value) {
 			if (stristr($field, '_id') === FALSE) {
+				print("ok");
 				$fields[] = substr($field, 1);
 				$values[] = $value;
 			}
@@ -50,7 +51,9 @@ class Model {
 
 		try{		
 			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
+			print_r($request);
 			$request->execute();
+
 		} catch(PDOException $e) {
   			echo $e->getMessage();
 		}
