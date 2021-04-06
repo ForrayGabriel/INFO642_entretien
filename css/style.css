@@ -4,20 +4,53 @@ body {
 	font-family: sans-serif, arial;
 }
 header {
-	padding: 10px;
+	padding: 3vh;
+
 	border-bottom: solid 1px #888888;
+}
+
+#logo{
+	float: left;
+	width: 15%;
+	height: auto;
+	margin-left: 15px; 
+	
+	margin-bottom: 15px;
+
+}
+
+.sep_verticale{
+	float: left;
+	width: 2px;
+    height: 42px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 15px;
+    background-color: #b2b2b2;
+}
+
+
+@media screen and (min-width: 850px) {
+  a.title_general {
+    font-size: 60px;
+  }
+}
+@media screen and (max-width: 600px) {
+  a.title_general {
+    font-size: 30px;
+  }
 }
 
 
 a:link, a:visited {
 	font-weight: bold;
 	text-decoration: none;
-	color: Chocolate;
-	border: dotted 1px white;
+	color: #00adef;
+	border: solid 1px rgba(0,173,239,0);
 	transition: all 0.5s ease;
 }
 a:hover {
-	border-bottom: dotted 1px Chocolate;
+	border-bottom: solid 1px Chocolate;
 }
 
 nav li {
@@ -54,6 +87,13 @@ footer {
 	border-top: solid 1px #888888;
 	padding: 10px;
 	font-size: 0.8em;
+}
+
+.footer-text{
+	margin-top: 4vh;
+	text-align: center;
+	font-size: 12px;
+
 }
 
 

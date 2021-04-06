@@ -1,12 +1,11 @@
-form {
-    
-    
-}
+.background{
+	background-color: rgba(0,173,239,0.2);
 
+}
 .container {
-	height: 30vh;
+	height: 35vh;
     width: 40vw;
-	background-color: rgba(0, 0, 255,0.8);
+	background-color: #0E5989;
 	margin-left: 30vw;
 }
 
@@ -26,6 +25,20 @@ button {
 
 #connexion {
 	text-align: center;
-	font-size: 4vh;
+	font-size: 4vw;
 	color: white;
+}
+
+
+/*centrer le texte 'login' ça me casse le rein*/
+.title_top{
+	position: absolute;
+ 	z-index: 2;
+ 	text-align: center;
+ 	margin-left: 42%;
+ 	font-size: 5vw;
+ 	color: white;
+ 	text-shadow: 1px 1px 5px black;
+    
+	
 }
