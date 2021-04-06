@@ -9,11 +9,18 @@
 <body>
 	<main>
 	<header>
-		<h1><a href=''>La gestion des cours</a></h1>
+		
+		<div >
+
+			<img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Logo_Polytech_Annecy_Chambery.svg/640px-Logo_Polytech_Annecy_Chambery.svg.png" alt="Italian Trulli">
+
+		</div>
+		<div class="sep_verticale"></div>
+		<div><h1><a class='title_general' href=''>La gestion des cours</a></h1></div>
 	</header>
-	<nav>
+	<nav class = "background">
 		<ul>
 			<li><a href="?r=classroom">Les classes de cours</a></li>
 		</ul>
 	</nav>
-	<section>	
+	<section class = "background">	
