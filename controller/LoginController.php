@@ -10,11 +10,11 @@ class LoginController extends Controller {
         header('Location: .');
       } else {
         // TODO add error
-        $this->render("index");
+        $this->render("index", "error");
       }
     }
-
-		$this->render("index", "aze");
+    
+		$this->render("index");
 	}
 
 }
