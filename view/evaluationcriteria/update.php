@@ -1,6 +1,6 @@
 <h2>Ajouter un critère d'évaluation</h2>
 
-<form action='?r=evaluationcriteria/add' method='post'>
+<form <?php echo "action='?r=evaluationcriteria/update&id=".$data["evaluationcriteria"]->idevaluationcriteria."'"; ?> method='post'>
 	<p>
 		<label>Label event</label>
 		<select name='idevent'>
@@ -24,7 +24,7 @@
 
 	<p>
 		<label>Description du critère</label>
-		<textarea name='description_criteria'><?php echo $data["evaluationcriteria"]->description_criteria; ?></textarea>
+		<input name='description_criteria' <?php echo 'value="'.$data["evaluationcriteria"]->description_criteria.'"'; ?>/>
 	</p>
 	<p>
 		<label>Notation (ex: {0:20})</label>

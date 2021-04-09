@@ -17,7 +17,7 @@
 
 	<p>
 		<label>Description du critère</label>
-		<textarea name='description_criteria'></textarea>
+		<input name='description_criteria' />
 	</p>
 	<p>
 		<label>Notation (ex: {0:20})</label>

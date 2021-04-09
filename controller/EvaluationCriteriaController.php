@@ -44,11 +44,11 @@ class EvaluationcriteriaController extends Controller {
 
 	public function update() {
 		if(isset(parameters()["idevent"]) and isset(parameters()["description_criteria"]) and isset(parameters()["scale_criteria"])) {
-			$evalcriteria = new Evaluationcriteria();
+			$evalcriteria = new Evaluationcriteria(parameters()["id"]);
 			$evalcriteria->idevent = parameters()["idevent"];
 			$evalcriteria->description_criteria = parameters()["description_criteria"];
 			$evalcriteria->scale_criteria = parameters()["scale_criteria"];
-			$evalcriteria->update(parameters()["id"]);
+			$evalcriteria->update();
 			$this->render("index", Evaluationcriteria::findAll());
 		}
 		else{
