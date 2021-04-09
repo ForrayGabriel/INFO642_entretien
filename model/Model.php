@@ -7,7 +7,11 @@ class Model {
 		$class = get_class($this);
 		$table = strtolower($class);
 		if ($id == null) {
-			// throw new Exception("id can't be null");
+			$st = db()->prepare("select * from $table where 0");
+			$st->execute();
+			$row = $st->fetch();
+			$field = "id".$table;
+			$this->$field = $row[$field];
 		} else {
 			$st = db()->prepare("select * from $table where id$table=:id");
 			$st->bindValue(":id", $id);
@@ -27,8 +31,9 @@ class Model {
 	public function insert(){
 		$fields = [];
 		$values = [];
+		$primary_id = "_id" . strtolower(get_class($this));
 		foreach($this as $field=>$value) {
-			if (stristr($field, '_id') === FALSE) {
+			if ($field != $primary_id) {
 				$fields[] = substr($field, 1);
 				$values[] = $value;
 			}
@@ -37,6 +42,7 @@ class Model {
 		try{		
 			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
 			$request->execute();
+
 		} catch(PDOException $e) {
   			echo $e->getMessage();
 		}
@@ -45,6 +51,25 @@ class Model {
 	public function delete($id){
 		try{
 			$request = db()->prepare("DELETE FROM " . strtolower(get_class($this)) . " WHERE id". strtolower(get_class($this)). " = " . $id);
+			$request->execute();
+		} catch(PDOException $e) {
+  			echo $e->getMessage();
+		}
+	}
+
+	public function update(){
+		$fields = [];
+		$values = [];
+		$primary_id = "_id" . strtolower(get_class($this));
+		foreach($this as $field=>$value) {
+			if ($field != $primary_id) {
+				$fields[] = substr($field, 1);
+				$values[] = $value;
+			}
+		}
+
+		try{		
+			$request = db()->prepare("UPDATE " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
 			$request->execute();
 		} catch(PDOException $e) {
   			echo $e->getMessage();
