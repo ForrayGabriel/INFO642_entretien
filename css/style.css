@@ -1,6 +1,6 @@
 * { margin: 0px; padding:0px; position: relative; }
 body {
-	background-color: white;
+	
 	font-family: sans-serif, arial;
 }
 
@@ -77,10 +77,12 @@ nav a:hover  {
 	color: white;	
 }
 section {
-	padding: 0 10px;
+	background-color: rgba(0,173,239,0.2);
+	
 	min-height: calc(100vh - 200px);
 }
 section table {
+
 	margin: 20px;
 	border-collapse: collapse;
 }
@@ -94,9 +96,13 @@ section p {
 
 footer {
 	border-top: solid 1px #888888;
-	padding: 0 10px;
+	
 	font-size: 0.8em;
 	height: 98px;
+}
+
+.footer-text{
+	text-align: center;
 }
 
 
