@@ -81,7 +81,7 @@ nav a:hover  {
 	color: white;	
 }
 section {
-	background-color: rgba(0,173,239,0.2);
+	
 	
 	min-height: calc(100vh - 200px);
 }
