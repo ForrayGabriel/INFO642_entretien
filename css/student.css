@@ -1,0 +1,43 @@
+#photo {
+	background-color: red;
+
+}
+
+#bande {
+		width: 100vw;
+		height: 15vw;
+		object-fit: cover;
+		object-position: 0 30%;
+
+}
+
+#contenu {
+	background-color: blue;
+	display: inline-block;
+}
+
+#bouttons {
+	width: 45vw;
+	display: inline-block;
+	justify-content:center;
+	align-items:center;
+	width:45%;
+	height:40%;
+	background-color: yellow;
+}
+
+#boutton1 {
+	height: 200px;
+	width: 60%;
+	background-color: pink;
+}
+
+#boutton2 {
+	height: 200px;
+}
+
+#entretients {
+	display: inline-block;
+	width: 50vw;
+	background-color: green;
+}
