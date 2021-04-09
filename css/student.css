@@ -1,7 +1,7 @@
 
 #bande {
 		width: 100vw;
-		height: 15vw;
+		height: 10vw;
 		object-fit: cover;
 		object-position: 0 30%;
 
@@ -70,4 +70,13 @@
 	border-radius: 2vh;
 	background-color: #488ea8;
 
+}
+
+#lesentretiens {
+	height: 70%;
+	width: 90%;
+	background-color: white;
+	margin: auto;
+	border-radius: 2vh;
+	margin-top: 2vh;
 }
