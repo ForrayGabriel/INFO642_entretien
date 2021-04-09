@@ -6,6 +6,7 @@ class InternalUser extends Model {
 	protected $_nom_internaluser;
 	protected $_prenom_internaluser;
   	protected $_email_internaluser;
+  	protected $_password;
   	protected $_username;
  	protected $_idrole;
 
