@@ -11,8 +11,10 @@ class SiteController extends Controller {
 	}
 
 	public function update_presentation(){
-		print_r(parameters()["presentation"]);
-		file_put_contents("./view/site/presentation-container.php", parameters()["presentation"]);
+		
+		if (isset($_SESSION['user']) && $_SESSION['user']['idrole'] == 3){
+			file_put_contents("./view/site/presentation-container.php", parameters()["presentation"]);
+		}
 	}
 
 }
