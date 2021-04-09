@@ -20,7 +20,7 @@ class LoginController extends Controller {
 	}
 
   public function logout(){
-    unset($_SESSION);
+    session_unset();
     $this->render("index");
   }
 

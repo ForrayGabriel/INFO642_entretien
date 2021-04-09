@@ -59,12 +59,12 @@ header .header-container .wrapper_menu li {
 a:link, a:visited {
 	font-weight: bold;
 	text-decoration: none;
-	color: Chocolate;
-	border: dotted 1px white;
+	color: #2fb3e4;
+	border: solid 1px white;
 	transition: all 0.5s ease;
 }
 a:hover {
-	border-bottom: dotted 1px Chocolate;
+	border-bottom: solid 1px #2fb3e4;
 }
 nav li {
 	list-style-type: none;
@@ -106,6 +106,9 @@ footer {
 }
 
 .footer-text{
+	text-align: center;
+}
+.texte_bienvenue{
 	text-align: center;
 }
 

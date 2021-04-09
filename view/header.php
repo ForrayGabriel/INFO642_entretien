@@ -33,6 +33,7 @@
 					<li><a href="?r=login">Login</a></li>
 					
 					<?php } ?>
+					<li><a href="?r=site/presentation">Présentation</a></li>
 				</ul>
 			</div>
 		</div>
