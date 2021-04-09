@@ -4,15 +4,22 @@
 <div id="contenu">
 	<div id="bouttons">
 	<div id="boutton1">
-		boutton1
+		<div class="test">
+		<strong>
+		MES RÉSULTATS
+		</strong>
+	</div>
 	</div>
 
 	<div id="boutton2">
-		boutton2
+		
+		<strong>	
+		CONTACTER L'ADMINISTRATEUR
+		</strong>
+		
 	</div></div>
 	<div id="entretients">
 		Mes entretients
 	</div>
-
 
 </div>
