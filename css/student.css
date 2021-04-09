@@ -1,3 +1,8 @@
+#photo {
+	position: relative;
+  text-align: center;
+  color: white;
+}
 
 #bande {
 		width: 100vw;
@@ -79,4 +84,14 @@
 	margin: auto;
 	border-radius: 2vh;
 	margin-top: 2vh;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 4px 4px rgba(0,0,0,0.8);
+	font-size: 5vw;
+	font-family: 'Verdana';
 }
