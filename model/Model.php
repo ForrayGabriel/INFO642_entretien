@@ -31,9 +31,8 @@ class Model {
 	public function insert(){
 		$fields = [];
 		$values = [];
-		$primary_id = "_id" . strtolower(get_class($this));
 		foreach($this as $field=>$value) {
-			if ($field != $primary_id) {
+			if (strtolower('_id'.get_class($this)) != $field) {
 				$fields[] = substr($field, 1);
 				$values[] = $value;
 			}
