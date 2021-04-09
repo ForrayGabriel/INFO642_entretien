@@ -4,6 +4,7 @@
   <h3>Erreur lors de la connexion</h3>
   </div>
 <?php } ?>
+<br><br><br>
   <div class="container">
   	<h2 id="connexion">CONNEXION</h2>
     <input class="champ" type="text" placeholder="Identifiant" name="uname" required><br>
