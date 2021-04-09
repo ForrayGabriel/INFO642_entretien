@@ -24,7 +24,8 @@
 			<div class="wrapper_menu">
 				<ul>
 					<?php if (isset($_SESSION['user'])){?>
-					<li>Logout</li>
+					
+					<li><a href="?r=login/logout">Logout</a></li>
 				
 					
 					
