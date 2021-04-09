@@ -42,10 +42,6 @@ class Model {
 		}
 	}
 
-	public function update(){
-		
-	}
-
 	public function delete($id){
 		try{
 			$request = db()->prepare("DELETE FROM " . strtolower(get_class($this)) . " WHERE id". strtolower(get_class($this)). " = " . $id);
