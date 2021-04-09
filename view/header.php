@@ -21,6 +21,7 @@
 	<nav class = "background">
 		<ul>
 			<li><a href="?r=classroom">Les classes de cours</a></li>
+			<li><a href="?r=event">Les events</a></li>
 		</ul>
 	</nav>
 	<section class = "background">	

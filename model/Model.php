@@ -22,8 +22,8 @@ class Model {
 				throw new Exception("Not in table: ".$table." id: ".$id );
 			} else {
 				$row = $st->fetch(PDO::FETCH_ASSOC);
-				foreach($row as $field=>$value) {
-					if (substr($field, 0,2) == "id") {
+				foreach($row as $field => $value) {
+					if ($field == "id".strtolower(get_class($this))) {
 						$linkedField = substr($field, 2);
 						$linkedClass = ucfirst($linkedField);
 						if ($linkedClass != get_class($this))
@@ -36,6 +36,33 @@ class Model {
 			}
 		}
 
+	}
+
+	public function insert(){
+		$fields = [];
+		$values = [];
+		foreach($this as $field=>$value) {
+			if (stristr($field, '_id') === FALSE) {
+				$fields[] = substr($field, 1);
+				$values[] = $value;
+			}
+		}
+
+		try{		
+			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
+			$request->execute();
+		} catch(PDOException $e) {
+  			echo $e->getMessage();
+		}
+	}
+
+	public function delete($id){
+		try{
+			$request = db()->prepare("DELETE FROM " . strtolower(get_class($this)) . " WHERE id". strtolower(get_class($this)). " = " . $id);
+			$request->execute();
+		} catch(PDOException $e) {
+  			echo $e->getMessage();
+		}
 	}
 
 	public static function findAll() {
