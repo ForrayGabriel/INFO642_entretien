@@ -3,7 +3,8 @@
 
 }
 .container {
-	height: 55vh;
+
+	height: 35vh;
     width: 40vw;
 	background-color: #0E5989;
 	margin-left: 30vw;
@@ -39,8 +40,8 @@ button {
  	font-size: 5vw;
  	color: white;
  	text-shadow: 1px 1px 5px black;
-    
-	
+
+
 }
 
 #error_login {

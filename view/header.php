@@ -17,10 +17,14 @@
 			</div>
 			<div class="wrapper_menu">
 				<ul>
+					<?php print_r($_SESSION); ?>
+					<?php if (isset($_SESSION['user']) && $_SESSION['user']['idrole'] == 1){?>
 					<li><a href="?r=login">Login</a></li>
+					<?php }else{?>
+					<li>Logout</li>
 					<li>Onglet</li>
 					<li>Onglet</li>
-					<li>Onglet</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
