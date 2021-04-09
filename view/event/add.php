@@ -10,6 +10,23 @@
 		Description
 		<input name='description_event'/>
 	</p>
+
+	<p>
+		<label for="idevent_creator">Choix de l'enseignant responsable de l'évenement :</label>
+
+		<select name="idevent_creator" id="idevent_creator">
+			<option value="0">--Please choose an option--</option>
+		<?php
+			foreach($data['internaluser'] as $user){
+				if($data['role_ban'] != $user->idrole){
+					echo "<option value=' " . $user->idinternaluser . " '>".  $user->nom_internaluser  . " " .  $user->prenom_internaluser  ."</option>";
+				}
+			}
+
+		?>
+		</select>
+	</p>
+
 	<!-- <p>
 		Responsable de l'évenement
 		<input name=''/>
