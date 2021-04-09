@@ -1,11 +1,9 @@
-
-
-<h2>ddddddddddddd</h2>
-<p>
 <?php
 
-	print_r($data);
-
+	echo "<h1>" . $data['object']->entitled_event . "</h1>";
+	echo "<p>" . $data['object']->description_event . "</p>";
+	echo "<a href='?r=event/update_view&id=".$data['object']->idevent."'>Modifier l'évenement</a>";
 
 ?>
-</p>
+
+
