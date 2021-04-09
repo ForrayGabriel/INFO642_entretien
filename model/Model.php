@@ -10,7 +10,6 @@ class Model {
 			$st = db()->prepare("select * from $table where 0");
 			$st->execute();
 			$row = $st->fetch();
-			var_dump($row);
 			$field = "id".$table;
 			$this->$field = $row[$field];
 		} else {
@@ -32,9 +31,9 @@ class Model {
 	public function insert(){
 		$fields = [];
 		$values = [];
+		$primary_id = "_id" . strtolower(get_class($this));
 		foreach($this as $field=>$value) {
-			if (stristr($field, '_id') === FALSE) {
-				print("ok");
+			if ($field != $primary_id) {
 				$fields[] = substr($field, 1);
 				$values[] = $value;
 			}
@@ -42,7 +41,6 @@ class Model {
 
 		try{		
 			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
-			print_r($request);
 			$request->execute();
 
 		} catch(PDOException $e) {
@@ -53,6 +51,25 @@ class Model {
 	public function delete($id){
 		try{
 			$request = db()->prepare("DELETE FROM " . strtolower(get_class($this)) . " WHERE id". strtolower(get_class($this)). " = " . $id);
+			$request->execute();
+		} catch(PDOException $e) {
+  			echo $e->getMessage();
+		}
+	}
+
+	public function update(){
+		$fields = [];
+		$values = [];
+		$primary_id = "_id" . strtolower(get_class($this));
+		foreach($this as $field=>$value) {
+			if ($field != $primary_id) {
+				$fields[] = substr($field, 1);
+				$values[] = $value;
+			}
+		}
+
+		try{		
+			$request = db()->prepare("UPDATE " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
 			$request->execute();
 		} catch(PDOException $e) {
   			echo $e->getMessage();
