@@ -28,7 +28,7 @@ class Model {
 		$fields = [];
 		$values = [];
 		foreach($this as $field=>$value) {
-			if (stristr($field, '_id') === FALSE) {
+			if (strtolower('_id'.get_class($this)) != $field) {
 				$fields[] = substr($field, 1);
 				$values[] = $value;
 			}
@@ -40,6 +40,10 @@ class Model {
 		} catch(PDOException $e) {
   			echo $e->getMessage();
 		}
+	}
+
+	public function update(){
+		
 	}
 
 	public function delete($id){
