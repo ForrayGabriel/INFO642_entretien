@@ -1,6 +1,7 @@
 
 <?php 
 	if ($_SESSION['user']['idrole'] == 1) {
+		print_r($_SESSION['user']['internaluser']) ;
 		include_once "student_view.php";
 	}
 ?>
