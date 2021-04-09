@@ -11,18 +11,27 @@
 	<header>
 		<div class="header-container">
 			<div class="wrapper_menu_logo">
-				<img src="./images/logo_polytech.png"/>
+				
+				<a href="https://www.polytech.univ-smb.fr/index.html">
+				<img src="./images/logo_polytech.png"/></a>
+				
 				<div class="separator"></div>
-				<img src="./images/logo_usmb.jpg">
+				
+				<a href="https://www.univ-smb.fr//index.html">
+				<img id = "logo_usmb" src="./images/logo_usmb.jpg"></a>
+				
 			</div>
 			<div class="wrapper_menu">
 				<ul>
 					<?php if (isset($_SESSION['user'])){?>
+					
+					<li><a href="?r=login/logout">Logout</a></li>
+				
+					
+					
+					<?php } else{?>
 					<li><a href="?r=login">Login</a></li>
-					<?php }else{?>
-					<li>Logout</li>
-					<li>Onglet</li>
-					<li>Onglet</li>
+					
 					<?php } ?>
 				</ul>
 			</div>
