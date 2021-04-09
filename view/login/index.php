@@ -5,7 +5,7 @@
   </div>
 <?php } ?>
   <div class="container">
-  	<h2 id="connexion">CONNEXION</h2>
+  	<h2 id="connexion">CONNEXIOsN</h2>
     <input class="champ" type="text" placeholder="Identifiant" name="uname" required><br>
     <input class="champ" type="password" placeholder="Mot de passe" name="psw" required><br>
     <button type="submit">Login</button>

@@ -3,8 +3,7 @@
 
 }
 .container {
-	background-color: rgba(0,173,239,0.2);
-	height: 35vh;
+	height: 55vh;
     width: 40vw;
 	background-color: #0E5989;
 	margin-left: 30vw;
@@ -42,4 +41,12 @@ button {
  	text-shadow: 1px 1px 5px black;
     
 	
+}
+
+#error_login {
+	background-color: red;
+	height: 5vh;
+    width: 30vw;
+    margin-left: 35vw;
+    text-align: center;
 }
