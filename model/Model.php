@@ -7,7 +7,7 @@ class Model {
 		$class = get_class($this);
 		$table = strtolower($class);
 		if ($id == null) {
-			throw new Exception("id can't be null");
+			// throw new Exception("id can't be null");
 		} else {
 			$st = db()->prepare("select * from $table where id$table=:id");
 			$st->bindValue(":id", $id);
