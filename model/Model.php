@@ -7,13 +7,12 @@ class Model {
 		$class = get_class($this);
 		$table = strtolower($class);
 		if ($id == null) {
-			//throw new Exception("id can't be null");
-			// $st = db()->prepare("select * from $table where 0");
-			// $st->execute();
-			// $row = $st->fetch();
-			// var_dump($row);
-			// $field = "id".$table;
-			// $this->$field = $row[$field];
+			$st = db()->prepare("select * from $table where 0");
+			$st->execute();
+			$row = $st->fetch();
+			var_dump($row);
+			$field = "id".$table;
+			$this->$field = $row[$field];
 		} else {
 			$st = db()->prepare("select * from $table where id$table=:id");
 			$st->bindValue(":id", $id);
@@ -23,15 +22,7 @@ class Model {
 			} else {
 				$row = $st->fetch(PDO::FETCH_ASSOC);
 				foreach($row as $field => $value) {
-					if ($field == "id".strtolower(get_class($this))) {
-						$linkedField = substr($field, 2);
-						$linkedClass = ucfirst($linkedField);
-						if ($linkedClass != get_class($this))
-							$this->$linkedField = new $linkedClass($value);
-						else
-							$this->$field = $value;
-					} else
-						$this->$field = $value;
+					$this->$field = $value;
 				}
 			}
 		}
