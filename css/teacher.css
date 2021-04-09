@@ -1,0 +1,74 @@
+
+#bande {
+		width: 100vw;
+		height: 15vw;
+		object-fit: cover;
+		object-position: 0 30%;
+
+}
+
+#contenu {
+	padding: 10px;
+
+	
+
+	
+}
+
+#bouttons {
+	color: white;
+	text-shadow: 2px 2px rgba(0,0,0,0.5);
+	font-size: 2vw;
+	font-family: 'Verdana';
+	width: 45vw;
+	display: inline-block;
+	justify-content:center;
+	align-items:center;
+	width:45%;
+	height:40%;
+	
+}
+
+
+
+#boutton1 {
+	/*aligner le texte parce que ça me casse les reins*/
+	text-align: center;
+	vertical-align: middle;
+	height: 10vh;
+	width: 25vw;
+	margin-left: 10vw;
+	margin-top: 10vh;
+	background-color: #488ea8;
+	border-radius: 2vh;
+
+}
+
+#boutton2 {
+	/*aligner verticale text parce que ça me casse les reins*/
+	text-align: center;
+	vertical-align: middle;
+	height: 10vh;
+	width: 25vw;
+	margin-left: 10vw;
+	margin-top: 10vh;
+	margin-bottom: 10vh;
+	background-color: #488ea8;
+	border-radius: 2vh;
+}
+
+#entretients {
+	color: white;
+	text-shadow: 2px 2px rgba(0,0,0,0.5);
+	font-size: 3vw;
+	font-family: 'Verdana';
+	text-align: center;
+	vertical-align: top;
+	align-items: center;
+	display: inline-block;
+	width: 45vw;
+	height: 50vh;
+	border-radius: 2vh;
+	background-color: #488ea8;
+
+}
