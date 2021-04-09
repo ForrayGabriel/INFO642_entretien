@@ -11,10 +11,15 @@
 	<header>
 		<div class="header-container">
 			<div class="wrapper_menu_logo">
+				
 				<a href="https://www.polytech.univ-smb.fr/index.html">
 				<img src="./images/logo_polytech.png"/></a>
+				
 				<div class="separator"></div>
-				<img src="./images/logo_usmb.jpg">
+				
+				<a href="https://www.univ-smb.fr//index.html">
+				<img id = "logo_usmb" src="./images/logo_usmb.jpg"></a>
+				
 			</div>
 			<div class="wrapper_menu">
 				<ul>
