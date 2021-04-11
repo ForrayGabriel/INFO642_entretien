@@ -1,3 +1,7 @@
+:root {
+	--button-color: rgb(155,200,22);
+}
+
 #photo {
 	position: relative;
   text-align: center;
@@ -15,7 +19,9 @@
 #contenu {
 	padding: 10px;
 	height: 70vh;
-
+	width: 100%;
+	display: grid;
+	grid-template-columns: 50% 50%;
 
 }
 
@@ -28,35 +34,30 @@
 	display: inline-block;
 	justify-content:center;
 	align-items:center;
-	width:45%;
-	height:40%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 40% 40%;
 	
 }
 
-
-
 #boutton1 {
-	/*aligner le texte parce que ça me casse les reins*/
 	text-align: center;
-	vertical-align: middle;
-	height: 10vh;
-	width: 25vw;
-	margin-left: 10vw;
-	margin-top: 10vh;
-	background-color: #488ea8;
+	padding: 2vw;
+	height: auto;
+	width: auto;
+	margin: auto;
+	background-color: var(--button-color);
 	border-radius: 2vh;
 
 }
 
 #boutton2 {
 	text-align: center;
-	vertical-align: middle;
-	height: 10vh;
-	width: 25vw;
-	margin-left: 10vw;
-	margin-top: 10vh;
-	margin-bottom: 10vh;
-	background-color: #488ea8;
+	padding: 2vw;
+	height: auto;
+	width: auto;
+	margin: auto;
+	background-color: var(--button-color);
 	border-radius: 2vh;
 }
 
@@ -66,13 +67,12 @@
 	font-size: 3vw;
 	font-family: 'Verdana';
 	text-align: center;
-	vertical-align: top;
-	align-items: center;
 	display: inline-block;
 	width: 45vw;
 	height: 100%;
 	border-radius: 2vh;
-	background-color: #488ea8;
+	background-color: var(--button-color);
+	margin: auto;
 
 }
 
