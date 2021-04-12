@@ -1,5 +1,6 @@
 :root {
 	--button-color: rgb(155,200,22);
+
 }
 
 #photo {
@@ -9,10 +10,11 @@
 }
 
 #bande {
-		width: 100vw;
-		height: 10vw;
-		object-fit: cover;
-		object-position: 0 30%;
+	
+	width: 100vw;
+	height: 10vw;
+	object-fit: cover;
+	object-position: 0 30%;
 
 }
 
@@ -26,6 +28,7 @@
 }
 
 #bouttons {
+
 	color: white;
 	text-shadow: 2px 2px rgba(0,0,0,0.5);
 	font-size: 2vw;
@@ -41,6 +44,7 @@
 }
 
 #boutton1 {
+	box-shadow: 1px 2px 2px black;
 	text-align: center;
 	padding: 2vw;
 	height: auto;
@@ -52,6 +56,7 @@
 }
 
 #boutton2 {
+	box-shadow: 1px 2px 2px black;
 	text-align: center;
 	padding: 2vw;
 	height: auto;
@@ -62,6 +67,7 @@
 }
 
 #entretients {
+	box-shadow: 1px 2px 2px black;
 	color: white;
 	text-shadow: 2px 2px rgba(0,0,0,0.5);
 	font-size: 3vw;
