@@ -25,16 +25,11 @@
 			<div class="wrapper_menu">
 				<ul>
 					<?php if (isset($_SESSION['user'])){?>
-					
-					<li><a href="?r=profil/logout">Logout</a></li>
-				
-					
-					
+					<li><a class="onglet" href="?r=profil/logout">Logout</a></li>
 					<?php } else{?>
-					<li><a href="?r=login">Login</a></li>
-					
+					<li><a class="onglet" href="?r=login">Login</a></li>
 					<?php } ?>
-					<li><a href="?r=site/presentation">Présentation</a></li>
+					<li><a class="onglet" href="?r=site/presentation">Présentation</a></li>
 				</ul>
 			</div>
 		</div>
