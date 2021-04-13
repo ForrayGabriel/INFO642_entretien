@@ -1,9 +1,5 @@
 <form action=".?r=login " method="post">
-  <?php if ($data == 'error') { ?>
-    <div id="error_login">
-      <h3>Erreur lors de la connexion</h3>
-    </div>
-  <?php } ?>
+  <!-- A MODIFIER  -->
   <br><br><br>
   <div class="container">
   	<h2 id="connexion">CONNEXION</h2>
@@ -12,6 +8,10 @@
     <button type="submit">Login</button>
   </div>
 </form>
-<div>
-  <input type="button" value="Modifier le mot de passe" onclick="javascript:location.href='?r=login/update'">
-</div>
+
+  <!-- A MODIFIER  -->
+<?php if ($data == 'error') { ?>
+    <div id="error_login">
+      <h3>Erreur lors de la connexion</h3>
+    </div>
+  <?php } ?>

@@ -6,12 +6,10 @@
 	<div class="centered">
 		<?php
 		if ($_SESSION['user']['idrole'] == 1) {
-
 			echo "Espace Etudiant";
 		}
 
 		if ($_SESSION['user']['idrole'] == 2) {
-
 			echo "Espace Enseignant";
 		}
 
