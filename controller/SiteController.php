@@ -4,8 +4,11 @@ class SiteController extends Controller {
 	public function index() {
 		
 		if (isset($_SESSION['user'])){
-			if ($_SESSION['user']['idrole'] == 1 or $_SESSION['user']['idrole'] == 2) {
-				$this->render("student_teacher_view");
+			if ($_SESSION['user']['idrole'] == 1) {
+				$this->render("student/index");
+			}
+			if ($_SESSION['user']['idrole'] == 2) {
+				$this->render("teacher/index");
 			}
 			if ($_SESSION['user']['idrole'] == 3) {
 				$this->render("admin/index");
