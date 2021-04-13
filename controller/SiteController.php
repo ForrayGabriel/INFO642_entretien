@@ -8,7 +8,7 @@ class SiteController extends Controller {
 				$this->render("student_teacher_view");
 			}
 			if ($_SESSION['user']['idrole'] == 3) {
-				$this->render("admin_view");
+				$this->render("admin/index");
 			}
 		}
 		else {
