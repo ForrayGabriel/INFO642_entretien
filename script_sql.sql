@@ -25,11 +25,11 @@ CREATE TABLE IF NOT EXISTS internaluser (
 );
 
 INSERT INTO internaluser (idinternaluser,nom_internaluser,prenom_internaluser,email_internaluser,password,username,idrole) VALUES
-(1,"CAULLIREAU","Dorian","caullireau.dorian@gmail.com","password","caullird",1),
-(2,"PERROLLAZ","Maverick","perrollaz.maverick@pm.com","password","perrollm",1),
-(3,"BASCOP","Alexandre","bascop.alexandre@gmail.com","password","bascopa",2),
-(4,"PROF2","PROF2","PROF2.PROF2@gmail.com","password","PROF2",2),
-(5,"admin","admin","admin@admin.admin","password","admin",3);
+(1,"CAULLIREAU","Dorian","caullireau.dorian@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","caullird",1),
+(2,"PERROLLAZ","Maverick","perrollaz.maverick@pm.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","perrollm",1),
+(3,"BASCOP","Alexandre","bascop.alexandre@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","bascopa",2),
+(4,"PROF2","PROF2","PROF2.PROF2@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","PROF2",2),
+(5,"admin","admin","admin@admin.admin","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","admin",3);
 
 
 DROP TABLE IF EXISTS student;
