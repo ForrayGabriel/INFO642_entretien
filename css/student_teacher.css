@@ -86,15 +86,6 @@
 	margin-top: 2%;
 
 
-	vertical-align: baseline;
-	width: 45vw;
-	height: 37vh;
-	border-radius: 2vh;
-	background-color: var(--button-color);
-	margin: auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
-
 }
 #lesentretiens {
 
@@ -122,25 +113,25 @@
 	font-size: 3vw;
 	font-family: 'Verdana';
 	text-align: center;
-	vertical-align: baseline;
-	width: 70vw;
-	height: 27vh;
+	display: inline-block;
+	width: 60vw;
+	min-height: 20vh;
 	border-radius: 2vh;
 	background-color: var(--button-color);
-	margin: auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-#lesentretiens {
-	min-height: auto;
-	width: 90%;
-	height: 20vh;
-	background-color: white;
-	margin: auto;
-	border-radius: 2vh;
-	margin-top: 2vh;
-	margin-bottom: 10vh;
-}
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-top: 2%;
+	}
+	#lesentretiens {
+		min-height: auto;
+		width: 90%;
+		height: 20vh;
+		background-color: white;
+		margin: auto;
+		border-radius: 2vh;
+		margin-top: 2vh;
+		margin-bottom: 2vh;
+	}
 }
 .centered {
   position: absolute;
