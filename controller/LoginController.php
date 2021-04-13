@@ -1,6 +1,9 @@
 <?php
 
 class LoginController extends Controller {
+
+  var $rolepermissions = [1,2,3];
+
 	public function index() {
     if (isset(parameters()["uname"]) && parameters()["psw"]) {
 
