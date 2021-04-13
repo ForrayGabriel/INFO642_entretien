@@ -1,0 +1,91 @@
+:root {
+	--button-color: rgba(53,180,250,0.9);
+}
+
+#photo {
+	position: relative;
+  	text-align: center;
+  	color: white;
+}
+
+#bande {
+	width: 100vw;
+	height: 10vw;
+	object-fit: cover;
+	object-position: 0 30%;
+}
+
+.centered {
+  	position: absolute;
+  	top: 50%;
+ 	left: 50%;
+ 	transform: translate(-50%, -50%);
+ 	text-shadow: 4px 4px rgba(0,0,0,0.8);
+	font-size: 4vw;
+	font-family: 'Verdana';
+}
+
+#container {
+	width: 80vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#button {
+	color: white;
+	background-color: var(--button-color);
+	padding: 1vw;
+	font-size: 1vw;
+	border-radius: 1vw;
+}
+
+
+#contact {
+	display: flex-row;
+	background-color: var(--button-color);
+	border-radius: 1vw;
+	width: 35vw;
+	min-height: 25vh;
+	margin-left: auto;
+	margin-right: auto;
+	 align-items: center;
+}
+
+@media only screen and (max-width: 800px) {
+  #contact {
+    width: 100vw;
+  }
+}
+
+#titre {
+	color: white;
+	font-size: calc(1vw * 2);
+	margin-left: 5%;
+}
+
+.text_label  {
+	width: 50%;
+	font-size: 1vw;
+	margin-left: auto;
+	margin-right: 0px;
+	margin-top: 2vh;
+	color: white;
+}
+
+#champs_container {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-gap: 5%;
+
+}
+
+#submit_button {
+	margin: 2vh 40% 2vh 40%;
+	width: 20%;
+	height: 4vh;
+	border-radius: 1vh;
+}
+
+input {
+	width: 50%;
+}

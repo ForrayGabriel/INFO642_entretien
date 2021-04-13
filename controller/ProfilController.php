@@ -12,7 +12,7 @@ class ProfilController extends Controller {
             foreach (parameters() as $key => $value) {
                 $internaluser = new Internaluser($_SESSION["user"]["idinternaluser"]);
                 if ($key instanceof classname)
-                    $internaluser->$key = $value
+                    $internaluser->$key = $value;
                 }
             }
             $internaluser->update()
