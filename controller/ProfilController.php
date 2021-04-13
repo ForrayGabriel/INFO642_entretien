@@ -7,28 +7,17 @@ class ProfilController extends Controller {
 	}
 
     public function update(){
-        if(isset($_SESSION["user"]["username"])
-        && isset(parameters()["last_psw"])
-        && isset(parameters()["new_psw"])
-        && isset(parameters()["new_psw2"])) {
-            if (parameters()["new_psw"] != parameters()["last_psw2"]) {
-            $this->render("update", "error");
-            exit();
+        if($_SERVER['REQUEST_METHOD'] == "POST") {
+            unset(parameters()['r']);
+            foreach (parameters() as $key => $value) {
+                $internaluser = new Internaluser($_SESSION["user"]["idinternaluser"]);
+                if ($key instanceof classname)
+                    $internaluser->$key = $value
+                }
             }
-
-            Internaluser::attempt($_SESSION["user"]["username"], parameters()["last_psw"]);
-            if (!$internaluser) {
-            $this->render("update", "error");
-            exit();
-            }
-
-            $internaluser["password"] = password_hash(parameters()["new_psw"], PASSWORD_DEFAULT);
-            $this->render("update", "success");
-            exit();
+            $internaluser->update()
         }
-        else {
-        $this->render("update");
-        }
+        $this->render("index");
     }
 
     public function logout(){
