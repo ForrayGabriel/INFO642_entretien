@@ -23,19 +23,16 @@
 		<div id="boutton1">
 			<div class="test">
 				<strong>
-					<a class="link"
-
 					<?php
 					if ($_SESSION['user']['idrole'] == 1) {
-						echo "href='.?r=site/prestation'>MES RÉSULTATS";
+						echo "<a class='link' href='.?r=site/prestation'>MES RÉSULTATS</a>";
 					}
 
 					if ($_SESSION['user']['idrole'] == 2) {
-						echo "href='.?r=site/resultats'>INDIQUER DISPONIBILITÉS";
+						echo "<a class='link' href='.?r=site/resultats'>INDIQUER DISPONIBILITÉS</a>";
 					}
 
 					?>
-					>
 				</strong>
 			</div>
 		</div>
@@ -43,11 +40,10 @@
 	<div id="boutton2">
 
 		<strong>
-			<a class="link"
+
 		<?php
 			if ($_SESSION['user']['idrole'] == 1) {
-
-			echo "href='.?r=site/contact'>CONTACTER L'ADMINISTRATEUR";
+				echo "<a class='link' href='.?r=site/contact'>CONTACTER L'ADMINISTRATEUR</a>";
 			}
 
 			if ($_SESSION['user']['idrole'] == 2) {
@@ -55,6 +51,7 @@
 			}
 
 			?>
+
 
 		</strong>
 
