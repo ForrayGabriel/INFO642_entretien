@@ -1,0 +1,14 @@
+:root {
+	--button-color: rgba(53,180,250,0.9);
+}
+
+
+
+#back{
+	background-color: var(--button-color);
+	border-radius: 1vw;
+	width: 80vw;
+	min-height: 25vh;
+	margin-left: auto;
+	margin-right: auto;
+}
