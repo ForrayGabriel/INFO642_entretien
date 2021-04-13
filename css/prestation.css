@@ -63,13 +63,13 @@
 
 #titre {
 	color: white;
-	font-size: 2vw;
+	font-size: calc(1vw * 2);
 	margin-left: 5%;
 }
 
 #liste_presta {
 	color: white;
-	font-size: 2vw;
+	font-size: calc(1vw * 1.5);
 	margin-left: 10%
 }
 
