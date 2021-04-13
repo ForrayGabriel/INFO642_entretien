@@ -26,7 +26,7 @@
 				<ul>
 					<?php if (isset($_SESSION['user'])){?>
 					
-					<li><a href="?r=login/logout">Logout</a></li>
+					<li><a href="?r=profil/logout">Logout</a></li>
 				
 					
 					
