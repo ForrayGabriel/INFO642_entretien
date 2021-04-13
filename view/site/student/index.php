@@ -1,5 +1,3 @@
-	
-
 <link rel="stylesheet" type="text/css" href="././css/student_teacher.css"/>
 <div id="entretiens">
 	Mes entretiens
