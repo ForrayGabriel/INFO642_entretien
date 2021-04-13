@@ -26,13 +26,13 @@ class EventController extends Controller {
 		}
 
 		foreach(InternalUser::findAll() as $user){
-			if($user->idrole == $object->idevent_creator){
-				$user_event_creator = $user;
+			if($user->idinternaluser == $object->idevent_creator){
+				$actual_creator = $user;
 			}
 		}
 
-
-		$this->render("update", array('object' => $object,'internaluser' => InternalUser::findAll(), 'role_ban' => $role_ban, 'actual_creator' => $user_event_creator));
+		
+		$this->render("update", array('object' => $object,'internaluser' => InternalUser::findAll(), 'role_ban' => $role_ban, 'actual_creator' => $actual_creator));
 	}
 
 	public function update_event(){

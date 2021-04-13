@@ -35,6 +35,8 @@
 					<?php } ?>
 				</ul>
 			</div>
+		<div>
+			<img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Logo_Polytech_Annecy_Chambery.svg/640px-Logo_Polytech_Annecy_Chambery.svg.png" alt="Italian Trulli">
 		</div>
 	</header>
 
@@ -45,7 +47,9 @@
 			<li><a href="?r=evaluationcriteria">Les différents critères d'évaluation</a></li>
 		</ul>
 	</nav>
+
 	<section class = "background">	
 
-	<section>	
+	</section>	
+
 
