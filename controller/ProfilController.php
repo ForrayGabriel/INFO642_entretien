@@ -20,6 +20,7 @@ class ProfilController extends Controller {
     //     $this->render("index");
     // }
 
+// test
     public function logout(){
         session_unset();
         header('Location: .');
