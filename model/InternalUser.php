@@ -15,10 +15,11 @@ class InternalUser extends Model {
 	}
 
 
+
 	public static function attempt($username, $password) {
-		$st = db()->prepare("select idinternaluser, idrole from internaluser where username=:username and password=:password");
+		$st = db()->prepare("select idinternaluser, idrole, password from internaluser where username=:username");
 		$st->bindValue(":username", $username);
-		$st->bindValue(":password", $password);
+		// $st->bindValue(":password", password_hash($password, PASSWORD_DEFAULT));
 		$st->execute();
 		if ($st->rowCount() != 1) {
 			return false;
@@ -27,7 +28,10 @@ class InternalUser extends Model {
 			foreach($row as $field=>$value) {
 					$internaluser[$field] = $value;
 			}
-			return $internaluser;
+			if (password_verify($password, $internaluser['password']))
+				return $internaluser;
+			else
+				return false;
 		}	
 	}
 }

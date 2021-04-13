@@ -1,6 +1,8 @@
 :root {
-	--button-color: rgb(155,200,22);
-}
+
+	--button-color: rgba(53,180,250,0.9);
+
+
 
 #photo {
 	position: relative;

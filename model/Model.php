@@ -87,7 +87,6 @@ class Model {
 		return $list;
 	}
 
-
 	public function __get($fieldName) {
 		$varName = "_".$fieldName;
 		if (property_exists(get_class($this), $varName))

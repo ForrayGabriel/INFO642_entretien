@@ -22,19 +22,42 @@ class ProfilController extends Controller {
             exit();
             }
 
-            $internaluser["password"] = password_hash(parameters()["new_psw"]);
+            $internaluser["password"] = password_hash(parameters()["new_psw"], PASSWORD_DEFAULT);
             $this->render("update", "success");
             exit();
         }
         else {
         $this->render("update");
         }
-        
     }
 
     public function logout(){
         session_unset();
         header('Location: .');
+    }
+
+    public function update_mdp_tmp(){
+        if(isset(parameters()["last_psw"])
+        && isset(parameters()["new_psw"])
+        && isset(parameters()["new_psw2"])) {
+            $internaluser = new Internaluser($_SESSION["user"]["idinternaluser"]);
+            if (parameters()["new_psw"] != parameters()["new_psw2"]) {
+                $this->render("update_mdp_tmp", "error1");
+                exit();
+            }
+            if (!password_verify(parameters()["last_psw"], $internaluser->password)) {
+                $this->render("update_mdp_tmp", "error2");
+                exit();
+            }
+
+            $internaluser->password = password_hash(parameters()["new_psw"], PASSWORD_DEFAULT);
+            $internaluser->update();
+            $this->render("update_mdp_tmp", "success");
+            exit();
+        }
+        else {
+        $this->render("update_mdp_tmp", "aezeaz");
+        }
     }
 
 }
