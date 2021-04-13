@@ -9,6 +9,7 @@
 <body>
 	<main>
 	<header>
+
 		<div class="header-container">
 			<div class="wrapper_menu_logo">
 				
@@ -17,24 +18,21 @@
 				
 				<div class="separator"></div>
 				
-				<a href="https://www.univ-smb.fr//index.html">
+				<a href="https://www.univ-smb.fr">
 				<img id = "logo_usmb" src="./images/logo_usmb.jpg"></a>
 				
 			</div>
 			<div class="wrapper_menu">
 				<ul>
 					<?php if (isset($_SESSION['user'])){?>
-					
-					<li><a href="?r=login/logout">Logout</a></li>
-				
-					
-					
+					<li><a class="onglet" href="?r=profil/logout">Logout</a></li>
 					<?php } else{?>
-					<li><a href="?r=login">Login</a></li>
-					
+					<li><a class="onglet" href="?r=login">Login</a></li>
 					<?php } ?>
+					<li><a class="onglet" href="?r=site/presentation">Présentation</a></li>
 				</ul>
 			</div>
 		</div>
 	</header>
-	<section>	
+
+	<section class="background">	

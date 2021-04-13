@@ -56,32 +56,20 @@ header .header-container .wrapper_menu li {
 	text-transform: uppercase;
 }
 
-a:link, a:visited {
+.onglet:link,  .onglet:visited {
 	font-weight: bold;
 	text-decoration: none;
-	color: Chocolate;
-	border: dotted 1px white;
+	color: #2fb3e4;
+	border: solid 1px white;
 	transition: all 0.5s ease;
 }
-a:hover {
-	border-bottom: dotted 1px Chocolate;
+.onglet:hover  {
+	border-bottom: solid 1px #2fb3e4;
+	background-color: blue;
 }
-nav li {
-	list-style-type: none;
-	display: inline-block;
-}
-nav a:link, nav a:visited{
-	display: block;
-	padding: 10px;
-	border: none;
-}
-nav a:hover  {
-	border: none;
-	background-color: Chocolate;
-	color: white;	
-}
+
 section {
-	background-color: rgba(0,173,239,0.2);
+	
 	
 	min-height: calc(100vh - 200px);
 }
@@ -106,6 +94,9 @@ footer {
 }
 
 .footer-text{
+	text-align: center;
+}
+.texte_bienvenue{
 	text-align: center;
 }
 

@@ -25,11 +25,11 @@ CREATE TABLE IF NOT EXISTS internaluser (
 );
 
 INSERT INTO internaluser (idinternaluser,nom_internaluser,prenom_internaluser,email_internaluser,password,username,idrole) VALUES
-(1,"CAULLIREAU","Dorian","caullireau.dorian@gmail.com","password","caullird",1),
-(2,"PERROLLAZ","Maverick","perrollaz.maverick@pm.com","password","perrollm",1),
-(3,"BASCOP","Alexandre","bascop.alexandre@gmail.com","password","bascopa",2),
-(4,"PROF2","PROF2","PROF2.PROF2@gmail.com","password","PROF2",2),
-(5,"admin","admin","admin@admin.admin","password","admin",3);
+(1,"CAULLIREAU","Dorian","caullireau.dorian@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","caullird",1),
+(2,"PERROLLAZ","Maverick","perrollaz.maverick@pm.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","perrollm",1),
+(3,"BASCOP","Alexandre","bascop.alexandre@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","bascopa",2),
+(4,"PROF2","PROF2","PROF2.PROF2@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","PROF2",2),
+(5,"admin","admin","admin@admin.admin","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","admin",3);
 
 
 DROP TABLE IF EXISTS student;
@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS classroom (
   name_classroom varchar(100) NULL,
   building_classroom varchar(100) NULL,
   capacity_classroom varchar(100) NULL,
+  description_classroom varchar(500) NULL,
   PRIMARY KEY (idclassroom)
 );
 
@@ -181,7 +182,7 @@ CREATE TABLE IF NOT EXISTS indivualevaluation (
   idevaluationcriteria int(11) NOT NULL,
   idcompose int(11) NOT NULL,
   individual_note varchar(25) NOT NULL,
-  individual_comment varchar(255) NULL,
+  individual_comment varchar(10000) NULL,
   PRIMARY KEY (idindivualevaluation),
   FOREIGN KEY (idprestation) REFERENCES prestation(idprestation),
   FOREIGN KEY (idevaluationcriteria) REFERENCES evaluationcriteria(idevaluationcriteria),
@@ -192,3 +193,42 @@ CREATE TABLE IF NOT EXISTS indivualevaluation (
 INSERT INTO indivualevaluation(idindivualevaluation,idprestation,idevaluationcriteria,idcompose,individual_note,individual_comment) VALUES
 (1,1,2,1,"20","Un peu lent dans la présentation"),
 (2,1,1,1,"A","Finalement, surpris de ce sujet oral");
+
+
+DROP TABLE IF EXISTS usercontact;
+CREATE TABLE IF NOT EXISTS usercontact (
+  idusercontact int(11) NOT NULL AUTO_INCREMENT,
+  iduser int(11) NOT NULL,
+  title_contact varchar(10000) NULL,
+  description_contact varchar(10000) NULL,
+  date_contact DATETIME NULL,
+  type_demande varchar(1000) NULL,
+  have_response boolean NULL,
+  is_close boolean NULL,
+  PRIMARY KEY (idusercontact),
+  FOREIGN KEY (iduser) REFERENCES user(iduser)
+);
+
+INSERT INTO usercontact (idusercontact, iduser,title_contact,description_contact,date_contact,type_demande,have_response) VALUES
+(1,1,"Erreur sur le site","Erreur quand je clique sur le bouton logout","2010-04-02","Erreur",1),
+(2,1,"Problèle","Problèle quand je clique sur le bouton logout","2010-04-02","Erreur",1);
+
+DROP TABLE IF EXISTS responsecontact;
+CREATE TABLE IF NOT EXISTS responsecontact (
+  idresponsecontact int(11) NOT NULL AUTO_INCREMENT,
+  iduser int(11) NOT NULL,
+  iduser_respondent int(11) NOT NULL,
+  iduser_contact int(11) NOT NULL,
+  title_response varchar(10000) NULL,
+  text_response varchar(10000) NULL,
+  date_response DATETIME NULL,
+  admin_response boolean NULL,
+  PRIMARY KEY (idresponsecontact),
+  FOREIGN KEY (iduser) REFERENCES user(iduser),
+  FOREIGN KEY (iduser_respondent) REFERENCES user(iduser),
+  FOREIGN KEY (iduser_contact) REFERENCES usercontact(idusercontact)
+);
+
+INSERT INTO responsecontact(idresponsecontact, iduser, iduser_respondent , iduser_contact ,title_response , text_response,date_response ,admin_response) VALUES 
+(1,1,3,1,"C'est noté !","Tu veux du pain ou quoi ?","2010-04-02",1),
+(2,1,3,2,"C'est pas noté !","Tu veux du lait ou quoi ?","2010-04-02",1);

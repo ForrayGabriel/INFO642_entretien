@@ -3,6 +3,7 @@
 
 }
 .container {
+	box-shadow: 1px 2px 2px black;
 	display: block;
 	justify-content: center;
 	align-items: center;
