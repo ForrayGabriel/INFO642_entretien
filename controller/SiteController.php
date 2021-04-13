@@ -50,6 +50,17 @@ class SiteController extends Controller {
 
 	}
 
+	public function contact(){
+
+		if ($_SESSION['user']['idrole'] == 1) {
+			$this->render("contact");
+		}
+		else {if ($_SESSION['user']['idrole'] == 1) {
+			$this->index();
+		}}
+
+	}
+
 
 
 }
