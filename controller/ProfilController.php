@@ -6,19 +6,19 @@ class ProfilController extends Controller {
 		$this->render("index");
 	}
 
-    public function update(){
-        if($_SERVER['REQUEST_METHOD'] == "POST") {
-            unset(parameters()['r']);
-            foreach (parameters() as $key => $value) {
-                $internaluser = new Internaluser($_SESSION["user"]["idinternaluser"]);
-                if ($key instanceof classname)
-                    $internaluser->$key = $value;
-                }
-            }
-            $internaluser->update()
-        }
-        $this->render("index");
-    }
+    // public function update(){
+    //     if($_SERVER['REQUEST_METHOD'] == "POST") {
+    //         unset(parameters()['r']);
+    //         foreach (parameters() as $key => $value) {
+    //             $internaluser = new Internaluser($_SESSION["user"]["idinternaluser"]);
+    //             if ($key instanceof classname)
+    //                 $internaluser->$key = $value;
+    //             }
+    //         }
+    //         $internaluser->update();
+    //     }
+    //     $this->render("index");
+    // }
 
     public function logout(){
         session_unset();
