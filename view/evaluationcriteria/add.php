@@ -7,7 +7,7 @@
 			<option value="">-</option>
 			<?php
 			foreach ($data as $event) {
-				echo "<option value='".$event->idevent."'>".$entitled_event."</option>";
+				echo "<option value='".$event->idevent."'>".$event->entitled_event."</option>";
 			}
 			 ?>
 
