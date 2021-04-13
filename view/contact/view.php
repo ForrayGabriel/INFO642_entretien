@@ -29,13 +29,14 @@ foreach($data['response'] as $response){
 		echo "<p> _______________________________________________ </p>";
 	}
 }
+
 ?>
 
 <p>Repondre</p>
 
 <form action='?r=contact/send_response' method='post'>
 
-	<input type="hidden" name="answer_iduser_respondent" value=<?php echo $_SESSION['user'];?> >
+	<input type="hidden" name="answer_iduser_respondent" value=<?php echo $_SESSION['user']['idinternaluser'];?> >
 	<input type="hidden" name="answer_iduser" value=<?php echo $data['contact']->iduser; ?> >
 	<input type="hidden" name="answer_idcontact" value=<?php echo $data['contact']->idusercontact; ?> >
 
