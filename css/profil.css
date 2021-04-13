@@ -1,0 +1,31 @@
+:root {
+	--button-color: rgba(53,180,250,0.9);
+}
+
+#back{
+	background-color: var(--button-color);
+	border-radius: 1vw;
+	width: 80vw;
+	min-height: 25vh;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.5vw;
+}
+
+.info{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	text-align: center;
+	padding-bottom: 1vh;
+}
+
+#btn_update{
+	width: 6vw;
+	margin: auto;
+
+}
+
+#btn_valide{
+	width: 6vw;
+	margin: auto
+}
