@@ -15,6 +15,9 @@
             }
         }
         public function add() {
+            $table = ["idcompose", "idevaluationcriteria", "idprestation", "individual_comment","individual_note"];
+            print_r(array_intersect($table, array_keys(parameters())));
+            print_r(array_keys(parameters()));
             if (isset(parameters()["idindividualevaluation"])) {
                 $prestation = new Prestation();
                 $prestation->idcompose = parameters()["idcompose"];
@@ -23,7 +26,7 @@
                 $prestation->individual_comment = parameters()["individual_comment"];
                 $prestation->individual_note = parameters()["individual_note"];
                 $prestation->insert();
-                $this->render("index", Classroom::findAll());
+                $this->render("index", Prestation::findAll()); /// à modifier
             } else {
                 $prestation = new Prestation(parameters()["id"]);
                 $event = Evaluationcriteria::findOne(["idevent"=>$prestation->idprestation]);
