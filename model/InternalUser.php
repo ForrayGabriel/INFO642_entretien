@@ -14,25 +14,19 @@ class InternalUser extends Model {
 		return get_class($this).": ".$this->nom_internaluser;
 	}
 
-
-
 	public static function attempt($username, $password) {
 		$st = db()->prepare("select idinternaluser, idrole, password from internaluser where username=:username");
 		$st->bindValue(":username", $username);
-		// $st->bindValue(":password", password_hash($password, PASSWORD_DEFAULT));
 		$st->execute();
-		if ($st->rowCount() != 1) {
-			return false;
-		} else {
+		if ($st->rowCount() == 1) {
 			$row = $st->fetch(PDO::FETCH_ASSOC);
-			foreach($row as $field=>$value) {
-					$internaluser[$field] = $value;
-			}
-			if (password_verify($password, $internaluser['password']))
+			if (password_verify($password, $row['password'])) {
+				$internaluser["idinternaluser"] = $row["idinternaluser"];
+				$internaluser["idrole"] = $row["idrole"];
 				return $internaluser;
-			else
-				return false;
-		}	
+			}
+		}
+		return false;
 	}
 }
 
