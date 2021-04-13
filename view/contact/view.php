@@ -1,38 +1,73 @@
+<link rel="stylesheet" type="text/css" href="././css/chatbox.css"/>
+
 <h1> Suivre la conversation </h1>
 
-<p> _______________________________________________ </p>
+
 
 <?php
 foreach($data['internaluser'] as $user){
 	if($data['contact']->iduser_requestor == $user->idinternaluser){
-		$display_name = $user->nom_internaluser . " " . $user->prenom_internaluser;
+		$display_name_requestor = $user->nom_internaluser . " " . $user->prenom_internaluser;
+		$id_requestor = $user->idinternaluser;
  	}
+ 	if($data['contact']->iduser_receiver == $user->idinternaluser){
+		$display_name_receiver = $user->nom_internaluser . " " . $user->prenom_internaluser;
+		$id_receiver = $user->idinternaluser;
+ 	}
+
 }
+echo "<div class='container'>";
+echo "<img src='https://latelierduformateur.fr/wp-content/uploads/2018/03/avatar-1606916_960_720.png' alt='Avatar'>";
+echo "<p><b>De " . $display_name_requestor . "  : ". $data['contact']->title_contact ."  </b> </br></br> ". $data['contact']->description_contact ."</p>";
+echo "<span class='time-right'>". $data['contact']->date_contact ."</span>";
+echo "</div>";
 
-echo "<p>" . $display_name . "</p>";
-echo "<p><b> Titre de la demande : " . $data['contact']->title_contact . "</b></p>";
-echo "<p>" . $data['contact']->description_contact . "</p>";
-echo "<p>" . $data['contact']->date_contact . "</p>";
-
-echo "<p> _______________________________________________ </p>";
 
 foreach($data['response'] as $response){
 	if($data['contact']->idusercontact == $response->idusercontact){
-		if($response->admin_response){
-			echo "<p> Réponse de l'administrateur </p>";
+		if($response->iduser_requestor == $id_requestor){
+			echo "<div class='container'>";
+			echo "<img src='https://latelierduformateur.fr/wp-content/uploads/2018/03/avatar-1606916_960_720.png' alt='Avatar'>";
+			echo "<p><b>De " . $display_name_requestor . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
+			echo "<span class='time-right'>". $response->date_response ."</span>";
+			echo "</div>";
 		}else{
-			echo "<p> Réponse de " . $display_name . "</p>";
+			echo "<div class='container darker'>";
+			echo "<img src='http://judowormhout.ovh/wp-content/uploads/2016/06/avatar7.png' alt='Avatar' class='right'>";
+			echo "<p><b>De " . $display_name_receiver . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
+			echo "<span class='time-left'>". $response->date_response ."</span>";
+			echo "</div>";
 		}
-		echo "<p><b> Titre : " . $response->title_response . "</b></p>";
-		echo "<p>" . $response->text_response . "</p>";
-		echo "<p>" . $response->date_response . "</p>";
-		echo "<p> _______________________________________________ </p>";
 	}
 }
 
 ?>
 
+
+
+
 <p>Repondre</p>
+
+<form action='?r=contact/send_response' method='post'>
+
+	<input type="hidden" name="answer_iduser_requestor" value=<?php echo $id_requestor;?> >
+	<input type="hidden" name="answer_iduser_receiver" value=<?php echo $id_receiver; ?> >
+	<input type="hidden" name="answer_idcontact" value=<?php echo $data['contact']->idusercontact; ?> >
+
+	<label>Titre</label>
+	<p>
+		<input name='answer_title'/>
+	</p>
+
+	<label>Contenu</label>
+	<p>
+		<textarea name='answer_text'></textarea>
+	</p>
+	<p>
+		<input type='submit' value='Ajouter'/>
+	</p>
+</form>
+
 
 
 
