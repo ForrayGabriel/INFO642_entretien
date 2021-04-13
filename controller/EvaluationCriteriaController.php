@@ -22,7 +22,6 @@ class EvaluationcriteriaController extends Controller {
 
 			} catch (Exception $e) {
 				(new SiteController())->render("index");
-				// $this->render("error");
 			}
 		}
 		
