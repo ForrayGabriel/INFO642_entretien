@@ -56,15 +56,16 @@ header .header-container .wrapper_menu li {
 	text-transform: uppercase;
 }
 
-.onglet a:link, .onglet a:visited {
+.onglet:link,  .onglet:visited {
 	font-weight: bold;
 	text-decoration: none;
 	color: #2fb3e4;
 	border: solid 1px white;
 	transition: all 0.5s ease;
 }
-.onglet a:hover {
+.onglet:hover  {
 	border-bottom: solid 1px #2fb3e4;
+	background-color: blue;
 }
 
 section {
