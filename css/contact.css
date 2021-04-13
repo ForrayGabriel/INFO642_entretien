@@ -41,12 +41,14 @@
 
 
 #contact {
+	display: flex-row;
 	background-color: var(--button-color);
 	border-radius: 1vw;
 	width: 35vw;
 	min-height: 25vh;
 	margin-left: auto;
 	margin-right: auto;
+	 align-items: center;
 }
 
 @media only screen and (max-width: 800px) {
@@ -67,11 +69,21 @@
 	margin-left: auto;
 	margin-right: 0px;
 	margin-top: 2vh;
+	color: white;
 }
 
 #champs_container {
 	display: grid;
-	grid-template-columns: 50% 50%
+	grid-template-columns: 50% 50%;
+	grid-gap: 5%;
+
+}
+
+#submit_button {
+	margin: 2vh 40% 2vh 40%;
+	width: 20%;
+	height: 4vh;
+	border-radius: 1vh;
 }
 
 input {

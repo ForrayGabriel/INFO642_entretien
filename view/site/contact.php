@@ -11,7 +11,7 @@
 <br><br>
 <div id="contact">
 	<div id="titre">Contact : </div>
-	
+	<br>
 	<form id="form_contact">
 		<div id="champs_container">
 			<label class="text_label" for="fname">Premier input :   </label>
@@ -21,6 +21,9 @@
 			<label class="text_label" for="fname">Troisieme input :   </label>
   			<input type="text" >
 	  	</div>
+	  	<br>
+	  	<input id="submit_button" type="submit" value="Submit">	
 	</form>
+	
 	
 </div>
