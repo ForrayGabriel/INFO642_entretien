@@ -43,10 +43,9 @@ class SiteController extends Controller {
 
 		if ($_SESSION['user']['idrole'] == 1) {
 			$this->render("prestation");
-		}
-		else {if ($_SESSION['user']['idrole'] == 1) {
+		}else {
 			$this->index();
-		}}
+		}
 
 	}
 
@@ -54,10 +53,9 @@ class SiteController extends Controller {
 
 		if ($_SESSION['user']['idrole'] == 1) {
 			$this->render("contact");
-		}
-		else {if ($_SESSION['user']['idrole'] == 1) {
+		}else {
 			$this->index();
-		}}
+		}
 
 	}
 
