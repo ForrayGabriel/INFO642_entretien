@@ -86,6 +86,37 @@ class Model {
 		}
 		return $list;
 	}
+	public static function findOne($data, $operator = null) {
+        $class = get_called_class();
+        $table = strtolower(get_called_class());
+
+        array_walk($data,
+            function (&$v, $k) {
+                if(is_string($v)){
+                    $v = "$k = '$v'";
+                }
+                else{
+                    $v = $k.' = '.$v;
+                }
+            }
+        );
+
+        if($operator == "or"){
+            $res = implode(' or ', $data);
+        }else{
+            $res = implode(' and ', $data);
+        }
+
+        $st = db()->prepare("select id$table from $table where $res");
+        $st->execute();
+        $list = array();
+        while($row = $st->fetch(PDO::FETCH_ASSOC)) {
+            $list[] = new $class($row["id".$table]);
+        }
+        return $list;
+    }
+
+
 
 	public function __get($fieldName) {
 		$varName = "_".$fieldName;
