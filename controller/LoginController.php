@@ -23,7 +23,9 @@ class LoginController extends Controller {
     session_unset();
     $this->render("index");
   }
-
+  public function update(){
+    $this->render("modif_mdp");
+  }
 }
 
 
