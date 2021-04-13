@@ -20,7 +20,7 @@
 	<div id="boutton1">
 		<div class="test">
 		<strong>
-		<a 
+		<a class="link" 
 		
 		<?php 
 			if ($_SESSION['user']['idrole'] == 1) {
