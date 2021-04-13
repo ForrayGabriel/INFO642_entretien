@@ -13,6 +13,7 @@ echo"<td>Identifiant évènement</td>";
 echo"<td>Heure début</td>";
 echo"<td>Heure fin</td>";
 echo"<td>Observation</td>";
+echo "</tr>";
 echo "<br>";
 
 foreach($data["prestation"] as $prestation){
@@ -25,8 +26,10 @@ foreach($data["prestation"] as $prestation){
         echo"<td>".$prestation->start_time."</td>";
         echo"<td>".$prestation->end_time."</td>";
         echo"<td>".$prestation->comment_jury."</td>";
+        echo "</tr>";
         echo "<br>";
     }
 }
+echo "</table>";
 ?>
 
