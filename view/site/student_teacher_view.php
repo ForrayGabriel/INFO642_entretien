@@ -29,7 +29,7 @@
 					}
 
 					if ($_SESSION['user']['idrole'] == 2) {
-						echo "href='.?r=site/resultats'>INDIQUER DISPONIBILITÉS";
+						echo "<a class='link' href='.?r=site/resultats'>INDIQUER DISPONIBILITÉS";
 					}
 
 					?>
