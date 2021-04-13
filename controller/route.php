@@ -27,7 +27,7 @@ if (isset(parameters()["r"])) {
 	$c = new $controller();
 
 	if (isset($c->rolepermissions) && !in_array(get_role(), $c->rolepermissions))
-		header('Location: /');
+		header('Location: .');
 
 	$c->$action();	
 
