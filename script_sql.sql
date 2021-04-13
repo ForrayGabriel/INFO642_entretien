@@ -203,6 +203,7 @@ CREATE TABLE IF NOT EXISTS usercontact (
   date_contact DATETIME NULL,
   type_demande varchar(1000) NULL,
   have_response boolean NULL,
+  is_close boolean NULL,
   PRIMARY KEY (idusercontact),
   FOREIGN KEY (iduser) REFERENCES user(iduser)
 );

@@ -27,10 +27,6 @@
 		</select>
 	</p>
 
-	<!-- <p>
-		Responsable de l'évenement
-		<input name=''/>
-	</p> -->
 	<p>
 		Date début
 		<input type="date" name="start_date" value="2018-07-22" min="2018-01-01" max="2018-12-31">

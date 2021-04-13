@@ -45,6 +45,7 @@
 			<li><a href="?r=classroom">Les classes de cours</a></li>
 			<li><a href="?r=event">Les events</a></li>
 			<li><a href="?r=evaluationcriteria">Les différents critères d'évaluation</a></li>
+			<li><a href="?r=contact">Contact</a></li>
 		</ul>
 	</nav>
 	<section class="background">	
