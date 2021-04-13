@@ -2,7 +2,18 @@
 
 class SiteController extends Controller {
 	public function index() {
-		$this->render("index");
+		
+		if (isset($_SESSION['user'])){
+			if ($_SESSION['user']['idrole'] == 1 or $_SESSION['user']['idrole'] == 2) {
+				$this->render("student_teacher_view");
+			}
+			if ($_SESSION['user']['idrole'] == 3) {
+				$this->render("admin_view");
+			}
+		}
+		else {
+			$this->render("index");
+		}
 	}
 
 
@@ -16,6 +27,30 @@ class SiteController extends Controller {
 			file_put_contents("./view/site/presentation-container.php", parameters()["presentation"]);
 		}
 	}
+
+	public function resultats(){
+
+		if ($_SESSION['user']['idrole'] == 1) {
+			$this->render("resultats");
+		}
+		else {if ($_SESSION['user']['idrole'] == 1) {
+			$this->index();
+		}}
+
+	}
+
+	public function prestation(){
+
+		if ($_SESSION['user']['idrole'] == 1) {
+			$this->render("prestation");
+		}
+		else {if ($_SESSION['user']['idrole'] == 1) {
+			$this->index();
+		}}
+
+	}
+
+
 
 }
 

@@ -2,6 +2,8 @@
 
 class LoginController extends Controller {
 
+  var $rolepermissions = [-999];
+
 	public function index() {
     if (isset(parameters()["uname"]) && parameters()["psw"]) {
 
@@ -11,19 +13,12 @@ class LoginController extends Controller {
         $_SESSION["user"] = $internaluser;
         header('Location: .');
       } else {
-        // TODO add error
         $this->render("index", "error");
       }
     }
     
 		$this->render("index");
 	}
-
-  public function logout(){
-    session_unset();
-    $this->render("index");
-  }
-
 }
 
 

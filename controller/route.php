@@ -13,7 +13,6 @@ function parameters() {
 	return $parameters;
 }
 
-
 if (isset(parameters()["r"])) {
 	
 	$route = parameters()["r"];    
@@ -23,10 +22,13 @@ if (isset(parameters()["r"])) {
 	else
 		list($controller, $action) = explode("/", $route);
 
-
-	$controller = ucfirst($controller)."Controller"; 
+	$controller = ucfirst($controller)."Controller";
 	
-	$c = new $controller();  
+	$c = new $controller();
+
+	if (isset($c->rolepermissions) && !in_array(get_role(), $c->rolepermissions))
+		header('Location: .');
+
 	$c->$action();	
 
 } else {

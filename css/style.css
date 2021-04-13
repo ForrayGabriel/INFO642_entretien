@@ -56,30 +56,18 @@ header .header-container .wrapper_menu li {
 	text-transform: uppercase;
 }
 
-a:link, a:visited {
+.onglet:link,  .onglet:visited {
 	font-weight: bold;
 	text-decoration: none;
 	color: #2fb3e4;
 	border: solid 1px white;
 	transition: all 0.5s ease;
 }
-a:hover {
+.onglet:hover  {
 	border-bottom: solid 1px #2fb3e4;
+	background-color: blue;
 }
-nav li {
-	list-style-type: none;
-	display: inline-block;
-}
-nav a:link, nav a:visited{
-	display: block;
-	padding: 10px;
-	border: none;
-}
-nav a:hover  {
-	border: none;
-	background-color: Chocolate;
-	color: white;	
-}
+
 section {
 	
 	
