@@ -5,7 +5,7 @@
 	<a class="onglet" href="">Accueil</a>
 	<a class="onglet" href="">Salles</a>
 	<a class="onglet" href="">Évènements</a>
-	<a class="onglet" href="contact_admin">Contact</a>
+	<a class="onglet" href="?r=contact">Contact</a>
 </div>
 <div id="line"></div>
 
