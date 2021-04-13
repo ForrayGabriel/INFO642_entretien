@@ -13,8 +13,8 @@ header {
 	align-items: center;
 }
 header .header-container {
-	width: 95%;
-	max-width: 1800px;
+	width: 100%;
+	max-width: 100%;
 	max-height: 60%;
 	display: flex;
 	justify-content: space-around;
