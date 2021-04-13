@@ -1,5 +1,5 @@
 <div id="accueil_admin">
-	Voici la page de présentation de l'admin le boss
+	Vous êtes connecté en tant qu'administrateur
 	
 </div>
 

@@ -10,7 +10,7 @@
 }
 
 #bande {
-	
+	opacity: 0.8;
 	width: 100vw;
 	height: 7vw;
 	object-fit: cover;
