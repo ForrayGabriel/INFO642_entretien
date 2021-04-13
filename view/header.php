@@ -28,9 +28,9 @@
 					<li><a class="onglet" href="?r=site/presentation">Présentation</a></li>
 					<?php if (isset($_SESSION['user'])){?>
 						<li><a class="onglet" href="">Mon Profil</a></li>
-						<li><a class="onglet" href="?r=profil/logout">Logout</a></li>
+						<li><a class="onglet" href="?r=profil/logout">Déconnexion</a></li>
 					<?php } else{?>
-						<li><a class="onglet" href="?r=login">Login</a></li>
+						<li><a class="onglet" href="?r=login">Connexion</a></li>
 					<?php } ?>
 
 					

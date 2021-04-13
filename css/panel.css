@@ -5,8 +5,8 @@
 
 #photo {
 	position: relative;
-  text-align: center;
-  color: white;
+  	text-align: center;
+  	color: white;
 }
 
 #bande {
@@ -31,23 +31,15 @@
 	margin-top: 1vh;
 	margin-bottom: 1vh;
 	margin-left: 2vw;
-	display: grid;
-	grid-template-columns: 25% 25% 25% 25%;
-	justify-content: center;
 	
 }
 #line{
-	
 	border-bottom: solid 1px #888888;
 }
 
-
-
-
 .centered {
 	color:white;
-  	position: absolute;
-  		
+  	position: absolute;	
   	top: 50%;
   	left: 50%;
   	transform: translate(-50%, -50%);
@@ -70,4 +62,5 @@
 
 .onglet {
 	text-align: center;
+	margin-left: 4vw;
 }
