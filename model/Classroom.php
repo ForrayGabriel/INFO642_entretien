@@ -5,7 +5,8 @@ class Classroom extends Model {
 	protected $_idclassroom;
 	protected $_name_classroom;
 	protected $_building_classroom;
-	protected $_capacity_classroom;	
+	protected $_capacity_classroom;
+	protected $_description_classroom;	
 
 
 	public function __toString() {
