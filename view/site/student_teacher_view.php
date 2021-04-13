@@ -20,21 +20,20 @@
 	<div id="boutton1">
 		<div class="test">
 		<strong>
-		<a class="link" 
-		
-		<?php 
-			if ($_SESSION['user']['idrole'] == 1) {
+			<a class="link" 
+				<?php 
+					if ($_SESSION['user']['idrole'] == 1) {
 
-			echo "href='.?r=site/prestation'>MES RÉSULTATS";
-			}
+					echo "href='.?r=site/prestation'>MES RÉSULTATS";
+					}
 
-			if ($_SESSION['user']['idrole'] == 2) {
+					if ($_SESSION['user']['idrole'] == 2) {
 
-			echo "href='.?r=site/resultats'>INDIQUER DISPONIBILITÉS";
-			}
+					echo "href='.?r=site/resultats'>INDIQUER DISPONIBILITÉS";
+					}
 
-		 ?>	
-		 </a>
+				 ?>	
+			 </a>
 		</strong>
 	</div>
 	</div>
@@ -42,10 +41,11 @@
 	<div id="boutton2">
 		
 		<strong>
+			<a class="link" 
 		<?php 
 			if ($_SESSION['user']['idrole'] == 1) {
 
-			echo "CONTACTER L'ADMINISTRATEUR";
+			echo "href='.?r=site/contact'>CONTACTER L'ADMINISTRATEUR";
 			}
 
 			if ($_SESSION['user']['idrole'] == 2) {
