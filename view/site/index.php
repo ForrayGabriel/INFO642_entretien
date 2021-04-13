@@ -1,19 +1,10 @@
 
 <?php 
 	if (isset($_SESSION['user'])){
-		if ($_SESSION['user']['idrole'] == 1) {
+		if ($_SESSION['user']['idrole'] == 1 or $_SESSION['user']['idrole'] == 2) {
 
-			include_once "student_view.php";
+			include_once "student_teacher_view.php";
 	}
-?>
-
-<?php 
-		if ($_SESSION['user']['idrole'] == 2) {
-			include_once "teacher_view.php";
-	}
-?>
-
-<?php 
 		if ($_SESSION['user']['idrole'] == 3) {
 			include_once "admin_view.php";
 	}}
