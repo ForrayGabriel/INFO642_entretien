@@ -3,9 +3,9 @@
 class ResponseContact extends Model {
 	
 	protected $_idresponsecontact;
-	protected $_iduser;
-	protected $_iduser_respondent;
-	protected $_iduser_contact;
+	protected $_idusercontact;
+	protected $_iduser_requestor;
+	protected $_iduser_receiver;
 	protected $_title_response;
 	protected $_text_response;
 	protected $_date_response;

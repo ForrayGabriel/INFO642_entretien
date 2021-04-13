@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS indivualevaluation (
   idevaluationcriteria int(11) NOT NULL,
   idcompose int(11) NOT NULL,
   individual_note varchar(25) NOT NULL,
-  individual_comment varchar(10000) NULL,
+  individual_comment varchar(2046) NULL,
   PRIMARY KEY (idindivualevaluation),
   FOREIGN KEY (idprestation) REFERENCES prestation(idprestation),
   FOREIGN KEY (idevaluationcriteria) REFERENCES evaluationcriteria(idevaluationcriteria),
@@ -198,37 +198,39 @@ INSERT INTO indivualevaluation(idindivualevaluation,idprestation,idevaluationcri
 DROP TABLE IF EXISTS usercontact;
 CREATE TABLE IF NOT EXISTS usercontact (
   idusercontact int(11) NOT NULL AUTO_INCREMENT,
-  iduser int(11) NOT NULL,
-  title_contact varchar(10000) NULL,
-  description_contact varchar(10000) NULL,
+  iduser_requestor int(11) NOT NULL,
+  iduser_receiver int(11) NOT NULL,
+  title_contact varchar(2046) NULL,
+  description_contact varchar(2046) NULL,
   date_contact DATETIME NULL,
   type_demande varchar(1000) NULL,
   have_response boolean NULL,
   is_close boolean NULL,
   PRIMARY KEY (idusercontact),
-  FOREIGN KEY (iduser) REFERENCES user(iduser)
+  FOREIGN KEY (iduser_requestor) REFERENCES user(iduser),
+  FOREIGN KEY (iduser_receiver) REFERENCES user(iduser)
 );
 
-INSERT INTO usercontact (idusercontact, iduser,title_contact,description_contact,date_contact,type_demande,have_response) VALUES
-(1,1,"Erreur sur le site","Erreur quand je clique sur le bouton logout","2010-04-02","Erreur",1),
-(2,1,"Problèle","Problèle quand je clique sur le bouton logout","2010-04-02","Erreur",1);
+INSERT INTO usercontact (idusercontact, iduser_requestor,iduser_receiver,title_contact,description_contact,date_contact,type_demande,have_response,is_close) VALUES
+(1,1,5,"Erreur sur le site","Erreur quand je clique sur le bouton logout","2010-04-02","Erreur",1,0),
+(2,1,5,"Problèle","Problèle quand je clique sur le bouton logout","2010-04-02","Erreur",1,0);
 
 DROP TABLE IF EXISTS responsecontact;
 CREATE TABLE IF NOT EXISTS responsecontact (
   idresponsecontact int(11) NOT NULL AUTO_INCREMENT,
-  iduser int(11) NOT NULL,
-  iduser_respondent int(11) NOT NULL,
-  iduser_contact int(11) NOT NULL,
-  title_response varchar(10000) NULL,
-  text_response varchar(10000) NULL,
+  idusercontact int(11) NOT NULL,
+  iduser_requestor int(11) NOT NULL,
+  iduser_receiver int(11) NOT NULL,
+  title_response varchar(2046) NULL,
+  text_response varchar(2046) NULL,
   date_response DATETIME NULL,
   admin_response boolean NULL,
   PRIMARY KEY (idresponsecontact),
-  FOREIGN KEY (iduser) REFERENCES user(iduser),
-  FOREIGN KEY (iduser_respondent) REFERENCES user(iduser),
-  FOREIGN KEY (iduser_contact) REFERENCES usercontact(idusercontact)
+  FOREIGN KEY (idusercontact) REFERENCES usercontact(idusercontact),
+  FOREIGN KEY (iduser_requestor) REFERENCES user(iduser),
+  FOREIGN KEY (iduser_receiver) REFERENCES user(iduser)
 );
 
-INSERT INTO responsecontact(idresponsecontact, iduser, iduser_respondent , iduser_contact ,title_response , text_response,date_response ,admin_response) VALUES 
-(1,1,3,1,"C'est noté !","Tu veux du pain ou quoi ?","2010-04-02",1),
-(2,1,3,2,"C'est pas noté !","Tu veux du lait ou quoi ?","2010-04-02",1);
+INSERT INTO responsecontact(idresponsecontact, idusercontact, iduser_requestor, iduser_receiver ,title_response , text_response,date_response ,admin_response) VALUES 
+(1,1,5,1,"C'est noté !","Tu veux du pain ou quoi ?","2010-04-02",1),
+(2,1,5,1,"C'est pas noté !","Tu veux du lait ou quoi ?","2010-04-02",1);
