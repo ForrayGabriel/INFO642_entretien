@@ -12,7 +12,7 @@
 <div class="haut">
 	<a class="onglet" href=".">Accueil</a>
 	<a class="onglet" href='.?r=site/prestation'>Mes résultats</a>
-	<a class="onglet" href="?r=contact">Contact</a>
+	<a class="onglet" href="?r=site/contact">Contact</a>
 </div>
 
 <div id="line"></div>
