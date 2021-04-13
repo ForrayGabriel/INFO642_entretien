@@ -1,6 +1,6 @@
 <?php
 
-class EvaluationCriteria extends Model {
+class Evaluationcriteria extends Model {
 
 	protected $_idevaluationcriteria;
 	protected $_idevent;

@@ -9,6 +9,7 @@
 <body>
 	<main>
 	<header>
+
 		<div class="header-container">
 			<div class="wrapper_menu_logo">
 				
@@ -38,4 +39,12 @@
 			</div>
 		</div>
 	</header>
-	<section>	
+
+	<nav class="background">
+		<ul>
+			<li><a href="?r=classroom">Les classes de cours</a></li>
+			<li><a href="?r=event">Les events</a></li>
+			<li><a href="?r=evaluationcriteria">Les différents critères d'évaluation</a></li>
+		</ul>
+	</nav>
+	<section class="background">	
