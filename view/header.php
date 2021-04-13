@@ -17,7 +17,7 @@
 				
 				<div class="separator"></div>
 				
-				<a href="https://www.univ-smb.fr//index.html">
+				<a href="https://www.univ-smb.fr/index.html">
 				<img id = "logo_usmb" src="./images/logo_usmb.jpg"></a>
 				
 			</div>
