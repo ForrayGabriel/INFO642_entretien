@@ -9,12 +9,37 @@
 <body>
 	<main>
 	<header>
-		<div>
-			<img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Logo_Polytech_Annecy_Chambery.svg/640px-Logo_Polytech_Annecy_Chambery.svg.png" alt="Italian Trulli">
+
+		<div class="header-container">
+			<div class="wrapper_menu_logo">
+				
+				<a href="https://www.polytech.univ-smb.fr/index.html">
+				<img src="./images/logo_polytech.png"/></a>
+				
+				<div class="separator"></div>
+				
+				<a href="https://www.univ-smb.fr">
+				<img id = "logo_usmb" src="./images/logo_usmb.jpg"></a>
+				
+			</div>
+			<div class="wrapper_menu">
+				<ul>
+					<?php if (isset($_SESSION['user'])){?>
+					
+					<li><a href="?r=login/logout">Logout</a></li>
+				
+					
+					
+					<?php } else{?>
+					<li><a href="?r=login">Login</a></li>
+					
+					<?php } ?>
+					<li><a href="?r=site/presentation">Présentation</a></li>
+				</ul>
+			</div>
 		</div>
-		<div class="sep_verticale"></div>
-		<div><h1><a class='title_general' href=''>La gestion des cours</a></h1></div>
 	</header>
+
 	<nav class="background">
 		<ul>
 			<li><a href="?r=classroom">Les classes de cours</a></li>
