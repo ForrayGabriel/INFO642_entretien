@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS classroom (
   name_classroom varchar(100) NULL,
   building_classroom varchar(100) NULL,
   capacity_classroom varchar(100) NULL,
+  description_classroom varchar(500) NULL,
   PRIMARY KEY (idclassroom)
 );
 
