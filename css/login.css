@@ -3,10 +3,15 @@
 
 }
 .container {
+	box-shadow: 1px 2px 2px black;
+	display: block;
+	justify-content: center;
+	align-items: center;
 	height: 35vh;
     width: 40vw;
 	background-color: #0E5989;
 	margin-left: 30vw;
+	
 }
 
 input {
@@ -17,7 +22,10 @@ input {
 }
 
 button {
-	margin-left: 17vw;
+
+	margin-left: 16vw;
+
+	min-width: 75px;
 	width: 6vw;
 	height: 5vh;
 	margin-top: 2vh;
@@ -39,6 +47,14 @@ button {
  	font-size: 5vw;
  	color: white;
  	text-shadow: 1px 1px 5px black;
-    
-	
+
+
+}
+
+#error_login {
+	background-color: red;
+	height: 5vh;
+    width: 30vw;
+    margin-left: 35vw;
+    text-align: center;
 }

@@ -4,8 +4,10 @@ class LoginController extends Controller {
 
 	public function index() {
     if (isset(parameters()["uname"]) && parameters()["psw"]) {
+
       $internaluser = Internaluser::attempt(parameters()["uname"], parameters()["psw"]);
       if ($internaluser) {
+    
         $_SESSION["user"] = $internaluser;
         header('Location: .');
       } else {
@@ -16,6 +18,11 @@ class LoginController extends Controller {
     
 		$this->render("index");
 	}
+
+  public function logout(){
+    session_unset();
+    $this->render("index");
+  }
 
 }
 
