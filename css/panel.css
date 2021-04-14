@@ -27,7 +27,7 @@
 }
 
 .haut{
-	font-size: 2vw;
+	font-size: 4vh;
 	margin-top: 1vh;
 	margin-bottom: 1vh;
 	margin-left: 2vw;
@@ -56,7 +56,7 @@
   	left: 50%;
   	transform: translate(-50%, -50%);
   	text-shadow: 2px 2px rgba(0,0,0,0.8);
-	font-size: 3vw;
+	font-size: 6vh;
 	font-family: 'Verdana';
 }
 

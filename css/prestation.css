@@ -57,19 +57,19 @@
 	margin-left: auto;
 	margin-right: auto;
 	color: white;
-	font-size: 2vw;
+	font-size: 4vh;
 	text-shadow: 2px 2px rgba(0,0,0,0.8);
 }
 
 #titre {
 	color: white;
-	font-size: calc(1vw * 2);
+	font-size: 4vh;
 	margin-left: 5%;
 }
 
 #liste_presta {
 	color: white;
-	font-size: calc(1vw * 1.5);
+	font-size: 3vh;
 	margin-left: 10%
 }
 
@@ -87,6 +87,6 @@
 	color: white;
 	background-color: var(--button-color);
 	padding: 1vw;
-	font-size: 1vw;
+	font-size: 3vh;
 	border-radius: 1vw;
 }

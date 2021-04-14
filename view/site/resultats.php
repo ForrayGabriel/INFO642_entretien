@@ -1,6 +1,6 @@
 
 <link rel="stylesheet" href="././css/resultats.css">
-<br><br>
+
 <div id="container">
 	<a id="button" href=".?r=site/prestation">Retour</a>
 </div>
