@@ -9,14 +9,13 @@ class Controller {
 	}
 
 	public function render($view, $d=null) {
-		global $data, $css;
+		global $data, $model;
 
 		$controller = get_class($this);  // SiteController
 		$model = substr($controller, 0, 
 		strpos($controller, "Controller")); // Site
 
 		$data = $d;
-		$css = strtolower($model);
 
 		include_once "view/header.php";
 		include_once "view/".strtolower($model)."/".$view.".php";

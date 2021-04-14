@@ -1,0 +1,98 @@
+:root {
+	--calendar-header-height: 80px;
+    --case-width: 100px;
+    --case-height: 100px;
+}
+
+.green {
+    background: #80b369;
+}
+
+.orange {
+    background: #f9ce67;
+}
+
+.red {
+    background: #da5350;
+}
+
+.calendar{
+  position: absolute;
+  width: calc(var(--case-width) * 8);
+  background-color: #ffffff;
+  color: #333333;
+  text-align: center;
+  font-size: 1.1em;
+  user-select:none;
+}
+
+.calendar .header {
+    display: flex;
+    height: var(--calendar-header-height);
+    align-content: space-around;
+    
+    align-items: center;
+}
+
+.calendar .header .month {
+    flex: 4;
+    background-color: lightskyblue;
+    line-height: var(--calendar-header-height);
+}
+
+.calendar .header .change-month {
+    flex: 1;
+    background-color: rgb(79, 179, 241);
+    max-width: var(--case-width);
+    line-height: var(--calendar-header-height);
+    text-decoration: none;
+}
+
+.calendar .content {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.calendar .content .item {
+    width: var(--case-width);
+    height: var(--case-height);
+    overflow: hidden;
+    margin: -1px;
+    border: 1px solid lightslategray;
+    line-height: var(--case-height);
+}
+
+.calendar .content .item .day {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    color: white;
+    z-index: 5;
+    font-weight: bold;
+    
+}
+
+.calendar .content .item .half_day {
+    z-index: 0;
+    position: absolute;
+    top: -8vw;
+    left: -8vw;
+    right: -8vw;
+    bottom: -8vw;
+    transform: rotate(45deg);
+    transform-origin: 75% -10%;
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid lightslategray;
+}
+
+.calendar .content .item .half_day + .half_day {
+    z-index: 1;
+    transform-origin: 25% 110%
+}
+
+.calendar .informations {
+    position: relative;
+    background-color: lightsalmon;
+}
