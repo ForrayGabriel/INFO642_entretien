@@ -2,9 +2,9 @@
 
 class Jury extends Model {
 
-	protected $_id_jury;
+	protected $_idjury;
 	protected $_idclassroom;
-	protected $_idtime_slot;
+	protected $_idtimeslot;
 	protected $_name_jury;
 	
 
