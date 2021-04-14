@@ -5,7 +5,14 @@ spl_autoload_register(function($name) {
 	$dir = "model";
 	if (strpos($name,"Controller") !== FALSE)
 		$dir = "controller";
-	include_once $dir."/".strtolower($name).".php";
+
+	$path = $dir."/".strtolower($name).".php";
+
+	if(file_exists($path)){
+		include_once $path;
+	}else{
+		(new SiteController())->render("index");
+	}
 });
 
 function get_role(){
