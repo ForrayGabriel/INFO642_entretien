@@ -6,6 +6,7 @@ class Prestation extends Model {
 	protected $_idstudent;
 	protected $_idjury;
 	protected $_idevent;
+	protected $_date_prestation;
 	protected $_start_time;
 	protected $_end_time;
 	protected $_comment_jury;	

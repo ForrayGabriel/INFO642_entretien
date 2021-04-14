@@ -147,6 +147,7 @@ CREATE TABLE IF NOT EXISTS prestation (
   idstudent int(11) NOT NULL,
   idjury int(11) NOT NULL,
   idevent int(11) NOT NULL,
+  date_prestation DATETIME NULL,
   start_time TIME NULL,
   end_time TIME NULL,
   comment_jury varchar(2048) NULL,
@@ -156,9 +157,9 @@ CREATE TABLE IF NOT EXISTS prestation (
   FOREIGN KEY (idevent) REFERENCES event(idevent)
 );
 
-INSERT INTO prestation(idprestation,idstudent,idjury,idevent,start_time,end_time,comment_jury) VALUES 
-(1,1,1,1,"","","Super incroyablement nickel"),
-(2,2,1,1,"","","Finalement pas incroyable");
+INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,start_time,end_time,comment_jury) VALUES 
+(1,1,1,1,"2010-04-02","","","Super incroyablement nickel"),
+(2,2,1,1,"2010-04-02","","","Finalement pas incroyable");
 
 DROP TABLE IF EXISTS evaluationcriteria;
 CREATE TABLE IF NOT EXISTS evaluationcriteria (
@@ -175,22 +176,22 @@ INSERT INTO evaluationcriteria(idevaluationcriteria,idevent,description_criteria
 (2,1,"Communication","{0:20}");
 
 
-DROP TABLE IF EXISTS indivualevaluation;
-CREATE TABLE IF NOT EXISTS indivualevaluation (
-  idindivualevaluation int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS individualevaluation;
+CREATE TABLE IF NOT EXISTS individualevaluation (
+  idindividualevaluation int(11) NOT NULL AUTO_INCREMENT,
   idprestation int(11) NOT NULL,
   idevaluationcriteria int(11) NOT NULL,
   idcompose int(11) NOT NULL,
   individual_note varchar(25) NOT NULL,
   individual_comment varchar(2046) NULL,
-  PRIMARY KEY (idindivualevaluation),
+  PRIMARY KEY (idindividualevaluation),
   FOREIGN KEY (idprestation) REFERENCES prestation(idprestation),
   FOREIGN KEY (idevaluationcriteria) REFERENCES evaluationcriteria(idevaluationcriteria),
   FOREIGN KEY (idcompose) REFERENCES compose(idcompose)
 );
 
 
-INSERT INTO indivualevaluation(idindivualevaluation,idprestation,idevaluationcriteria,idcompose,individual_note,individual_comment) VALUES
+INSERT INTO individualevaluation(idindividualevaluation,idprestation,idevaluationcriteria,idcompose,individual_note,individual_comment) VALUES
 (1,1,2,1,"20","Un peu lent dans la présentation"),
 (2,1,1,1,"A","Finalement, surpris de ce sujet oral");
 
