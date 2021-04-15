@@ -3,20 +3,6 @@
 	--button-color: rgba(53,180,250,0.9);
 }
 
-#photo {
-	position: relative;
-  text-align: center;
-  color: white;
-}
-
-#bande {
-	opacity: 0.8;
-	width: 100vw;
-	height: 7vw;
-	object-fit: cover;
-	object-position: 0 30%;
-
-}
 
 #contenu {
 	padding: 10px;
@@ -111,15 +97,6 @@
 	}
 }
 
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-shadow: 4px 4px rgba(0,0,0,0.8);
-	font-size: 4vw;
-	font-family: 'Verdana';
-}
 
 .link {
 	color: white;
