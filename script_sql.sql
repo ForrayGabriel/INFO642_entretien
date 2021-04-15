@@ -1,5 +1,17 @@
-
+DROP TABLE IF EXISTS individualevaluation;
+DROP TABLE IF EXISTS prestation;
+DROP TABLE IF EXISTS student;
+DROP TABLE IF EXISTS compose;
+DROP TABLE IF EXISTS jury;
+DROP TABLE IF EXISTS timeslot;
+DROP TABLE IF EXISTS classroom;
+DROP TABLE IF EXISTS evaluationcriteria;
+DROP TABLE IF EXISTS event;
+DROP TABLE IF EXISTS responsecontact;
+DROP TABLE IF EXISTS usercontact;
+DROP TABLE IF EXISTS internaluser;
 DROP TABLE IF EXISTS role;
+
 CREATE TABLE IF NOT EXISTS role (
   idrole int(11) NOT NULL AUTO_INCREMENT,
   name_role varchar(100) NOT NULL,
@@ -11,7 +23,6 @@ INSERT INTO role (idrole,name_role) VALUES
 (2,"Professeur"),
 (3,"Administrateur");
 
-DROP TABLE IF EXISTS internaluser;
 CREATE TABLE IF NOT EXISTS internaluser (
   idinternaluser int(11) NOT NULL AUTO_INCREMENT,
   nom_internaluser varchar(100) NOT NULL,
@@ -31,8 +42,6 @@ INSERT INTO internaluser (idinternaluser,nom_internaluser,prenom_internaluser,em
 (4,"PROF2","PROF2","PROF2.PROF2@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","PROF2",2),
 (5,"admin","admin","admin@admin.admin","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","admin",3);
 
-
-DROP TABLE IF EXISTS student;
 CREATE TABLE IF NOT EXISTS student (
   idstudent int(11) NOT NULL AUTO_INCREMENT,
   num_INE varchar(100) NULL,
@@ -46,39 +55,6 @@ INSERT INTO student (idstudent,num_INE,num_student,idinternaluser) VALUES
 (1,"1445D8854","8985444447",1),
 (2,"14E5D8854","8944589447",2);
 
-DROP TABLE IF EXISTS timeslot;
-CREATE TABLE IF NOT EXISTS timeslot (
-  idtimeslot int(11) NOT NULL AUTO_INCREMENT,
-  date_day DATETIME NULL,
-  start_time TIME NULL,
-  end_time TIME NULL,
-  PRIMARY KEY (idtimeslot)
-);
-
-INSERT INTO timeslot (idtimeslot,date_day,start_time,end_time) VALUES
-(1,"2010-04-02","",""),
-(2,"2010-04-02","",""),
-(3,"2010-04-02","",""),
-(4,"2010-04-02","","");
-
-DROP TABLE IF EXISTS availability;
-CREATE TABLE IF NOT EXISTS availability (
-  idavailability int(11) NOT NULL AUTO_INCREMENT,
-  idinternaluser int(11) NOT NULL,
-  idtimeslot int(11) NOT NULL,
-  comment varchar(2048) NULL,
-  PRIMARY KEY (idavailability),
-  FOREIGN KEY (idinternaluser) REFERENCES internaluser(idinternaluser),
-  FOREIGN KEY (idtimeslot) REFERENCES timeslot(idtimeslot)
-); 
-
-INSERT INTO availability (idavailability,idinternaluser,idtimeslot,comment) VALUES
-(1,3,1,"Dispo vraiment si besoin"),
-(2,4,1,""),
-(3,4,3,"Disponible");
-
-
-DROP TABLE IF EXISTS classroom;
 CREATE TABLE IF NOT EXISTS classroom (
   idclassroom int(11) NOT NULL AUTO_INCREMENT,
   name_classroom varchar(100) NULL,
@@ -93,8 +69,20 @@ INSERT INTO classroom(idclassroom,name_classroom,building_classroom,capacity_cla
 (2,"C204","Bâtiment C","200 places assises"),
 (3,"T804","Bâtiment T","200 places assises");
 
+CREATE TABLE IF NOT EXISTS timeslot (
+  idtimeslot int(11) NOT NULL AUTO_INCREMENT,
+  idinternaluser int(11) NOT NULL,
+  disponibility  int(1) NOT NULL,
+  meridiem DATETIME NOT NULL,
+  PRIMARY KEY (idtimeslot)
+);
 
-DROP TABLE IF EXISTS jury;
+INSERT INTO timeslot (idtimeslot,idinternaluser,disponibility,meridiem) VALUES
+(1,1,0,NOW()),
+(2,2,0,NOW()),
+(3,2,0,NOW()-INTERVAL 1 DAY),
+(4,2,0,NOW()+INTERVAL 1 DAY);
+
 CREATE TABLE IF NOT EXISTS jury (
   idjury int(11) NOT NULL AUTO_INCREMENT,
   idclassroom int(11) NOT NULL,
@@ -109,22 +97,6 @@ INSERT INTO jury(idjury,idclassroom,idtimeslot,name_jury) VALUES
 (1,1,1,"Jury de la honte"),
 (2,2,2,"Jury des bg");
 
-DROP TABLE IF EXISTS compose;
-CREATE TABLE IF NOT EXISTS compose (
-  idcompose int(11) NOT NULL AUTO_INCREMENT,
-  idinternaluser int(11) NOT NULL,
-  idjury int(11) NOT NULL,
-  PRIMARY KEY (idcompose),
-  FOREIGN KEY (idinternaluser) REFERENCES internaluser(idinternaluser),
-  FOREIGN KEY (idjury) REFERENCES jury(idjury)
-);
-
-INSERT INTO compose(idcompose,idinternaluser,idjury) VALUES
-(1,1,1),
-(2,2,2);
-
-
-DROP TABLE IF EXISTS event;
 CREATE TABLE IF NOT EXISTS event (
   idevent int(11) NOT NULL AUTO_INCREMENT,
   entitled_event varchar(2048) NULL,
@@ -140,8 +112,6 @@ INSERT INTO event(idevent,entitled_event,description_event,idevent_creator,start
 (1,"Soutenance des stage FI4","Description de l event",5,"2010-04-02","2010-04-03"),
 (2,"Soutenance des stage FI3","Description de l event",5,"2010-04-02","2010-04-03");
 
-
-DROP TABLE IF EXISTS prestation;
 CREATE TABLE IF NOT EXISTS prestation (
   idprestation int(11) NOT NULL AUTO_INCREMENT,
   idstudent int(11) NOT NULL,
@@ -161,7 +131,19 @@ INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,sta
 (1,1,1,1,"2010-04-02","","","Super incroyablement nickel"),
 (2,2,1,1,"2010-04-02","","","Finalement pas incroyable");
 
-DROP TABLE IF EXISTS evaluationcriteria;
+CREATE TABLE IF NOT EXISTS compose (
+  idcompose int(11) NOT NULL AUTO_INCREMENT,
+  idinternaluser int(11) NOT NULL,
+  idjury int(11) NOT NULL,
+  PRIMARY KEY (idcompose),
+  FOREIGN KEY (idinternaluser) REFERENCES internaluser(idinternaluser),
+  FOREIGN KEY (idjury) REFERENCES jury(idjury)
+);
+
+INSERT INTO compose(idcompose,idinternaluser,idjury) VALUES
+(1,1,1),
+(2,2,2);
+
 CREATE TABLE IF NOT EXISTS evaluationcriteria (
   idevaluationcriteria int(11) NOT NULL AUTO_INCREMENT,
   idevent int(11) NOT NULL,
@@ -176,7 +158,6 @@ INSERT INTO evaluationcriteria(idevaluationcriteria,idevent,description_criteria
 (2,1,"Communication","{0:20}");
 
 
-DROP TABLE IF EXISTS individualevaluation;
 CREATE TABLE IF NOT EXISTS individualevaluation (
   idindividualevaluation int(11) NOT NULL AUTO_INCREMENT,
   idprestation int(11) NOT NULL,
@@ -196,7 +177,6 @@ INSERT INTO individualevaluation(idindividualevaluation,idprestation,idevaluatio
 (2,1,1,1,"A","Finalement, surpris de ce sujet oral");
 
 
-DROP TABLE IF EXISTS usercontact;
 CREATE TABLE IF NOT EXISTS usercontact (
   idusercontact int(11) NOT NULL AUTO_INCREMENT,
   iduser_requestor int(11) NOT NULL,
@@ -216,7 +196,6 @@ INSERT INTO usercontact (idusercontact, iduser_requestor,iduser_receiver,title_c
 (1,1,5,"Erreur sur le site","Erreur quand je clique sur le bouton logout","2010-04-02","Erreur",1,0),
 (2,1,5,"Problèle","Problèle quand je clique sur le bouton logout","2010-04-02","Erreur",1,0);
 
-DROP TABLE IF EXISTS responsecontact;
 CREATE TABLE IF NOT EXISTS responsecontact (
   idresponsecontact int(11) NOT NULL AUTO_INCREMENT,
   idusercontact int(11) NOT NULL,
