@@ -50,7 +50,7 @@ th{
 	color: white;
 	background-color: var(--button-color);
 	padding: 1vw;
-	font-size: 1vw;
+	font-size: 3vh;
 	border-radius: 1vw;
 }
 
@@ -63,7 +63,7 @@ th{
 	min-height: 25vh;
 	margin-left: auto;
 	margin-right: auto;
-	 align-items: center;
+	align-items: center;
 }
 
 @media only screen and (max-width: 800px) {
@@ -74,13 +74,13 @@ th{
 
 #titre {
 	color: white;
-	font-size: calc(1vw * 2);
+	font-size: 4vh;
 	margin-left: 5%;
 }
 
 .text_label  {
-	width: 50%;
-	font-size: 1vw;
+	width: 70%;
+	font-size: 2vh;
 	margin-left: auto;
 	margin-right: 0px;
 	margin-top: 2vh;
@@ -103,4 +103,5 @@ th{
 
 input {
 	width: 50%;
+	height: 80%;
 }

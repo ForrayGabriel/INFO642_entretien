@@ -35,6 +35,7 @@ button {
 	text-align: center;
 	font-size: 4vw;
 	color: white;
+	text-shadow: 2px 2px rgba(0,0,0,0.5);
 }
 
 

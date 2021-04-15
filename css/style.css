@@ -1,4 +1,4 @@
-* { margin: 0px; padding:0px; position: relative; }
+* { margin: 0px; padding:0px; position: relative; z-index: 0;}
 body {
 	
 	font-family: sans-serif, arial;
@@ -70,7 +70,7 @@ header .header-container .wrapper_menu li {
 section {
 	
 	
-	min-height: calc(100vh - 200px);
+	min-height: calc(100vh - 180px);
 }
 section table {
 
@@ -86,18 +86,17 @@ section p {
 }
 
 footer {
+	background-color: white;
 	border-top: solid 1px #888888;
-	
+	padding: 10px 0;
 	font-size: 0.8em;
-	height: 30px;
+	height: 100%;
 }
 
 .footer-text{
 	text-align: center;
 }
-.texte_bienvenue{
-	text-align: center;
-}
+
 
 
 

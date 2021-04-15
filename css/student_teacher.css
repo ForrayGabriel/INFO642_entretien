@@ -10,9 +10,9 @@
 }
 
 #bande {
-	
+	opacity: 0.8;
 	width: 100vw;
-	height: 10vw;
+	height: 7vw;
 	object-fit: cover;
 	object-position: 0 30%;
 
@@ -65,8 +65,10 @@
 	background-color: var(--button-color);
 	border-radius: 2vh;
 }
+ 
 
-#entretients {
+
+#entretiens {
 	box-shadow: 1px 2px 2px black;
 	color: white;
 	text-shadow: 2px 2px rgba(0,0,0,0.5);
@@ -74,21 +76,39 @@
 	font-family: 'Verdana';
 	text-align: center;
 	display: inline-block;
-	width: 45vw;
-	height: 100%;
+	width: 60%;
+	min-height: 40vh;
 	border-radius: 2vh;
 	background-color: var(--button-color);
-	margin: auto;
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-top: 2%;
+
 
 }
-
 #lesentretiens {
+	color: black;
 	height: 70%;
+	min-height: auto;
 	width: 90%;
+	height: 25vh;
 	background-color: white;
 	margin: auto;
 	border-radius: 2vh;
 	margin-top: 2vh;
+	margin-bottom: 10vh;
+}
+
+
+@media screen and (max-width: 700px) {
+  	#entretiens {
+		width: 100vw;
+		margin-left: 0px;
+	}
+	#lesentretiens {
+		height: 20vh;
+		margin-bottom: 2vh;
+	}
 }
 
 .centered {
@@ -97,10 +117,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-shadow: 4px 4px rgba(0,0,0,0.8);
-	font-size: 5vw;
+	font-size: 4vw;
 	font-family: 'Verdana';
 }
 
 .link {
 	color: white;
+
 }
