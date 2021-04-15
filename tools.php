@@ -29,3 +29,12 @@ function is_admin(){
 function is_visitor(){
 	return get_role() == -999;
 }
+function as_arguments($arguments){
+	foreach($arguments as &$argument){
+		if(!isset(parameters()[$argument])){
+			return false;
+		}
+	}
+	return true;
+	
+}

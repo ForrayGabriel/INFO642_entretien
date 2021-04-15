@@ -34,8 +34,6 @@ foreach($data["prestation"] as $prestation){
 }
 echo "</table>";
 
-///colonnes notes : critère / bareme / note / appreciation  
-
 
 
 ?>

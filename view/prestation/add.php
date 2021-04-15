@@ -20,7 +20,7 @@ foreach($data['evalcritere'] as $critere){
     echo"<td>".implode(' - ', $liste)."</td>";
     echo"<td>";
     if(is_numeric($liste[0])){
-        echo"<input type='text'>";
+        echo"<input name='test' type='text'>";
     }
     else{
         echo"<p>";
@@ -28,7 +28,7 @@ foreach($data['evalcritere'] as $critere){
         echo"<select name='notation'>";
 
         foreach($liste as $note){
-            echo"<option>".$note."</option>";
+            echo"<option value=".$note.">".$note."</option>";
 
         }
         echo"</select>";
