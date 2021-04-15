@@ -113,7 +113,7 @@
 
 .blog-card .description {
 	padding: 1rem;
-	background: #fff;
+	background: rgb(232,232,232);
 	position: relative;
 	z-index: 1;
 }
@@ -133,7 +133,7 @@
 	font-size: 1rem;
 	font-weight: 300;
 	text-transform: uppercase;
-	color: #a2a2a2;
+	color: #000000;
 	margin-top: 5px;
 }
 
@@ -201,7 +201,7 @@
 	.blog-card .description:before {
 		transform: skewX(-3deg);
 		content: "";
-		background: #fff;
+		
 		width: 30px;
 		position: absolute;
 		left: -10px;
