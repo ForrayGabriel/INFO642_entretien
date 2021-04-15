@@ -1,9 +1,3 @@
-<link rel="stylesheet" type="text/css" href="././css/contact.css"/>
-<br><br>
-<div id="container">
-	<a id="button" href=".">Retour</a>
-</div>
-
 <br><br>
 
 <div id="contact">
