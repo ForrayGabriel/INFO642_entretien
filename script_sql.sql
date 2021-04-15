@@ -208,8 +208,8 @@ CREATE TABLE IF NOT EXISTS usercontact (
   have_response boolean NULL,
   is_close boolean NULL,
   PRIMARY KEY (idusercontact),
-  FOREIGN KEY (iduser_requestor) REFERENCES user(iduser),
-  FOREIGN KEY (iduser_receiver) REFERENCES user(iduser)
+  FOREIGN KEY (iduser_requestor) REFERENCES internaluser(idinternaluser),
+  FOREIGN KEY (iduser_receiver) REFERENCES internaluser(idinternaluser)
 );
 
 INSERT INTO usercontact (idusercontact, iduser_requestor,iduser_receiver,title_contact,description_contact,date_contact,type_demande,have_response,is_close) VALUES
@@ -228,8 +228,8 @@ CREATE TABLE IF NOT EXISTS responsecontact (
   admin_response boolean NULL,
   PRIMARY KEY (idresponsecontact),
   FOREIGN KEY (idusercontact) REFERENCES usercontact(idusercontact),
-  FOREIGN KEY (iduser_requestor) REFERENCES user(iduser),
-  FOREIGN KEY (iduser_receiver) REFERENCES user(iduser)
+  FOREIGN KEY (iduser_requestor) REFERENCES internaluser(idinternaluser),
+  FOREIGN KEY (iduser_receiver) REFERENCES internaluser(idinternaluser)
 );
 
 INSERT INTO responsecontact(idresponsecontact, idusercontact, iduser_requestor, iduser_receiver ,title_response , text_response,date_response ,admin_response) VALUES 
