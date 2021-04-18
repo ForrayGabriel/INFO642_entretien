@@ -35,7 +35,7 @@
 
 ?>
 <center>
-<h1> OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU CA #TEAMCSS </h1>
+<h1>  mettre le tableau de dessous pour les profs  </h1>
 
 	<table class="global_table">
 		<thead>
