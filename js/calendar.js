@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let colors = ["green", "red", "neutral"];
     let item_size = document.querySelector(".calendar .content .item").offsetHeight
     let btnIsEnabled = true;
     let updatedData = {}
+    colors = Object.values(colors)
 
     function disableBtns() {
         btnIsEnabled = false;
@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
             next_color = colors[index_nextColor%colors.length];
             event.path[1].children[half_day == "AM" ? 1 : 2].classList.remove(...colors);
             event.path[1].children[half_day == "AM" ? 1 : 2].classList.add(next_color);
-            console.log(event.path[1])
             updatedData[event.path[1].dataset.date + " " + half_day] = {
                 "date": event.path[1].dataset.date,
                 "meridiem": half_day,
