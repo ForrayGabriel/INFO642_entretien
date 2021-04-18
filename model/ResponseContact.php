@@ -10,7 +10,6 @@ class ResponseContact extends Model {
 	protected $_text_response;
 	protected $_date_response;
 	protected $_admin_response;
-								
 
  	//TODO
 	public function __toString() {
