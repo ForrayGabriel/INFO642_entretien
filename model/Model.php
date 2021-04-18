@@ -6,13 +6,7 @@ class Model {
 	public function __construct($id=null) {
 		$class = get_class($this);
 		$table = strtolower($class);
-		if ($id == null) {
-			$st = db()->prepare("select * from $table where 0");
-			$st->execute();
-			$row = $st->fetch();
-			$field = "id".$table;
-			$this->$field = $row[$field];
-		} else {
+		if ($id != null) {
 			$st = db()->prepare("select * from $table where id$table=:id");
 			$st->bindValue(":id", $id);
 			$st->execute();
@@ -25,7 +19,6 @@ class Model {
 				}
 			}
 		}
-
 	}
 
 	public function insert(){

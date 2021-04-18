@@ -1,19 +1,18 @@
 :root {
-	--calendar-header-height: 80px;
-    --case-width: 100px;
-    --case-height: 100px;
+	--calendar-header-height: 60px;
+    --case-size: 60px;
 }
 
 .green {
-    background: #80b369;
+    background: #80b369 !important;
 }
 
 .orange {
-    background: #f9ce67;
+    background: #f9ce67 !important;
 }
 
 .red {
-    background: #da5350;
+    background: #da5350 !important;
     color: white;
 }
 
@@ -22,9 +21,13 @@
     color: #333333;
 }
 
+.grey {
+    background: rgba(0,0,0,0.25);
+}
+
 .calendar{
   position: absolute;
-  width: calc(var(--case-width) * 8);
+  width: calc(var(--case-size) * 8);
   background-color: #ffffff;
   color: #333333;
   text-align: center;
@@ -36,7 +39,6 @@
     display: flex;
     height: var(--calendar-header-height);
     align-content: space-around;
-    
     align-items: center;
 }
 
@@ -49,7 +51,7 @@
 .calendar .header .change-month {
     flex: 1;
     background-color: rgb(79, 179, 241);
-    max-width: var(--case-width);
+    max-width: var(--case-size);
     line-height: var(--calendar-header-height);
     text-decoration: none;
 }
@@ -62,11 +64,19 @@
 
 .calendar .content .item {
     z-index: 8;
-    width: var(--case-width);
-    height: var(--case-height);
+    width: calc(var(--case-size) - 2px);
+    height: var(--case-size);
     overflow: hidden;
     border: 1px solid lightslategray;
-    line-height: var(--case-height);
+    line-height: var(--case-size);
+}
+
+.calendar .content .today  {
+    border: 1px solid red;
+}
+
+.calendar .content .inactive > * {
+    background-color: rgba(0,0,0,0.25);
 }
 
 .calendar .content .item .day {
@@ -75,7 +85,6 @@
     width: 100%;
     z-index: 5;
     font-weight: bold;
-    
 }
 
 .calendar .content .item .half_day {
@@ -97,7 +106,42 @@
     transform-origin: 25% 110%
 }
 
-.calendar .informations {
-    position: relative;
-    background-color: lightsalmon;
+.calendar .footer {
+    margin: calc(var(--case-size) / 4) 0;
+    height: calc(var(--case-size) / 2);
+    display: flex;
+}
+
+.calendar .footer .legend {
+    width: calc(var(--case-size) * 6);
+    display: inline-flex;
+    align-items: center;
+}
+
+.calendar .footer .legend * {
+    margin-right: 10px;
+}
+
+.calendar .footer .legend .box {
+    float: left;
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    clear: both;
+  }
+  
+
+.calendar .footer .btns {
+    display: inline-flex;
+    width: calc(var(--case-size)*2);
+    background-color: red;
+    align-content: space-between;
+}
+
+.calendar .footer .btns > * {
+    flex: 1;
+    width: calc(var(--case-size)*0.8);
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
 }

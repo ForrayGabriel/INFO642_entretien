@@ -78,10 +78,10 @@ CREATE TABLE IF NOT EXISTS timeslot (
 );
 
 INSERT INTO timeslot (idtimeslot,idinternaluser,disponibility,meridiem) VALUES
-(1,1,0,NOW()),
-(2,2,0,NOW()),
-(3,2,0,NOW()-INTERVAL 1 DAY),
-(4,2,0,NOW()+INTERVAL 1 DAY);
+(1,1,1,NOW()),
+(2,2,2,NOW()),
+(3,2,3,NOW()-INTERVAL 1 DAY),
+(4,2,4,NOW()+INTERVAL 1 DAY);
 
 CREATE TABLE IF NOT EXISTS jury (
   idjury int(11) NOT NULL AUTO_INCREMENT,
