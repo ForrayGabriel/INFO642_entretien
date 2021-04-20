@@ -1,6 +1,21 @@
 :root {
 	--button-color: rgba(53,180,250,0.9);
 }
+.back{
+	background-color: var(--button-color);
+	padding: 2vh;
+	border-radius: 1vw;
+	width: 80vw;
+	margin: auto;
+	margin-top: 2vh;
+	display: grid;
+	grid-column: repeat(5, 1fr);
+	text-align: center;
+}
+
+th{
+	padding-bottom: 3vh;
+}
 
 #photo {
 	position: relative;
