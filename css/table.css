@@ -1,0 +1,23 @@
+.global_table{
+	max-width: 1200px;
+	border-collapse: collapse;
+	margin: 25px 0;font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 1200px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.global_head_line{
+	background-color: #2fb3e4;
+	color: #ffffff;
+	text-align: left;
+}
+
+.global_top_line{
+	padding: 12px 15px;
+}
+
+.global_main_line{
+	border-bottom: 1px solid #dddddd; 
+	cursor: pointer;
+}

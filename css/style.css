@@ -1,6 +1,10 @@
+:root {
+	--main-color: #2fb3e4;
+}
+
 * { margin: 0px; padding:0px; position: relative; z-index: 0;}
+
 body {
-	
 	font-family: sans-serif, arial;
 }
 
@@ -12,6 +16,7 @@ header {
 	display: flex;
 	align-items: center;
 }
+
 header .header-container {
 	width: 100%;
 	max-width: 100%;
@@ -19,16 +24,19 @@ header .header-container {
 	display: flex;
 	justify-content: space-around;
 }
+
 header .header-container .wrapper_menu_logo {
 	display: flex;
 	align-items: center;
 	max-width: 100%;
 }
+
 header .header-container .wrapper_menu_logo .separator {
 	height: 80%;
 	border: 1px solid #888888;
 	margin: 0 7px;
 }
+
 header #logo_usmb{
 	height: 78px;
 }
@@ -40,16 +48,19 @@ header .header-container .wrapper_menu_logo img {
 	vertical-align: middle;
 	border: 0;
 }
+
 header .header-container .wrapper_menu {
 	display: flex;
 	align-items: center;
 }
+
 header .header-container .wrapper_menu ul {
 	display: inline-block;
     padding: 0;
 	min-width: 100%;
 	width: max-content;
 }
+
 header .header-container .wrapper_menu li {
 	display: inline-block;
     list-style: none;
@@ -68,19 +79,20 @@ header .header-container .wrapper_menu li {
 }
 
 section {
-	
-	
 	min-height: calc(100vh - 180px);
 }
+
 section table {
 
 	margin: 20px;
 	border-collapse: collapse;
 }
+
 section td {
 	border-bottom: solid 1px #888888;
 	padding: 10px;
 }
+
 section p {
 	margin: 20px;
 }
@@ -97,8 +109,13 @@ footer {
 	text-align: center;
 }
 
-
-
-
-
-
+.background-image {
+	position: absolute;
+	opacity: 0.2;
+	object-fit: cover;
+	min-width: 100vw;
+	height: calc(100vh - 180px);
+	z-index: -1;
+	overflow: hidden;
+	max-width: 100vw;
+}

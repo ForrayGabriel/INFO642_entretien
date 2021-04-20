@@ -25,9 +25,9 @@
 			<div class="wrapper_menu">
 				<ul>
 					
-					<li><a class="onglet" href="?r=site/index">Accueil</a></li>
+					<li><a class="onglet" href="?r=presentation">Presentation</a></li>
 					<?php if (isset($_SESSION['user'])){?>
-						<li><a class="onglet" href="">Mon Profil</a></li>
+						<li><a class="onglet" href="?r=profil">Mon Profil</a></li>
 						<li><a class="onglet" href="?r=profil/logout">Déconnexion</a></li>
 					<?php } else{?>
 						<li><a class="onglet" href="?r=login">Connexion</a></li>

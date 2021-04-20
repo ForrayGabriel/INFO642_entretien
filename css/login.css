@@ -1,20 +1,73 @@
-.background{
-	background-color: rgba(0,173,239,0.2);
-
-}
-.container {
-	box-shadow: 1px 2px 2px black;
-	display: block;
-	justify-content: center;
-	align-items: center;
-	height: 35vh;
-    width: 40vw;
-	background-color: #0E5989;
-	margin-left: 30vw;
-	
+.login-container {
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: white;
+	border: 1px solid black;
+	margin-top: 5%;
+	padding: 20px;
+	width: 400px;
 }
 
-input {
+.login-container h2 {
+	font-weight: 300;
+	font-size: 2.6em;
+	margin: 0.2em 0 0.1em;
+	color: var(--main-color);
+}
+
+.login-container .form-group {
+	margin: 1.6em 0;
+	display: flex;
+  	flex-direction: column;
+}
+
+.login-container .form-group label {
+	color: grey;
+	font-size: 0.8em;
+  	text-transform: uppercase;
+}
+
+.login-container .form-group input {
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+	font-size: 1em;
+	padding: 8px 1px;
+	margin-top: 0.1em;
+	border-bottom: 1px solid grey;
+}
+
+.login-container .form-group input:focus {
+	border-bottom: 1px solid var(--main-color);
+}
+
+.login-container .login-bttm button {
+	display: inline-block;
+	padding: 0.8em 1.2em;
+	margin: 0 10px 0 0;
+	width: auto;
+	font-weight: 600;
+	text-transform:  uppercase;
+	font-size: 1em;
+	color: #fff;
+	line-height: 1em;
+	letter-spacing: 0.6px;
+	border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+	border: 0;
+	outline: 0;
+	transition: all 0.25s;
+	background-color: var(--main-color);
+	cursor: pointer;
+}
+
+.login-container .login-bttm .error {
+	display: inline-block;
+	color: red;
+}
+/* input {
 	margin-left: 5vw;
 	width: 30vw;
 	height: 5vh;
@@ -42,14 +95,12 @@ button {
 /*centrer le texte 'login' ça me casse le rein*/
 .title_top{
 	position: absolute;
- 	z-index: 2;
- 	text-align: center;
- 	margin-left: 42%;
- 	font-size: 5vw;
- 	color: white;
- 	text-shadow: 1px 1px 5px black;
-
-
+	z-index: 2;
+	text-align: center;
+	margin-left: 42%;
+	font-size: 5vw;
+	color: white;
+	text-shadow: 1px 1px 5px black;
 }
 
 #error_login {
@@ -58,4 +109,4 @@ button {
     width: 30vw;
     margin-left: 35vw;
     text-align: center;
-}
+} */

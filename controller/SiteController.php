@@ -21,7 +21,7 @@ class SiteController extends Controller {
 
 
 	public function presentation() {
-		$this->render("presentation");	
+		$this->render("index");	
 	}
 
 	public function update_presentation(){
