@@ -25,9 +25,9 @@ INSERT INTO role (idrole,name_role) VALUES
 
 CREATE TABLE IF NOT EXISTS internaluser (
   idinternaluser int(11) NOT NULL AUTO_INCREMENT,
-  nom_internaluser varchar(100) NOT NULL,
-  prenom_internaluser varchar(100) NOT NULL,
-  email_internaluser varchar(100) NOT NULL,
+  nom varchar(100) NOT NULL,
+  prenom varchar(100) NOT NULL,
+  email varchar(100) NOT NULL,
   password varchar(100) NOT NULL,
   username varchar(100) NULL,
   idrole int(11) NULL,
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS internaluser (
   FOREIGN KEY (idrole) REFERENCES role(idrole)
 );
 
-INSERT INTO internaluser (idinternaluser,nom_internaluser,prenom_internaluser,email_internaluser,password,username,idrole) VALUES
+INSERT INTO internaluser (idinternaluser,nom,prenom,email,password,username,idrole) VALUES
 (1,"CAULLIREAU","Dorian","caullireau.dorian@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","caullird",1),
 (2,"PERROLLAZ","Maverick","perrollaz.maverick@pm.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","perrollm",1),
 (3,"BASCOP","Alexandre","bascop.alexandre@gmail.com","$2y$10$8.V7eL2.V02RR7gbut/QIeyS0KHl0f6HvCDZQASqpjfC4OQMKPASS","bascopa",2),
