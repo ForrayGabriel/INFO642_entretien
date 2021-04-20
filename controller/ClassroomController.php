@@ -22,10 +22,27 @@ class ClassroomController extends Controller {
 			$classroom->name_classroom = parameters()["name_classroom"];
 			$classroom->building_classroom = parameters()["building_classroom"];
 			$classroom->capacity_classroom = parameters()["capacity_classroom"];
+			$classroom->description_classroom = parameters()["description_classroom"];
 			$classroom->insert();
 			$this->render("index", Classroom::findAll());
 		} else {
 			$this->render("add");
+		}
+	}
+
+	public function update(){
+		if(isset(parameters()["name_classroom"]) and isset(parameters()["building_classroom"]) and isset(parameters()["capacity_classroom"]) and isset(parameters()["description_classroom"])) {
+			$classroom = new Classroom(parameters()["id"]);
+			$classroom->name_classroom = parameters()["name_classroom"];
+			$classroom->building_classroom = parameters()["building_classroom"];
+			$classroom->capacity_classroom = parameters()["capacity_classroom"];
+			$classroom->description_classroom = parameters()["description_classroom"];
+			$classroom->update();
+			$this->render("index", Classroom::findAll());
+		}
+		else{
+			$b = new Classroom(parameters()["id"]);
+			$this->render("update", $b);
 		}
 	}
 

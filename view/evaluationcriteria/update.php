@@ -1,6 +1,6 @@
 <h2>Ajouter un critère d'évaluation</h2>
 
-<form action='?r=evaluationcriteria/add' method='post'>
+<form <?php echo "action='?r=evaluationcriteria/update&id=".$data["evaluationcriteria"]->idevaluationcriteria."'"; ?> method='post'>
 	<p>
 		<label>Label event</label>
 		<select name='idevent'>

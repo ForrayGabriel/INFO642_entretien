@@ -1,0 +1,10 @@
+#presentation-container {
+	display:flex;
+	justify-content:center;
+	padding: 100px 50px;
+}
+
+.texte_bienvenue{
+	text-align: center;
+	vertical-align: middle;
+}

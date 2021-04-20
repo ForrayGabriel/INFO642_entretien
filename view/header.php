@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css"/>
-	<?php echo file_exists('./css/'.$css.'.css') ? "<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/".$css.".css\"/>" : ""; ?>
+	<?php echo file_exists('./css/'.strtolower($model).'.css') ? "<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/".strtolower($model).".css\"/>" : ""; ?>
+	<?php echo file_exists('./js/'.strtolower($model).'.js') ? "<script src=\"./js/".strtolower($model).".js\"></script>" : ""; ?>
 </head>
 <body>
 	<main>
@@ -24,25 +25,18 @@
 			</div>
 			<div class="wrapper_menu">
 				<ul>
-					<li><a class="onglet" href=".">Accueil</a></li>
-					<li><a class="onglet" href="?r=site/presentation">Présentation</a></li>
+					
+					<li><a class="onglet" href="?r=presentation">Presentation</a></li>
 					<?php if (isset($_SESSION['user'])){?>
-					<li><a class="onglet" href="?r=profil/logout">Logout</a></li>
+						<li><a class="onglet" href="?r=profil">Mon Profil</a></li>
+						<li><a class="onglet" href="?r=profil/logout">Déconnexion</a></li>
 					<?php } else{?>
-					<li><a class="onglet" href="?r=login">Login</a></li>
+						<li><a class="onglet" href="?r=login">Connexion</a></li>
 					<?php } ?>
+
 					
 				</ul>
 			</div>
 		</div>
 	</header>
-
-	<?php
-	if (isset($_SESSION['user'])){
-		if ($_SESSION['user']['idrole'] == 3) {
-			include_once 'view/site/admin/header.php';
-		}
-	}
-	?>
-
 	<section class="background">
