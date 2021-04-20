@@ -13,7 +13,7 @@
         <input type="password" name="psw" id="psw" required>
       </div>
       <div class="login-bttm">
-        <button type="submit">LOG IN</button>
+        <button type="submit">Connexion</button>
         <div class="error">
           <?php if ($data == 'error') print("erreur"); ?>
         </div>
