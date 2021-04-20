@@ -5,11 +5,11 @@
   <div class="login-form">
     <form action=".?r=login " method="post">
       <div class="form-group">
-        <label for="uname">USERNAME</label>
+        <label for="uname">Identifiant</label>
         <input type="text" name="uname" id="uname" required>
       </div>
       <div class="form-group">
-        <label for="psw">PASSWORD</label>
+        <label for="psw">Mot de passe</label>
         <input type="password" name="psw" id="psw" required>
       </div>
       <div class="login-bttm">
