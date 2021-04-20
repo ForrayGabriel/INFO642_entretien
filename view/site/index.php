@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="././css/presentation.css"/>
+<link rel="stylesheet" type="text/css" href="./css/presentation.css"/>
 
 <img class="background-image" src="https://www.polytech.univ-smb.fr/fileadmin/_processed_/d/b/csm_Polytech_site_Annecy_vu_du_ciel_db27e8c54f.jpg">
 

@@ -1,6 +1,8 @@
 <?php
 
-class ResultController extends Controller {
+class ResultatController extends Controller {
+
+	var $rolepermissions = [1];
 
 	public function index() {
 

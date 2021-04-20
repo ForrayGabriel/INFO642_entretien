@@ -1,5 +1,4 @@
 <?php
-/// , 'individualevaluation'=>new IndividualEvaluation::findAll()
     class PrestationController extends Controller {
 
         public function index() {
@@ -31,8 +30,6 @@
 
             }
         }
-
-
 
     }
 
