@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     document.querySelector(".calendar .content").addEventListener("click", (event) => {
+        console.log(event)
+        console.log("a");
         if (event.target.className != "day") return;
         if (event.path[1].classList[1] == "today") return;
         if (event.path[1].classList[1] == "inactive") return;
@@ -41,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let btns = document.querySelector(".calendar .footer .btns").children
     btns[0].addEventListener("click", (event) => {
-        location.href = ".?r=calendar"
+        location.href = ".?r=disponibilite"
     })
     btns[1].addEventListener("click", (event) => {
         let form = document.createElement('form');

@@ -1,8 +1,8 @@
 <?php
 
-class CalendarController extends Controller {
+class DisponibiliteController extends Controller {
 
-	var $rolepermissions = [1,2,3];
+	var $rolepermissions = [2,3];
 
 	public function index() {
 		
@@ -25,14 +25,16 @@ class CalendarController extends Controller {
 
 		$actual_date = new DateTime();
 		if (isset(parameters()['month']) && isset(parameters()['year']) && $actual_date->format("m-Y") != parameters()['month']."-".parameters()['year']) {
+			$now = false;
 			$date = new DateTime("01-".parameters()['month']."-".parameters()['year']);
 			if ($actual_date > $date)
 				$date = new DateTime($date->format("t-m-Y"));
 		} else {
+			$now = true;
 			$date = new DateTime();
 		}
 		$data = TimeSlot::timeslotInMonth($date);
-		$this->render("index", ["date"=>$date, "data"=>$data, "colors"=>array_flip($colors)]);
+		$this->render("index", ["date"=>$date, "data"=>$data, "colors"=>array_flip($colors), "now"=>$now]);
 	}
     
 }

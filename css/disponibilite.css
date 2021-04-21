@@ -1,0 +1,10 @@
+.container {
+    margin-top: 2%;
+}
+
+.calendar {
+    position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+    border: 1px solid black;
+}

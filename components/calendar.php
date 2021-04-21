@@ -4,14 +4,16 @@
   $day_before_month = $calendar_date->format("w");
   if ($day_before_month == 0) $day_before_month = 7;
 ?>
+<link rel="stylesheet" type="text/css" href="./css/calendar.css"/>
+<script src="./js/calendar.js"></script>
 <div class="calendar">
     <script>let colors = <?php echo json_encode($colors); ?></script>
   <div class="header">
     <?php
       $calendar_date->modify('-1 month');
-      $last = ".?r=calendar&month={$calendar_date->format("m")}&year={$calendar_date->format("Y")}";
+      $last = ".?r=disponibilite&month={$calendar_date->format("m")}&year={$calendar_date->format("Y")}";
       $calendar_date->modify('+2 month');
-      $next = ".?r=calendar&month={$calendar_date->format("m")}&year={$calendar_date->format("Y")}";
+      $next = ".?r=disponibilite&month={$calendar_date->format("m")}&year={$calendar_date->format("Y")}";
       $calendar_date->modify('-1 month');
 
       echo "<a href='".$last."' class='change-month'><</a>";
@@ -58,7 +60,7 @@
       if ($calendar_date->format("w") == 1)
       echo "<div class='item week_number'>{$calendar_date->format("W")}</div>";
       
-      if ($calendar_date->format("d-m-Y") == $date->format("d-m-Y")) {
+      if ($now && $calendar_date->format("d-m-Y") == $date->format("d-m-Y")) {
         echo "<div class='item today'>"; 
       } else {
         echo "<div class='item' data-date='{$calendar_date->format("Y-m-d")}'>"; 
