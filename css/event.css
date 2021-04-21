@@ -1,28 +1,22 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
-
-
 div.table-title {
   display: block;
   margin: auto;
   max-width: 600px;
   padding:5px;
   width: 100%;
-
-
 }
 
 .table-title h3 {
-   color: #000000;
-   font-size: 30px;
-   font-weight: 400;
-   font-style:normal;
-   font-family: "Roboto", helvetica, arial, sans-serif;
-   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-   text-transform:uppercase;
-
+  color: #000000;
+  font-size: 30px;
+  font-weight: 400;
+  font-style:normal;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  text-transform:uppercase;
 }
-
 
 /*** Table Styles **/
 
@@ -39,10 +33,8 @@ div.table-title {
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
-
-
 }
- 
+
 th {
   color:#515151;
   background:#40c6f7;
@@ -59,7 +51,7 @@ th {
 th:first-child {
   border-top-left-radius:3px;
 }
- 
+
 th:last-child {
   border-top-right-radius:3px;
   border-right:none;
@@ -73,14 +65,12 @@ tr {
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
- 
+
 tr:hover td {
   background:#589afc2e;
   border-top: 1px solid #22262e;
 }
 
-
- 
 tr:first-child {
   border-top:none;
 }
@@ -88,11 +78,11 @@ tr:first-child {
 tr:last-child {
   border-bottom:none;
 }
- 
+
 tr:nth-child(odd) td {
   background:#EBEBEB;
 }
- 
+
 tr:nth-child(odd):hover td {
   background:#589afc2e;
 }
@@ -100,11 +90,11 @@ tr:nth-child(odd):hover td {
 tr:last-child td:first-child {
   border-bottom-left-radius:3px;
 }
- 
+
 tr:last-child td:last-child {
   border-bottom-right-radius:3px;
 }
- 
+
 td {
   background:#FFFFFF;
   padding:20px;
@@ -144,8 +134,6 @@ td.text-right {
   text-align: right;
 }
 
-
-
 .bouton_4{
   margin-top: 5vh;
     margin-right: auto;
@@ -162,12 +150,14 @@ td.text-right {
     -o-transition:all 0.2s ease-in;
     transition:all 0.2s ease-in;
 }
+
 .bouton_4:hover{
     width:280px;
     height:40px;
     border-radius:40px;
     background-color: #40C6f7;
 }
+
 .texteduboutton_4
 {
     width:70%;
@@ -181,5 +171,4 @@ td.text-right {
 .img_plus{
   width: 40px;
   height: 40px;
-
 }

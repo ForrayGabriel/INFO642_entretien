@@ -1,19 +1,10 @@
-.texte_bienvenue{
-	
-
-	text-align: center;
-	vertical-align: middle;
+#presentation-container {
+	display:flex;
+	justify-content:center;
+	padding: 100px 50px;
 }
 
-
-
-#photo {
- 	
-	position: absolute;
-	opacity: 0.2;
-	object-fit: cover;
-	min-width: 100vw;
-	height: calc(100vh - 180px);
-	
-	z-index: -1;
+.texte_bienvenue{
+	text-align: center;
+	vertical-align: middle;
 }

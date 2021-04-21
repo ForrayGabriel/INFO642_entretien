@@ -9,7 +9,7 @@ class Controller {
 	}
 
 	public function render($view, $d=null) {
-		global $data, $model;
+		global $data, $model, $onglet;
 
 		$controller = get_class($this);  // SiteController
 		$model = substr($controller, 0, 
@@ -18,20 +18,9 @@ class Controller {
 		$data = $d;
 
 		include_once "view/header.php";
-		if (isset($_SESSION['user'])){
-			if ($_SESSION['user']['idrole'] == 3) {
-				include_once 'view/site/admin/header.php';
-			}
-			if ($_SESSION['user']['idrole'] == 2) {
-				include_once 'view/site/teacher/header.php';
-			}
-			if ($_SESSION['user']['idrole'] == 1) {
-				include_once 'view/site/student/header.php';
-			}
-		}
+		if (isset($_SESSION['user']))
+			include_once "components/loggedHeader.php";
 		include_once "view/".strtolower($model)."/".$view.".php";
 		include_once "view/footer.php";
 	}
-
 }
-

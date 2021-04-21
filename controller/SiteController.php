@@ -2,16 +2,15 @@
 
 class SiteController extends Controller {
 	public function index() {
-		
 		if (isset($_SESSION['user'])){
-			if ($_SESSION['user']['idrole'] == 1) {
-				$this->render("student/index");
+			if (get_role() == 1) {
+				$this->render("student");
 			}
-			if ($_SESSION['user']['idrole'] == 2) {
-				$this->render("teacher/index");
+			if (get_role() == 2) {
+				$this->render("teacher");
 			}
-			if ($_SESSION['user']['idrole'] == 3) {
-				$this->render("admin/index");
+			if (get_role() == 3) {
+				$this->render("admin");
 			}
 		}
 		else {
@@ -19,51 +18,16 @@ class SiteController extends Controller {
 		}
 	}
 
-
 	public function presentation() {
-		$this->render("presentation");	
+		$this->render("index");	
 	}
 
 	public function update_presentation(){
 		
-		if (isset($_SESSION['user']) && $_SESSION['user']['idrole'] == 3){
+		if (isset($_SESSION['user']) && get_role() == 3){
 			file_put_contents("./view/site/presentation-container.php", parameters()["presentation"]);
 		}
 	}
-
-	public function resultats(){
-
-		if ($_SESSION['user']['idrole'] == 1) {
-			$this->render("resultats");
-		}
-		else {if ($_SESSION['user']['idrole'] == 1) {
-			$this->index();
-		}}
-
-	}
-
-	public function prestation(){
-
-		if ($_SESSION['user']['idrole'] == 1) {
-			$this->render("prestation");
-		}else {
-			$this->index();
-		}
-
-	}
-
-	public function contact(){
-
-		if ($_SESSION['user']['idrole'] == 1) {
-			$this->render("contact");
-		}else {
-			$this->index();
-		}
-
-	}
-
-
-
 }
 
 
