@@ -1,0 +1,12 @@
+li{
+	list-style-type: disc;
+	color: blue;
+	font-size: 20px;
+}
+.back{
+	margin-left: 10vw;
+}
+
+.ajout{
+	margin-top: 10vh;
+}
