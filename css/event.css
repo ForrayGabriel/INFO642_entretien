@@ -135,27 +135,16 @@ td.text-right {
 }
 
 .bouton_4{
+  width:280px;
+  height:40px;
+  border-radius:40px;
   margin-top: 5vh;
-    margin-right: auto;
-    margin-left: auto;
-    width:40px;
-    height:40px;
-    padding:10px;
-    border-radius:40px;
-    background-color:#9FE2FB;
-    overflow:hidden;
-    -webkit-transition:all 0.2s ease-in;
-    -moz-transition:all 0.2s ease-in;
-    -ms-transition:all 0.2s ease-in;
-    -o-transition:all 0.2s ease-in;
-    transition:all 0.2s ease-in;
-}
-
-.bouton_4:hover{
-    width:280px;
-    height:40px;
-    border-radius:40px;
-    background-color: #40C6f7;
+  margin-right: auto;
+  margin-left: auto;
+  padding:10px;
+  border-radius:40px;
+  background-color:#9FE2FB;
+  overflow:hidden;
 }
 
 .texteduboutton_4
