@@ -1,7 +1,7 @@
 :root {
 	--button-color: rgba(53,180,250,0.9);
 }
-
+ 
 #contenu {
 	padding: 10px;
 	height: 70vh;
@@ -91,4 +91,12 @@
 .link {
 	color: white;
 
+}
+
+.phrase{
+	text-align: center;
+	font-family: Verdana;
+	color:rgb(73 69 184);
+	font-size: 2vw;
+	font-weight: bold;
 }
