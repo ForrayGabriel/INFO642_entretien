@@ -15,7 +15,7 @@
       <div class="login-bttm">
         <button type="submit">Connexion</button>
         <div class="error">
-          <?php if ($data == 'error') print("erreur"); ?>
+          <?php if ($data == 'error') print("Identifiant ou mot de passe invalide"); ?>
         </div>
       </div>
     </form>
