@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="./././css/event.css">
+<img class="background-image" src="https://www.polytech.univ-smb.fr/fileadmin/_processed_/d/b/csm_Polytech_site_Annecy_vu_du_ciel_db27e8c54f.jpg">
 <body>
 	<div class="bouton_4">
 		<img class="img_plus" src="https://image.flaticon.com/icons/png/512/32/32339.png"/>
