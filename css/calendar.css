@@ -26,7 +26,6 @@
 }
 
 .calendar{
-  position: absolute;
   width: calc(var(--case-size) * 8);
   background-color: #ffffff;
   color: #333333;

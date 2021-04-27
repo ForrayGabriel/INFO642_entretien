@@ -1,92 +1,78 @@
-:root {
-	--button-color: rgba(53,180,250,0.9);
+div.table-title {
+	margin-top: 2%;
+	margin: auto;
+	max-width: 600px;
+	padding:5px;
+	width: 100%;
 }
 
-#photo {
-	position: relative;
+.table-title h3 {
 	text-align: center;
+	font-size: 30px;
+	font-weight: 400;
+	font-style:normal;
+	text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+	text-transform:uppercase;
+}
+
+th {
 	color: white;
+	background: var(--main-color);
+	font-size:23px;
+	font-weight: 100;
+	padding:24px;
+	text-align:left;
+	vertical-align:middle;  
 }
 
-#bande {
-	width: 100vw;
-	height: 10vw;
-	object-fit: cover;
-	object-position: 0 30%;
+th:first-child {
+	border-top-left-radius:3px;
 }
 
-.centered {
-	position: absolute;
-	top: 50%;
+th:last-child {
+	border-top-right-radius:3px;
+}
+
+tr {
+	color:#666B85;
+	font-size:16px;
+	border-top: 1px solid black;
+}
+
+tr:hover td {
+	background:#A6E5FF;
+	color:#FFFFFF;
+}
+
+tr:nth-child(odd) td {
+	background:#EBEBEB;
+}
+
+tr:nth-child(odd):hover td {
+	background:#A6E5FF;
+}
+
+tr:last-child td:first-child {
+	border-bottom-left-radius:3px;
+}
+
+tr:last-child td:last-child {
+	border-bottom-right-radius:3px;
+}
+
+td {
+	background:#FFFFFF;
+	padding:20px;
+	text-align:left;
+	vertical-align:middle;
+	font-weight:300;
+	font-size:18px; 
+}
+
+table{
+	position: relative;
 	left: 50%;
-	transform: translate(-50%, -50%);
-	text-shadow: 4px 4px rgba(0,0,0,0.8);
-	font-size: 5vw;
-	font-family: 'Verdana';
-}
-
-#prestation {
-	background-color: var(--button-color);
-	border-radius: 1vw;
-	width: 80vw;
-	min-height: 25vh;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-@media only screen and (max-width: 800px) {
-	#prestation {
-    	width: 100vw;
-	}
-}
-
-#tableau {
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 50px;
-}
-
-#tableau tr:nth-child(even) {
-	background-color: #eee;
-}
-#tableau tr:nth-child(odd) {
-	background-color: #fff;
-}	
-
-#entete {
-	margin-left: auto;
-	margin-right: auto;
-	color: white;
-	font-size: 4vh;
-	text-shadow: 2px 2px rgba(0,0,0,0.8);
-}
-
-#titre {
-	color: white;
-	font-size: 4vh;
-	margin-left: 5%;
-}
-
-#liste_presta {
-	color: white;
-	font-size: 3vh;
-	margin-left: 10%
-}
-
-.presta {
-	color: white;
-}
-
-#container {
-	width: 80vw;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#button {
-	color: white;
-	background-color: var(--button-color);
-	padding: 1vw;
-	font-size: 3vh;
-	border-radius: 1vw;
+	transform: translateX(-50%);
+	border-collapse: collapse;
+	border: 1px solid black;
 }
