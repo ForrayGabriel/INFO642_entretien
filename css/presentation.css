@@ -1,7 +1,9 @@
 #presentation-container {
 	display:flex;
+	font-size: small;
+	flex-direction: column;
 	justify-content:center;
-	padding: 100px 50px;
+	padding: 100px 140px;
 }
 
 .texte_bienvenue{
