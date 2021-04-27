@@ -28,7 +28,7 @@ class InternalUser extends Model {
 	}
 
 	public static function attempt($username, $password) {
-		$st = db()->prepare("select idinternaluser, idrole, password from internaluser where username=:username");
+		$st = db()->prepare("select idinternaluser, nom, prenom, idrole, password from internaluser where username=:username");
 		$st->bindValue(":username", $username);
 		$st->execute();
 		if ($st->rowCount() == 1) {
@@ -36,6 +36,9 @@ class InternalUser extends Model {
 			if (password_verify($password, $row['password'])) {
 				$internaluser["idinternaluser"] = $row["idinternaluser"];
 				$internaluser["idrole"] = $row["idrole"];
+				$internaluser["nom"] = $row["nom"];
+				$internaluser["prenom"] = $row["prenom"];
+				$internaluser["username"] = $username;
 				return $internaluser;
 			}
 		}
