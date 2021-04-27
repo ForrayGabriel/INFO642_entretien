@@ -66,4 +66,5 @@
 .login-container .login-bttm .error {
 	display: inline-block;
 	color: red;
+	font-size: 15px;
 }
