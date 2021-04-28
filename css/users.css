@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2% 0;
+}
+
+#searchBox {
+    background-image: url('../images/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 80%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }
+  
+  #users {
+    border-collapse: collapse; /* Collapse borders */
+    width: 80%; /* Full-width */
+    font-size: 18px; /* Increase font-size */
+  }
+  
+  #users th, #users td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+  }
+  
+  #users tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #users tr.header {
+    /* Add a grey background color to the table header and on hover */
+    background-color: var(--main-color);
+    color: white;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  tr:nth-child(even) {
+      background-color:white;
+  }
+
+  tr:nth-child(odd) {
+	background-color:lightgrey;
+  }
+
+  #users .no-padding {
+      padding: 0;
+  }
+
+  #users a {
+    height: 44px;
+    display: flex;
+    align-items: center;
+}
+
+  #users a img {
+      height: 32px;
+  }
