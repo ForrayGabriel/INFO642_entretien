@@ -1,23 +1,73 @@
-.global_table{
-	max-width: 1200px;
-	border-collapse: collapse;
-	margin: 25px 0;font-size: 0.9em;
-	font-family: sans-serif;
-	min-width: 1200px;
+.table-container {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	flex-direction: column;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	border-collapse: collapse;
+	font-family: sans-serif;
+	width: 1200px;
+	position: relative;
+	left: 50%;
+	top: 30px;
+	margin-bottom: 60px;
+	transform: translate(-50%);
 }
 
-.global_head_line{
-	background-color: #2fb3e4;
-	color: #ffffff;
-	text-align: left;
+#searchBox {
+	background-image: url('../images/searchicon.png'); /* Add a search icon to input */
+	background-position: 10px 12px; /* Position the search icon */
+	background-repeat: no-repeat; /* Do not repeat the icon image */
+	width: calc(100% - 60px); /* Full-width */
+	font-size: 16px; /* Increase font-size */
+	padding: 12px 20px 12px 40px; /* Add some padding */
+	border: 1px solid #ddd; /* Add a grey border */
+	margin-bottom: 12px; /* Add some space below the input */
 }
 
-.global_top_line{
-	padding: 12px 15px;
+#table {
+	border-collapse: collapse; /* Collapse borders */
+	width: 100%; /* Full-width */
+	font-size: 18px; /* Increase font-size */
 }
 
-.global_main_line{
-	border-bottom: 1px solid #dddddd; 
+#table th, #table td {
+	text-align: left; /* Left-align text */
+	padding: 12px; /* Add padding */
+}
+
+#table tr {
+	/* Add a bottom border to all table rows */
+	border-bottom: 1px solid #ddd;
+}
+
+#table tr.table-header {
+	/* Add a grey background color to the table header and on hover */
+	background-color: var(--main-color);
+	color: white;
 	cursor: pointer;
+	user-select: none;
+	border-bottom: 1px solid #dddddd; 
+}
+
+tr:nth-child(even) {
+	background-color:white;
+}
+
+tr:nth-child(odd) {
+	background-color:#e4e4e4;
+}
+
+#table .no-padding {
+	padding: 0;
+}
+
+#table a {
+	height: 44px;
+	display: flex;
+	align-items: center;
+}
+
+#table a img {
+	height: 32px;
 }

@@ -44,6 +44,22 @@ class InternalUser extends Model {
 		}
 		return false;
 	}
+
+	public function getEnseignantPrestations() {
+		$sql = "select idprestation, date_prestation, comment_jury, nom, prenom, entitled_event, name_jury, name_classroom from prestation p
+				join compose c on p.idjury=c.idjury
+				join internaluser i on i.idinternaluser=p.idstudent
+				join jury j on j.idjury=p.idjury
+				join event e on e.idevent=p.idevent
+				join classroom cl on j.idclassroom=cl.idclassroom
+				where c.idinternaluser=:idinternaluser";
+
+		$st = db()->prepare($sql);
+		$st->bindValue(":idinternaluser", 1);
+		// $st->bindValue(":idinternaluser", $this->idinternaluser);
+		$st->execute();
+		return $st->fetchAll();;
+	}
 }
 
 

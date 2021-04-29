@@ -2,7 +2,7 @@
 function search() {
     let input = document.querySelector("#searchBox");
     let filter = input.value.toUpperCase();
-    let table = document.querySelector("#users");
+    let table = document.querySelector("#table");
     let tr = table.querySelectorAll("tr");
 
     // Loop through all table rows, and hide those who don't match the search query
@@ -30,7 +30,7 @@ async function sort(event) {
 
     do{
         var switching = false;
-        let rows = document.querySelectorAll("#users tr");
+        let rows = document.querySelectorAll("#table tr");
         for (i = 1; i < (rows.length - 1); i++) {
             let x = rows[i].querySelectorAll("TD")[column];
             let y = rows[i + 1].querySelectorAll("TD")[column];
@@ -52,7 +52,7 @@ async function sort(event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#searchBox").addEventListener("keyup", search);
-    document.querySelector("#users tr").addEventListener("click", sort);
+    document.querySelector("#table tr").addEventListener("click", sort);
 });
 
 
