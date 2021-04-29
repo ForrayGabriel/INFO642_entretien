@@ -1,6 +1,9 @@
 <?php
 
 class UsersController extends Controller {
+
+	var $rolepermissions = [3];
+
 	public function index() {
 		$users = Internaluser::findAll();
 		$this->render("index", $users);

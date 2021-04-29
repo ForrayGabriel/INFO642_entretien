@@ -71,7 +71,6 @@ class Model {
 			$request = db()->prepare("delete from $table where id$table=:id");
 			$request->bindValue(":id", $this->$primary_id, PDO::PARAM_INT);
 			$request->execute();
-			var_dump($request);
 		} catch(PDOException $e) {
   			echo $e->getMessage();
 		}
@@ -91,8 +90,7 @@ class Model {
 		try{		
 			$request = db()->prepare("UPDATE " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
 			$request->execute();
-			
-			return db()->lastInsertId();
+
 		} catch(PDOException $e) {
   			echo $e->getMessage();
 		}

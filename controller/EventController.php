@@ -2,8 +2,22 @@
 
 class EventController extends Controller {
 
+	var $rolepermissions = [1,2,3];
+
 	public function index() {
-		$this->render("index", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll()));
+		$events = Event::findAll();
+		$events = array_filter($events, function($event) {
+			return strtotime($event->end_date) > strtotime(date("Y-m-d H:i:s"));
+		});
+		$this->render("index", $events);
+	}
+
+	public function historique() {
+		$events = Event::findAll();
+		$events = array_filter($events, function($event) {
+			return strtotime($event->end_date) < strtotime(date("Y-m-d H:i:s"));
+		});
+		$this->render("index", $events);
 	}
 
 	public function view() {
@@ -51,7 +65,7 @@ class EventController extends Controller {
 
 	}
 
-	public function add_view(){
+	public function add(){
 		foreach(Role::findAll() as $role){
 			if($role->name_role == "Etudiant"){
 				$role_ban = $role->idrole;

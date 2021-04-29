@@ -2,7 +2,7 @@
 
 class ResultatController extends Controller {
 
-	var $rolepermissions = [1];
+	var $rolepermissions = [1,2,3];
 
 	public function index() {
 
