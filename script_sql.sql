@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS peoplegroup (
   PRIMARY KEY (idpeoplegroup)
 );
 
-INSERT INTO peoplegroup (idpeoplegroup,title_peoplegroup,description_peoplegroup) VALUES 
+INSERT INTO peoplegroup (idpeoplegroup,title_peoplegroup,description_peoplegroup) VALUES
 (1,"IDU3",""),
 (2,"IDU3-G1",""),
 (3,"IDU3-G2",""),
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS belonggroup (
   FOREIGN KEY (idpeoplegroup) REFERENCES peoplegroup(idpeoplegroup)
 );
 
-INSERT INTO belonggroup (idbelonggroup, idinternaluser,idpeoplegroup) VALUES 
+INSERT INTO belonggroup (idbelonggroup, idinternaluser,idpeoplegroup) VALUES
 (1,1,1),
 (2,1,2),
 (3,1,6),
@@ -141,8 +141,8 @@ CREATE TABLE IF NOT EXISTS event (
 );
 
 INSERT INTO event(idevent,entitled_event,description_event,idevent_creator,start_date,end_date) VALUES
-(1,"Soutenance des stage FI4","Description de l event",5,"2010-04-02","2010-04-03"),
-(2,"Soutenance des stage FI3","Description de l event",5,"2010-04-02","2010-04-03");
+(1,"Soutenance des stage FI4","Description de l event",5,"2021-05-20","2021-06-15"),
+(2,"Soutenance des stage FI3","Description de l event",5,"2021-04-20","2021-05-15");
 
 CREATE TABLE IF NOT EXISTS prestation (
   idprestation int(11) NOT NULL AUTO_INCREMENT,
@@ -159,9 +159,11 @@ CREATE TABLE IF NOT EXISTS prestation (
   FOREIGN KEY (idevent) REFERENCES event(idevent)
 );
 
-INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,start_time,end_time,comment_jury) VALUES 
-(1,1,1,1,"2010-04-02","","","Super incroyablement nickel"),
-(2,2,1,1,"2010-04-02","","","Finalement pas incroyable");
+INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,start_time,end_time,comment_jury) VALUES
+(1,1,1,1,"2021-04-22","","","Super incroyablement nickel"),
+(2,1,1,1,"2021-04-26","","","Finalement pas incroyable"),
+(3,2,1,2,"2021-05-5","","","Super incroyablement nickel"),
+(4,2,1,2,"2021-06-10","","","Finalement pas incroyable");
 
 CREATE TABLE IF NOT EXISTS compose (
   idcompose int(11) NOT NULL AUTO_INCREMENT,
@@ -173,8 +175,9 @@ CREATE TABLE IF NOT EXISTS compose (
 );
 
 INSERT INTO compose(idcompose,idinternaluser,idjury) VALUES
-(1,1,1),
-(2,2,2);
+(1,3,1),
+(2,4,1),
+(3,3,2);
 
 CREATE TABLE IF NOT EXISTS evaluationcriteria (
   idevaluationcriteria int(11) NOT NULL AUTO_INCREMENT,
@@ -225,8 +228,8 @@ CREATE TABLE IF NOT EXISTS usercontact (
 );
 
 INSERT INTO usercontact (idusercontact, idinternaluser_requestor,idinternaluser_receiver,title_contact,description_contact,date_contact,type_demande,have_response,is_close) VALUES
-(1,1,5,"Erreur sur le site","Erreur quand je clique sur le bouton logout","2010-04-02","Erreur",1,0),
-(2,1,5,"Problèle","Problèle quand je clique sur le bouton logout","2010-04-02","Erreur",1,0);
+(1,1,5,"Erreur sur le site","Erreur quand je clique sur le bouton logout","2021-04-02","Erreur",1,0),
+(2,1,5,"Problèle","Problèle quand je clique sur le bouton logout","2021-04-02","Erreur",1,0);
 
 CREATE TABLE IF NOT EXISTS responsecontact (
   idresponsecontact int(11) NOT NULL AUTO_INCREMENT,
@@ -242,6 +245,6 @@ CREATE TABLE IF NOT EXISTS responsecontact (
   FOREIGN KEY (idinternaluser_receiver) REFERENCES internaluser(idinternaluser)
 );
 
-INSERT INTO responsecontact(idresponsecontact, idusercontact, idinternaluser_requestor, idinternaluser_receiver ,title_response , text_response,date_response) VALUES 
-(1,1,5,1,"C'est noté !","Tu veux du pain ou quoi ?","2010-04-02"),
-(2,1,5,1,"C'est pas noté !","Tu veux du lait ou quoi ?","2010-04-02");
+INSERT INTO responsecontact(idresponsecontact, idusercontact, idinternaluser_requestor, idinternaluser_receiver ,title_response , text_response,date_response) VALUES
+(1,1,5,1,"C'est noté !","Tu veux du pain ou quoi ?","2021-04-02"),
+(2,1,5,1,"C'est pas noté !","Tu veux du lait ou quoi ?","2021-04-02");

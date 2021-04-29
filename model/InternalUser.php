@@ -51,8 +51,7 @@ class InternalUser extends Model {
 				where c.idinternaluser=:idinternaluser";
 
 		$st = db()->prepare($sql);
-		$st->bindValue(":idinternaluser", 1);
-		// $st->bindValue(":idinternaluser", $this->idinternaluser);
+		$st->bindValue(":idinternaluser", $this->idinternaluser);
 		$st->execute();
 		return $st->fetchAll();;
 	}

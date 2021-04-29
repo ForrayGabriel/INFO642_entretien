@@ -11,6 +11,11 @@
             "Date" => $contact->date_contact,
         );
     }
+    
+    if (is_admin())
+        $table_addBtn = array("text" => "Contacter quelqu'un", "url" => "?r=contact/TODO");
+    else
+        $table_addBtn = array("text" => "Contacter un admin", "url" => "?r=contact/TODO");
 
     $table_actions = array(
         array("url" => "?r=contact/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),

@@ -3,14 +3,11 @@
 class SiteController extends Controller {
 	public function index() {
 		if (isset($_SESSION['user'])){
-			if (get_role() == 1) {
-				$this->render("student");
+			if (is_student() || is_teacher()) {
+				header('Location: ?r=prestation');
 			}
-			if (get_role() == 2) {
-				$this->render("teacher");
-			}
-			if (get_role() == 3) {
-				$this->render("admin");
+			if (is_admin()) {
+				header('Location: ?r=event');
 			}
 		}
 		else {
