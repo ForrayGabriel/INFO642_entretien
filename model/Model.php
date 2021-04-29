@@ -40,10 +40,15 @@ class Model {
 		}
 	}
 
-	public function delete($id){
+	public function delete(){
+		$class = get_class($this);
+		$table = strtolower($class);
+		$primary_id = "id$table";
 		try{
-			$request = db()->prepare("DELETE FROM " . strtolower(get_class($this)) . " WHERE id". strtolower(get_class($this)). " = " . $id);
+			$request = db()->prepare("delete from $table where id$table=:id");
+			$request->bindValue(":id", $this->$primary_id, PDO::PARAM_INT);
 			$request->execute();
+			var_dump($request);
 		} catch(PDOException $e) {
   			echo $e->getMessage();
 		}

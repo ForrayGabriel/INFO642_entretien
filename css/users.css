@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-collapse: collapse;
+  font-family: sans-serif;
+  width: 1200px;
+  position: relative;
+  left: 50%;
+  top: 30px;
+  margin-bottom: 60px;
+  transform: translate(-50%);
+}

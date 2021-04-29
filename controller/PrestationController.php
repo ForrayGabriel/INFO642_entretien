@@ -1,9 +1,16 @@
 <?php
     class PrestationController extends Controller {
 
+        var $rolepermissions = [1,2,3];
+
         public function index() {
-            $this->render("index", array('prestation'=>Prestation::findAll(), 'internaluser'=>new InternalUser($_SESSION["user"]["idinternaluser"]), ));
+
+            $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+            $prestations = $user->getEnseignantPrestations();
+            
+            $this->render("index", $prestations);
         }
+        
         public function view() {
             try {
                 $b = new Classroom(parameters()["id"]);
@@ -13,6 +20,7 @@
                 // $this->render("error");
             }
         }
+
         public function add() {
             if (isset(parameters()["idindividualevaluation"])) {
                 $prestation = new Prestation();
