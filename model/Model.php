@@ -22,6 +22,7 @@ class Model {
 					$classes_update[strtolower($value)] = $value;
 				}
 				foreach($row as $field => $value) {
+					
 					if (substr($field, 0,2) == "id") {
 						$linkedField = substr($field, 2);
 						if (strpos($linkedField, '_') !== false)
@@ -33,8 +34,9 @@ class Model {
 						}
 						else
 							$this->$field = $value;
-					} else
+					} else {
 						$this->$field = $value;
+					}
 				}
 			}
 		}
@@ -138,9 +140,12 @@ class Model {
 	public function __get($fieldName) {
 		$varName = "_".$fieldName;
 		if (property_exists(get_class($this), $varName))
-			return $this->$varName;
-		else
+		return $this->$varName;
+		else {
+			print(get_class($this));
+			print($varName);
 			throw new Exception("Unknown variable: ".$fieldName);
+		}
 	}
 
 

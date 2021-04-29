@@ -4,10 +4,17 @@
         var $rolepermissions = [1,2,3];
 
         public function index() {
-
             $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+
             $prestations = $user->getEnseignantPrestations();
-            
+            foreach ($prestations as $key => $prestation) {
+                $prestations[$key] = new Prestation($prestation["idprestation"]);
+            }
+
+            $prestations = array_filter($prestations, function($prestation) {
+                return $prestation->date_prestation < date("Y-m-d H:i:s");
+            });
+
             $this->render("index", $prestations);
         }
         
