@@ -7,11 +7,11 @@
 <?php
 foreach($data['internaluser'] as $user){
 	if($data['contact']->iduser_requestor == $user->idinternaluser){
-		$display_name_requestor = $user->nom_internaluser . " " . $user->prenom_internaluser;
+		$display_name_requestor = $user->nom . " " . $user->prenom;
 		$id_requestor = $user->idinternaluser;
  	}
  	if($data['contact']->iduser_receiver == $user->idinternaluser){
-		$display_name_receiver = $user->nom_internaluser . " " . $user->prenom_internaluser;
+		$display_name_receiver = $user->nom . " " . $user->prenom;
 		$id_receiver = $user->idinternaluser;
  	}
 
