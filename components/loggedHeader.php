@@ -5,7 +5,7 @@
 	$onglets = [
 		1=>["Accueil"=>".","Mes résultats"=>".?r=resultat","Contact"=>"?r=contact"],
 		2=>["Accueil"=>".","Disponibilités"=>"?r=disponibilite","Notations"=>".?r=prestation"],
-		3=>["Accueil"=>".","Salles"=>"","Évènements"=>"?r=event","Contact"=>"?r=contact"]
+		3=>["Accueil"=>".","Salles"=>"","Évènements"=>"?r=event","Contact"=>"?r=contact","J'ai pas de nom cool pour ça" => "?r=group"]
 	];
 ?>
 
