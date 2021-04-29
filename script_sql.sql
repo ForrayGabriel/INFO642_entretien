@@ -204,7 +204,6 @@ CREATE TABLE IF NOT EXISTS responsecontact (
   title_response varchar(2046) NULL,
   text_response varchar(2046) NULL,
   date_response DATETIME NULL,
-  admin_response boolean NULL,
   PRIMARY KEY (idresponsecontact),
   FOREIGN KEY (idusercontact) REFERENCES usercontact(idusercontact),
   FOREIGN KEY (iduser_requestor) REFERENCES internaluser(idinternaluser),
