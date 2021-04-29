@@ -23,7 +23,7 @@ class ContactController extends Controller {
 		}
 	}
 
-	public function send_response(){
+	public function send(){
 		if (isset(parameters()['answer_iduser_requestor']) and isset(parameters()['answer_iduser_receiver']) and isset(parameters()['answer_idcontact']) and isset(parameters()['answer_title']) and isset(parameters()['answer_text'])){
 			$responsecontact = new ResponseContact();
 			$responsecontact->idusercontact = parameters()['answer_idcontact'];
@@ -32,11 +32,9 @@ class ContactController extends Controller {
 			$responsecontact->title_response = parameters()['answer_title'];
 			$responsecontact->text_response = parameters()['answer_text'];
 			$responsecontact->date_response = date("Y-m-d H:i:s");
-			$responsecontact->admin_response = 1;
 			$responsecontact->insert();
 		}
-		$contact = new UserContact(parameters()['answer_idcontact']);
-		$this->render("view", array('contact' => $contact, 'response' => ResponseContact::findAll(), 'internaluser' => InternalUser::findAll()));  
+		go_back();
 	}
 }
 
