@@ -2,6 +2,8 @@
 
 class EventController extends Controller {
 
+	var $rolepermissions = [1,2,3];
+
 	public function index() {
 		$events = Event::findAll();
 		$events = array_filter($events, function($event) {

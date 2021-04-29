@@ -2,6 +2,7 @@
 
 class EvaluationcriteriaController extends Controller {
 
+	var $rolepermissions = [1,2,3];
 
 	public function index() {
 		$this->render("index", Evaluationcriteria::findAll());
