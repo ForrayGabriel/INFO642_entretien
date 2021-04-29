@@ -2,6 +2,8 @@
 
 class ContactController extends Controller {
 
+	var $rolepermissions = [1,2,3];
+
 	public function index() {
 		if (isset($_SESSION['user'])){
 			if ($_SESSION['user']['idrole'] == 3) {

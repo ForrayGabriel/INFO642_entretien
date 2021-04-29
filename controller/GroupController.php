@@ -1,6 +1,9 @@
 <?php
 
 class GroupController extends Controller {
+
+	var $rolepermissions = [2,3];
+
 	public function index(){
 		$this->render("index");
 	}

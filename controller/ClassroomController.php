@@ -2,6 +2,8 @@
 
 class ClassroomController extends Controller {
 
+	var $rolepermissions = [3];
+
 	public function index() {
 		$this->render("index", Classroom::findAll());
 	}
