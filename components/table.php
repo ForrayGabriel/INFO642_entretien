@@ -1,11 +1,15 @@
 <link rel="stylesheet" type="text/css" href="./css/table.css"/>
 <script src="./js/table.js"></script>
 
-<div class="table-container">
-
-<input type="text" id="searchBox" placeholder="Rechercher dans le tableau">
-
 <?php 
+
+print("<div class='table-container'>");
+print("<div id='headerBox'>");
+if (isset($table_addBtn)) {
+    print("<a href='".$table_addBtn['url']."' id='addButton'>".$table_addBtn['text']."</a>");
+}
+print("<input type='text' id='searchBox' placeholder='Rechercher dans le tableau'>");
+print("</div>");
 
 print("<table id='table'>");
 print("<tr class='table-header'>");
@@ -27,7 +31,8 @@ if (isset($table_content)) {
                 $actions["url"] = str_replace(":id", $id, $actions["url"]);
                 print("<td class='no-padding'><a title='".$actions["desc"]."' href='".$actions["url"]."'><img src='./images/".$actions["icon"]."'></a></td>");
             }
-        }print("</tr>");
+        }
+        print("</tr>");
     }
 }
 

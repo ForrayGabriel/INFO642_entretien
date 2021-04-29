@@ -9,4 +9,6 @@
             "Desc" => $event->description_event);
     }
 
+    $table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
+
     include 'components/table.php'; 

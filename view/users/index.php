@@ -13,6 +13,8 @@
         );
     }
 
+    $table_addBtn = array("text" => "Ajouter un membre", "url" => "?r=users/add");
+
     $table_actions = array(
         array("url" => "?r=", "desc"=>"update password", "icon"=>"updatepasswordicon.png"),
         array("url" => "?r=users/delete&id=:id", "desc"=>"delete member", "icon"=>"removeicon.png"));

@@ -63,7 +63,7 @@ class EventController extends Controller {
 
 	}
 
-	public function add_view(){
+	public function add(){
 		foreach(Role::findAll() as $role){
 			if($role->name_role == "Etudiant"){
 				$role_ban = $role->idrole;

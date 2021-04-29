@@ -27,6 +27,7 @@ async function sort(event) {
 
     // S'il s'agit de la colonne actions, on ne fait rien
     if (column == 5) return;
+    if (document.querySelectorAll("#table tr").length === 1) return;
 
     do{
         var switching = false;
