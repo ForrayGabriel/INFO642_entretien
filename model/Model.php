@@ -33,7 +33,9 @@ class Model {
 
 		try{		
 			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
-			$request->execute();
+			$result = $request->execute();
+
+			return db()->lastInsertId();
 
 		} catch(PDOException $e) {
   			echo $e->getMessage();
