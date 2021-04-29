@@ -14,7 +14,7 @@ class ContactController extends Controller {
 		$this->render("index", array('user_contact' => $user_contact, 'internaluser' => InternalUser::findAll()));
 	}
 
-	public function admin_view() {
+	public function view() {
 		try {
 			$contact = new UserContact(parameters()["id"]);
 			$this->render("view", array('contact' => $contact, 'response' => ResponseContact::findAll(), 'internaluser' => InternalUser::findAll()));
@@ -33,12 +33,10 @@ class ContactController extends Controller {
 			$responsecontact->text_response = parameters()['answer_text'];
 			$responsecontact->date_response = date("Y-m-d H:i:s");
 			$responsecontact->admin_response = 1;
-
 			$responsecontact->insert();
-
-			$contact = new UserContact(parameters()['answer_idcontact']);
-			$this->render("view", array('contact' => $contact, 'response' => ResponseContact::findAll(), 'internaluser' => InternalUser::findAll()));
-		}  
+		}
+		$contact = new UserContact(parameters()['answer_idcontact']);
+		$this->render("view", array('contact' => $contact, 'response' => ResponseContact::findAll(), 'internaluser' => InternalUser::findAll()));  
 	}
 }
 

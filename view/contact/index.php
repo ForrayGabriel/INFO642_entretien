@@ -25,12 +25,12 @@
 						echo "<td class='global_top_line'>" . $contact->title_contact . "</td>";
 						foreach($data['internaluser'] as $user){
 							if($contact->iduser_requestor == $user->idinternaluser){
-								echo "<td class='global_top_line'>" . $user->nom_internaluser . " " . $user->prenom_internaluser. "</td>";
+								echo "<td class='global_top_line'>" . $user->nom . " " . $user->prenom. "</td>";
 							}
 						}
 						echo "<td class='global_top_line'>" . $contact->type_demande . "</td>";
 						echo "<td class='global_top_line'>" . $contact->date_contact . "</td>";
-						echo "<td class='global_top_line'> <a href='?r=contact/admin_view&id=".$contact->idusercontact."'><buttontype='button'> Répondre </button></a></td>";
+						echo "<td class='global_top_line'> <a href='?r=contact/view&id=".$contact->idusercontact."'><buttontype='button'> Répondre </button></a></td>";
 						echo "</tr>";
 						echo "</tbody>";
 					}
