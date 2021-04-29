@@ -52,7 +52,7 @@ class Model {
 
 		try{		
 			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
-			$result = $request->execute();
+			$request->execute();
 
 			return db()->lastInsertId();
 
@@ -89,6 +89,8 @@ class Model {
 		try{		
 			$request = db()->prepare("UPDATE " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
 			$request->execute();
+			
+			return db()->lastInsertId();
 		} catch(PDOException $e) {
   			echo $e->getMessage();
 		}

@@ -48,7 +48,7 @@ foreach($data['response'] as $response){
 
 <p>Repondre</p>
 
-<form action='?r=contact/send_response' method='post'>
+<form action='?r=contact/send' method='post'>
 
 	<input type="hidden" name="answer_iduser_requestor" value=<?php echo $id_requestor;?> >
 	<input type="hidden" name="answer_iduser_receiver" value=<?php echo $id_receiver; ?> >
