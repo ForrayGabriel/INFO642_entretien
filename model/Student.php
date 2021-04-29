@@ -5,7 +5,7 @@ class Student extends Model {
 	protected $_idstudent;
 	protected $_num_INE;
 	protected $_num_student;
-  	protected $_iduser;
+  	protected $_idinternaluser;
 
  	//TODO
 	public function __toString() {

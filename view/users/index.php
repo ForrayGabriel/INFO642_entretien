@@ -1,7 +1,6 @@
 <img class="background-image" src="https://www.polytech.univ-smb.fr/fileadmin/_processed_/d/b/csm_Polytech_site_Annecy_vu_du_ciel_db27e8c54f.jpg">
 
 <?php 
-    $roles = array(1=>"Eleve", 2=>"Enseignant", 3=>"Admin");
     $table_header = array("Username", "Nom", "Prenom", "Email", "Role");
     
     foreach ($data as &$user) {
@@ -10,7 +9,7 @@
             "Nom" => $user->nom,
             "Prenom" => $user->prenom,
             "Email" => $user->email,
-            "Role" => $roles[$user->idrole]
+            "Role" => $user->idrole->name_role
         );
     }
 
