@@ -3,8 +3,8 @@
 class UserContact extends Model {
 
 	protected $_idusercontact;
-	protected $_iduser_requestor;
-	protected $_iduser_receiver;
+	protected $_idinternaluser_requestor;
+	protected $_idinternaluser_receiver;
 	protected $_title_contact;
 	protected $_description_contact;
 	protected $_date_contact;
