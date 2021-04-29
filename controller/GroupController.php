@@ -2,11 +2,10 @@
 
 class GroupController extends Controller {
 	public function index(){
-		$this->render("index");
+		$this->render("index",['groups' => PeopleGroup::findAll()]);
 	}
 
 	public function send(){
-
 		$fields_name = array();
 		$data = array();
 
@@ -35,14 +34,36 @@ class GroupController extends Controller {
 						if(property_exists($student, '_' . $key))
 							$student->$key = $value;	
 					}
+
+					// INSERT OR UPDATE
+
 					if(!InternalUser::findOne(['email' => $internal->email])){
 						$get_id = $internal->insert();
 						$student->idinternaluser = $get_id;
 						$student->insert();	
 					}else{
-						$get_id = $internal->update();
+						$internal->update();
+
+						$internal_last_update = InternalUser::findOne(['email' => $internal->email]);
+
+
+						$get_id = $internal_last_update[0]->idinternaluser;
 						$student->idinternaluser = $get_id;
+
 						$student->update();	
+					}
+
+					// INSERT GROUP BELONG
+
+					if(isset($_POST['group_id'])){
+						foreach($_POST['group_id'] as $group){
+							if(!BelongGroup::findOne(['idinternaluser' => $get_id, 'idpeoplegroupe' => $group])){
+								$belong = new BelongGroup();
+								$belong->idinternaluser = $get_id;
+								$belong->idpeoplegroup = $group;
+								$belong->insert();
+							}
+						}
 					}
 				}
 				
