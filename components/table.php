@@ -4,6 +4,7 @@
 <?php 
 
 print("<div class='table-container'>");
+if (isset($table_title)) print("<h1>$table_title</h1>");
 print("<div id='headerBox'>");
 if (isset($table_addBtn)) {
     print("<a href='".$table_addBtn['url']."' id='addButton'>".$table_addBtn['text']."</a>");
