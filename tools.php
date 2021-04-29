@@ -36,3 +36,7 @@ function is_admin(){
 function is_visitor(){
 	return get_role() == -999;
 }
+
+function go_back(){
+	return header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
