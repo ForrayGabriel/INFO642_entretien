@@ -14,8 +14,27 @@ class Model {
 				throw new Exception("Not in table: ".$table." id: ".$id );
 			} else {
 				$row = $st->fetch(PDO::FETCH_ASSOC);
+				$classes = glob('model/*');
+				$classes_update = array();
+				foreach($classes as &$value) {
+					$value = substr($value,6);
+					$value = substr($value,0,-4);
+					$classes_update[strtolower($value)] = $value;
+				}
 				foreach($row as $field => $value) {
-					$this->$field = $value;
+					if (substr($field, 0,2) == "id") {
+						$linkedField = substr($field, 2);
+						if (strpos($linkedField, '_') !== false)
+							$linkedField = substr($linkedField, 0, strpos($linkedField, "_"));
+							
+						$linkedClass = $classes_update[$linkedField];
+						if ($linkedClass != get_class($this)) {
+							$this->$field = new $linkedClass($value);
+						}
+						else
+							$this->$field = $value;
+					} else
+						$this->$field = $value;
 				}
 			}
 		}

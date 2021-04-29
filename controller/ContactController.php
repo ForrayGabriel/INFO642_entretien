@@ -5,13 +5,13 @@ class ContactController extends Controller {
 	public function index() {
 		if (isset($_SESSION['user'])){
 			if ($_SESSION['user']['idrole'] == 3) {
-				$user_contact = UserContact::findAll();
+				$contacts = UserContact::findAll();
 			}else{
-				$user_contact = UserContact::findOne(["iduser_requestor" => $_SESSION['user']['idinternaluser'],"iduser_receiver" => $_SESSION['user']['idinternaluser']],"or");
+				$contacts = UserContact::findOne(["iduser_requestor" => $_SESSION['user']['idinternaluser'],"iduser_receiver" => $_SESSION['user']['idinternaluser']],"or");
 			}
 		}
 
-		$this->render("index", array('user_contact' => $user_contact, 'internaluser' => InternalUser::findAll()));
+		$this->render("index", $contacts);
 	}
 
 	public function view() {

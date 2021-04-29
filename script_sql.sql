@@ -179,8 +179,8 @@ INSERT INTO individualevaluation(idindividualevaluation,idprestation,idevaluatio
 
 CREATE TABLE IF NOT EXISTS usercontact (
   idusercontact int(11) NOT NULL AUTO_INCREMENT,
-  iduser_requestor int(11) NOT NULL,
-  iduser_receiver int(11) NOT NULL,
+  idinternaluser_requestor int(11) NOT NULL,
+  idinternaluser_receiver int(11) NOT NULL,
   title_contact varchar(2046) NULL,
   description_contact varchar(2046) NULL,
   date_contact DATETIME NULL,
@@ -188,29 +188,29 @@ CREATE TABLE IF NOT EXISTS usercontact (
   have_response boolean NULL,
   is_close boolean NULL,
   PRIMARY KEY (idusercontact),
-  FOREIGN KEY (iduser_requestor) REFERENCES internaluser(idinternaluser),
-  FOREIGN KEY (iduser_receiver) REFERENCES internaluser(idinternaluser)
+  FOREIGN KEY (idinternaluser_requestor) REFERENCES internaluser(idinternaluser),
+  FOREIGN KEY (idinternaluser_receiver) REFERENCES internaluser(idinternaluser)
 );
 
-INSERT INTO usercontact (idusercontact, iduser_requestor,iduser_receiver,title_contact,description_contact,date_contact,type_demande,have_response,is_close) VALUES
+INSERT INTO usercontact (idusercontact, idinternaluser_requestor,idinternaluser_receiver,title_contact,description_contact,date_contact,type_demande,have_response,is_close) VALUES
 (1,1,5,"Erreur sur le site","Erreur quand je clique sur le bouton logout","2010-04-02","Erreur",1,0),
 (2,1,5,"Problèle","Problèle quand je clique sur le bouton logout","2010-04-02","Erreur",1,0);
 
 CREATE TABLE IF NOT EXISTS responsecontact (
   idresponsecontact int(11) NOT NULL AUTO_INCREMENT,
   idusercontact int(11) NOT NULL,
-  iduser_requestor int(11) NOT NULL,
-  iduser_receiver int(11) NOT NULL,
+  idinternaluser_requestor int(11) NOT NULL,
+  idinternaluser_receiver int(11) NOT NULL,
   title_response varchar(2046) NULL,
   text_response varchar(2046) NULL,
   date_response DATETIME NULL,
   admin_response boolean NULL,
   PRIMARY KEY (idresponsecontact),
   FOREIGN KEY (idusercontact) REFERENCES usercontact(idusercontact),
-  FOREIGN KEY (iduser_requestor) REFERENCES internaluser(idinternaluser),
-  FOREIGN KEY (iduser_receiver) REFERENCES internaluser(idinternaluser)
+  FOREIGN KEY (idinternaluser_requestor) REFERENCES internaluser(idinternaluser),
+  FOREIGN KEY (idinternaluser_receiver) REFERENCES internaluser(idinternaluser)
 );
 
-INSERT INTO responsecontact(idresponsecontact, idusercontact, iduser_requestor, iduser_receiver ,title_response , text_response,date_response ,admin_response) VALUES 
+INSERT INTO responsecontact(idresponsecontact, idusercontact, idinternaluser_requestor, idinternaluser_receiver ,title_response , text_response,date_response ,admin_response) VALUES 
 (1,1,5,1,"C'est noté !","Tu veux du pain ou quoi ?","2010-04-02",1),
 (2,1,5,1,"C'est pas noté !","Tu veux du lait ou quoi ?","2010-04-02",1);
