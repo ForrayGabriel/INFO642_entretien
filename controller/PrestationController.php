@@ -5,18 +5,100 @@
 
         public function index() {
             $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+            if (is_student()) {
+                $this->student($user, "comming");
+                die();
+            } else if (is_teacher()) {
+                $this->teacher($user, "comming");
+            } else {
+                print("TODO");
+                die();
+            }
+        }
 
+        public function resultat() {
+            $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+            $this->student($user, "noted");
+        }
+
+        public function historique() {
+            $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+            if (is_student()) {
+                header('Location: ?r=prestation/resultat');
+            } else if (is_teacher()) {
+                $this->teacher($user, "history");
+            } else {
+                print("TODO");
+                die();
+            }
+        }
+
+        public function notation() {
+            $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+            $this->teacher($user, "wait_notation");
+        }
+
+        public function admin($user) {
+
+        }
+
+        public function student($user, $state) {
+            print("il faut changer pour mettre noter ou non plutot que faire le test par la date");
+            $prestations = Prestation::findOne(["idstudent" => $user->idinternaluser]);
+            if ($state == "comming") {
+                $prestations = array_filter($prestations, function($prestation) {
+                    return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
+                });
+                $this->render("student", $prestations);
+            } else if ($state == "noted") {
+                $prestations = array_filter($prestations, function($prestation) {
+                    return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
+                });
+                $this->render("studentNoted", $prestations);
+            }
+        }
+
+        public function teacher($user, $state) {
             $prestations = $user->getEnseignantPrestations();
             foreach ($prestations as $key => $prestation) {
                 $prestations[$key] = new Prestation($prestation["idprestation"]);
             }
+            if ($state == "comming") {
+                $prestations = array_filter($prestations, function($prestation) {
+                    return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
+                });
+                $this->render("teacher", $prestations);
+            } else if ($state == "wait_notation") {
+                print("Même page que Historique pour le moment car la gestions des notes n'est pas encore codé");
+                $prestations = array_filter($prestations, function($prestation) {
+                    return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
+                });
+                $this->render("teacherHistorique", $prestations);
+            } else if ($state == "history") {
+                print("Même page que Notations pour le moment car la gestions des notes n'est pas encore codé");
+                $prestations = array_filter($prestations, function($prestation) {
+                    return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
+                });
+                $this->render("teacherHistorique", $prestations);
+            }
 
-            $prestations = array_filter($prestations, function($prestation) {
-                return $prestation->date_prestation < date("Y-m-d H:i:s");
-            });
-
-            $this->render("index", $prestations);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         public function view() {
             try {
