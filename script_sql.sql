@@ -87,13 +87,13 @@ CREATE TABLE IF NOT EXISTS jury (
   idjury int(11) NOT NULL AUTO_INCREMENT,
   idclassroom int(11) NOT NULL,
   idtimeslot int(11) NOT NULL,
-  name_jury varchar(2048) NULL,
+  name varchar(2048) NULL,
   PRIMARY KEY (idjury),
   FOREIGN KEY (idclassroom) REFERENCES classroom(idclassroom),
   FOREIGN KEY (idtimeslot) REFERENCES timeslot(idtimeslot)
 );
 
-INSERT INTO jury(idjury,idclassroom,idtimeslot,name_jury) VALUES
+INSERT INTO jury(idjury,idclassroom,idtimeslot,name) VALUES
 (1,1,1,"Jury de la honte"),
 (2,2,2,"Jury des bg");
 
