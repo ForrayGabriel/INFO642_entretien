@@ -13,7 +13,6 @@ div.table-title {
   font-size: 30px;
   font-weight: 400;
   font-style:normal;
-  font-family: "Roboto", helvetica, arial, sans-serif;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   text-transform:uppercase;
 }
@@ -161,3 +160,47 @@ td.text-right {
   width: 40px;
   height: 40px;
 }
+
+
+/*add.php*/
+
+
+
+input[type=submit] {
+  background-color: var(--main-color);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: rgb(100,100,100);
+}
+
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-sizing : border-box;
+  border-radius:5px;
+  background-color:#f2f2f2;
+  padding:20px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, .6);
+}
+
+.box-input{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: right;
+}
+
+p{
+  margin-top: 10px;
+}
+
