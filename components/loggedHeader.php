@@ -3,9 +3,23 @@
 <?php 
 	$espaces = [1=>"Etudiant", 2=>"Enseignant", 3=>"Administrateur"];
 	$onglets = [
-		1=>["Accueil"=>".","Mes résultats"=>".?r=resultat","Contact"=>"?r=contact"],
-		2=>["Accueil"=>".","Disponibilités"=>"?r=disponibilite","Notations"=>".?r=prestation"],
-		3=>["Accueil"=>".","Salles"=>"","Évènements"=>"?r=event","Contact"=>"?r=contact","J'ai pas de nom cool pour ça" => "?r=group"]
+		1=>["Entretient"=>"?r=prestation",
+			"Résultats"=>".?r=prestation/resultat",
+			"Contact"=>"?r=contact"],
+
+		2=>["Préstations"=>"?r=prestation",
+			"Disponibilités"=>"?r=disponibilite",
+			"Notations"=>".?r=prestation/notation",
+			"Historique"=>".?r=prestation/historique",
+			"Contact"=>"?r=contact"],
+
+		3=>["Évènements"=>"?r=event",
+			"Historique"=>"?r=event/historique",
+			"Salles"=>"?r=TODO",
+			"Groupe" => "?r=TODO",
+			"Utilisateurs" => "?r=users",
+			"Contact"=>"?r=contact",
+		]
 	];
 ?>
 

@@ -3,7 +3,7 @@
 
 <div class="table-container">
 
-<input type="text" id="searchBox" placeholder="Search for names..">
+<input type="text" id="searchBox" placeholder="Rechercher dans le tableau">
 
 <?php 
 
@@ -11,7 +11,6 @@ print("<table id='table'>");
 print("<tr class='table-header'>");
 foreach ($table_header as &$header) {
     print("<th>$header</th>");
-    
 }
 if (isset($table_actions)) {
     print("<th colspan='".count($table_actions)."'>Actions</th>");

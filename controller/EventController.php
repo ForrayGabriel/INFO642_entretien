@@ -3,7 +3,19 @@
 class EventController extends Controller {
 
 	public function index() {
-		$this->render("index", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll()));
+		$events = Event::findAll();
+		$events = array_filter($events, function($event) {
+			return strtotime($event->end_date) > strtotime(date("Y-m-d H:i:s"));
+		});
+		$this->render("index", $events);
+	}
+
+	public function historique() {
+		$events = Event::findAll();
+		$events = array_filter($events, function($event) {
+			return strtotime($event->end_date) < strtotime(date("Y-m-d H:i:s"));
+		});
+		$this->render("index", $events);
 	}
 
 	public function view() {
