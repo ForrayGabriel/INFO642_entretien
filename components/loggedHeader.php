@@ -1,22 +1,32 @@
 <link rel="stylesheet" type="text/css" href="./css/panel.css"/>
 
 <?php 
-	$espaces = [1=>"Etudiant", 2=>"Enseignant", 3=>"Administrateur"];
+	$espaces = [
+		1=>"Etudiant",
+		2=>"Enseignant", 
+		3=>"Administrateur"
+	];
+	
 	$onglets = [
-		1=>["Entretient"=>"?r=prestation",
+		1 => [
+			"Entretient"=>"?r=prestation",
 			"Résultats"=>".?r=prestation/resultat",
-			"Contact"=>"?r=contact"],
+			"Contact"=>"?r=contact"
+		],
 
-		2=>["Préstations"=>"?r=prestation",
+		2 => [
+			"Préstations"=>"?r=prestation",
 			"Disponibilités"=>"?r=disponibilite",
 			"Notations"=>".?r=prestation/notation",
 			"Historique"=>".?r=prestation/historique",
-			"Contact"=>"?r=contact"],
+			"Contact"=>"?r=contact"
+		],
 
-		3=>["Évènements"=>"?r=event",
+		3 => [
+			"Évènements"=>"?r=event",
 			"Historique"=>"?r=event/historique",
 			"Salles"=>"?r=TODO",
-			"Groupe" => "?r=TODO",
+			"Groupe" => "?r=group/import",
 			"Utilisateurs" => "?r=users",
 			"Contact"=>"?r=contact",
 		]
