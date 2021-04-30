@@ -22,6 +22,12 @@ function get_role(){
 	return -999;
 }
 
+function get_id(){
+	if(isset($_SESSION["user"]["idinternaluser"])){
+		return $_SESSION["user"]["idinternaluser"];
+	}
+}
+
 function is_student(){
 	return get_role() == 1;
 }
