@@ -1,21 +1,27 @@
+<img class="background-image" src="https://www.polytech.univ-smb.fr/fileadmin/_processed_/d/b/csm_Polytech_site_Annecy_vu_du_ciel_db27e8c54f.jpg">
+
 <link rel="stylesheet" type="text/css" href="././css/chatbox.css"/>
+<link rel="stylesheet" type="text/css" href="././css/form.css"/>
+<script src="././js/form.js"></script>
 
+<center>
+<br>
 <h1> Suivre la conversation </h1>
-
+<br>
 
 
 <?php
 foreach($data['internaluser'] as $user){
-	if($data['contact']->iduser_requestor == $user->idinternaluser){
+
+	if($data['contact']->idinternaluser_requestor->idinternaluser == $user->idinternaluser){
 		$display_name_requestor = $user->nom . " " . $user->prenom;
 		$id_requestor = $user->idinternaluser;
- 	}
- 	if($data['contact']->iduser_receiver == $user->idinternaluser){
+ 	}else if($data['contact']->idinternaluser_receiver->idinternaluser == $user->idinternaluser){
 		$display_name_receiver = $user->nom . " " . $user->prenom;
 		$id_receiver = $user->idinternaluser;
  	}
-
 }
+
 echo "<div class='container'>";
 echo "<img src='https://latelierduformateur.fr/wp-content/uploads/2018/03/avatar-1606916_960_720.png' alt='Avatar'>";
 echo "<p><b>De " . $display_name_requestor . "  : ". $data['contact']->title_contact ."  </b> </br></br> ". $data['contact']->description_contact ."</p>";
@@ -24,12 +30,14 @@ echo "</div>";
 
 
 foreach($data['response'] as $response){
-	if($data['contact']->idusercontact == $response->idusercontact){
-		if($response->iduser_requestor == $id_requestor){
+	if($data['contact']->idusercontact == $response->idusercontact->idusercontact){
+
+		if($response->idinternaluser_requestor == $id_requestor){
 			echo "<div class='container'>";
 			echo "<img src='https://latelierduformateur.fr/wp-content/uploads/2018/03/avatar-1606916_960_720.png' alt='Avatar'>";
 			echo "<p><b>De " . $display_name_requestor . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
 			echo "<span class='time-right'>". $response->date_response ."</span>";
+			echo "</br>";
 			echo "</div>";
 		}else{
 			echo "<div class='container darker'>";
@@ -44,29 +52,40 @@ foreach($data['response'] as $response){
 ?>
 
 
+<h2>Repondre</h2>
+
+</center>
 
 
-<p>Repondre</p>
+<div class='form-container'>
+	<form action='?r=contact/reply' method='post'>
 
-<form action='?r=contact/send' method='post'>
+		<input type="hidden" name="answer_iduser_requestor" value=<?php echo $id_requestor;?> >
+		<input type="hidden" name="answer_iduser_receiver" value=<?php echo $id_receiver; ?> >
+		<input type="hidden" name="answer_idcontact" value=<?php echo $data['contact']->idusercontact; ?> >
 
-	<input type="hidden" name="answer_iduser_requestor" value=<?php echo $id_requestor;?> >
-	<input type="hidden" name="answer_iduser_receiver" value=<?php echo $id_receiver; ?> >
-	<input type="hidden" name="answer_idcontact" value=<?php echo $data['contact']->idusercontact; ?> >
+		<div class='form-group'>
+			<label>Titre</label>
+			<p>
+				<input class='form-control' placeholder='Entrer le titre du message' name='answer_title'/>
+			</p>
+		</div>
 
-	<label>Titre</label>
-	<p>
-		<input name='answer_title'/>
-	</p>
+		<div class='form-group'>
+			<label>Contenu</label>
+			<p>
+				<textarea class='form-control' placeholder='Entrer le contenu du message' name='answer_text' style="resize: none;height: 100px;width: 100%;"></textarea>
+			</p>
+		</div>
 
-	<label>Contenu</label>
-	<p>
-		<textarea name='answer_text'></textarea>
-	</p>
-	<p>
-		<input type='submit' value='Ajouter'/>
-	</p>
-</form>
+
+		<div class="form-group">
+	      <button type="submit" id="submit" class="submit-button">
+	        Envoyer
+	      </button>
+	    </div>
+	</form>
+</div>
 
 
 
