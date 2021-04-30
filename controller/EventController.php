@@ -65,15 +65,6 @@ class EventController extends Controller {
 
 	}
 
-	public function add(){
-		foreach(Role::findAll() as $role){
-			if($role->name_role == "Etudiant"){
-				$role_ban = $role->idrole;
-			}
-		}
-		$this->render("add", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll(), 'role_ban' => $role_ban));
-	}
-
 	public function add_event(){
 		if(isset(parameters()['idevent_creator']) and parameters()['idevent_creator']  != 0 and isset(parameters()['entitled_event']) and isset(parameters()['description_event']) and isset(parameters()['start_date']) and isset(parameters()['end_date'])){
 
@@ -88,6 +79,39 @@ class EventController extends Controller {
 		}
 		$this->render("index", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll()));
 
+	}
+
+	public function add() {
+
+		if($_SERVER['REQUEST_METHOD'] == "GET") {
+			$form_title = "Ajouter un évènement";
+
+			$teachers = InternalUser::findOne(["idrole"=>2]);
+			$options = array();
+			foreach ($teachers as &$teacher) {
+				$options[$teacher->nom." ".$teacher->prenom] = $teacher->idinternaluser;
+				
+			}
+
+
+			$form_content = array(
+				"Titre"=>array("type"=>"text"),
+				"Description"=>array("type"=>"text"),
+				"Choix de l'enseignant responsable de l'évenement :"=>array(
+					"type"=>"select",
+					"desc"=>"Choisissez une option",
+					"options"=>$options),
+				"Date"=>array(
+					"type"=>"date",
+					"title"=>"Date de début et de fin")
+						
+			);
+			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
+		} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+			var_dump(parameters());
+		}
+
+		
 	}
 
 }

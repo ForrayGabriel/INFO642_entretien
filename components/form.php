@@ -44,16 +44,27 @@
 
             case "select":
                 print("<p>$key</p>");
-                print("<select id='dropdown' name='role' class='form-control' required=''>");
+                print("<select id='dropdown' name='$key' class='form-control' required=''>");
                 print("<option disabled selected value>".$value["desc"]."</option>");
                 foreach ($value["options"] as $value => $id) {
                     print("<option value='$id'>$value</option>");
                 }
+                print("</select>");
                 break;
 
             case "file":
                 print("<label id='$key' for='$key'>$key</label>");
                 print("<input type='file' name='$key' />");
+                break;
+
+            case "date":
+                print("<p>".$value["title"]."</p>");
+                print("<div class='input-date'>");
+                print("<input class='box-input' type='date' name='".$key."_start'>");
+                print("<input class='box-input' type='date' name=".$key."_end'>");
+                print("</div>");
+                break;
+
 
         }
         print("</div>");
