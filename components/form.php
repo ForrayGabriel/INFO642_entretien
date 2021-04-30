@@ -7,7 +7,7 @@
 <?php
     extract($data);
     print("<h1 id='title' class='text-center'>$title</h1>");
-    print("<form action='' method='post'>");
+    print("<form action='' method='post' enctype='multipart/form-data'>");
     
     foreach ($content as $key => $value) {
         print("<div class='form-group'>");
@@ -23,11 +23,21 @@
                     required
                     />");
                 break;
+
             case "radio":
                 print("<p>$key</p>");
                 foreach ($value["options"] as $value => $id) {
                     print("<label>");
                     print("<input name='$key' value='$id' type='radio' class='input-radio' checked=''>$value");
+                    print("</label>");
+                }
+                break;
+
+            case "checkbox":
+                print("<p>$key</p>");
+                foreach ($value["options"] as $value => $id) {
+                    print("<label>");
+                    print("<input name='$key.[]' value='$id' type='checkbox' class='input-radio'>$value");
                     print("</label>");
                 }
                 break;
@@ -40,6 +50,11 @@
                     print("<option value='$id'>$value</option>");
                 }
                 break;
+
+            case "file":
+                print("<label id='$key' for='$key'>$key</label>");
+                print("<input type='file' name='$key' />");
+
         }
         print("</div>");
     }
@@ -47,7 +62,7 @@
     ?>
     <div class="form-group">
       <button type="submit" id="submit" class="submit-button">
-        Submit
+        Envoyer
       </button>
     </div>
     </form>
