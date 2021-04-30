@@ -24,6 +24,12 @@
                     />");
                 break;
 
+            case "text-area":
+                print("<label id='$key' for='$key'>$key</label>");
+                print("<textarea class='form-control' placeholder='Entrer le contenu du message' name='$key' style='resize: none;height: 100px;width: 100%;''></textarea>");
+                break;
+
+
             case "radio":
                 print("<p>$key</p>");
                 foreach ($value["options"] as $value => $id) {
@@ -44,11 +50,12 @@
 
             case "select":
                 print("<p>$key</p>");
-                print("<select id='dropdown' name='role' class='form-control' required=''>");
+                print("<select id='dropdown' name='$key' class='form-control' required=''>");
                 print("<option disabled selected value>".$value["desc"]."</option>");
                 foreach ($value["options"] as $value => $id) {
                     print("<option value='$id'>$value</option>");
                 }
+                print("</select>");
                 break;
 
             case "file":
