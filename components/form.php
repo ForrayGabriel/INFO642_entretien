@@ -50,7 +50,11 @@
 
             case "select":
                 print("<p>$key</p>");
-                print("<select id='dropdown' name='$key' class='form-control' required=''>");
+                if(isset($value['!required'])){
+                    print("<select id='dropdown' name='$key' class='form-control'>");
+                }else{
+                    print("<select id='dropdown' name='$key' class='form-control' required=''>");
+                }
                 print("<option disabled selected value>".$value["desc"]."</option>");
                 foreach ($value["options"] as $value => $id) {
                     print("<option value='$id'>$value</option>");
