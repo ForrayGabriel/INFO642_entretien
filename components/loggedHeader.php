@@ -25,7 +25,7 @@
 		3 => [
 			"Évènements"=>"?r=event",
 			"Historique"=>"?r=event/historique",
-			"Salles"=>"?r=TODO",
+			"Salles"=>"?r=classroom",
 			"Groupe" => "?r=group/import",
 			"Utilisateurs" => "?r=users",
 			"Contact"=>"?r=contact",
