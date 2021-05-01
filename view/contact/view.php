@@ -11,8 +11,8 @@
 
 
 <?php
+// Need to be remove (Dorian)
 foreach($data['internaluser'] as $user){
-
 	if($data['contact']->idinternaluser_requestor->idinternaluser == $user->idinternaluser){
 		$display_name_requestor = $user->nom . " " . $user->prenom;
 		$id_requestor = $user->idinternaluser;
@@ -31,18 +31,17 @@ echo "</div>";
 
 foreach($data['response'] as $response){
 	if($data['contact']->idusercontact == $response->idusercontact->idusercontact){
-
-		if($response->idinternaluser_requestor == $id_requestor){
+		if($response->idinternaluser_requestor->idinternaluser == $id_requestor){
 			echo "<div class='container'>";
 			echo "<img src='https://latelierduformateur.fr/wp-content/uploads/2018/03/avatar-1606916_960_720.png' alt='Avatar'>";
-			echo "<p><b>De " . $display_name_requestor . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
+			echo "<p><b>De " . $response->idinternaluser_requestor->nom . " " . $response->idinternaluser_requestor->prenom . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
 			echo "<span class='time-right'>". $response->date_response ."</span>";
 			echo "</br>";
 			echo "</div>";
 		}else{
 			echo "<div class='container darker'>";
 			echo "<img src='http://judowormhout.ovh/wp-content/uploads/2016/06/avatar7.png' alt='Avatar' class='right'>";
-			echo "<p><b>De " . $display_name_receiver . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
+			echo "<p><b>De " . $response->idinternaluser_receiver->nom . " " . $response->idinternaluser_receiver->prenom . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
 			echo "<span class='time-left'>". $response->date_response ."</span>";
 			echo "</div>";
 		}
