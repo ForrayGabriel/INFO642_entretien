@@ -96,10 +96,21 @@ class Model {
 		}
 	}
 
-	public static function findAll() {
+	public static function findAll($params = null){
 		$class = get_called_class();
 		$table = strtolower($class);
-		$st = db()->prepare("select id$table from $table");
+
+		$sql = "select id$table from $table";
+
+		if($params){
+			foreach($params as $attribute => $element){
+				foreach($element as $field => $action){
+					$sql .= " " . $attribute . " " . $field . " " . $action . "";
+				}
+			}
+		}
+
+		$st = db()->prepare($sql);
 		$st->execute();
 		$list = array();
 		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
@@ -107,7 +118,8 @@ class Model {
 		}
 		return $list;
 	}
-	public static function findOne($data, $operator = null) {
+
+	public static function findOne($data, $operator = null, $params = null) {
         $class = get_called_class();
         $table = strtolower(get_called_class());
 
@@ -128,7 +140,18 @@ class Model {
             $res = implode(' and ', $data);
         }
 
-        $st = db()->prepare("select id$table from $table where $res");
+        $sql = "select id$table from $table where $res";
+
+
+		if($params){
+			foreach($params as $attribute => $element){
+				foreach($element as $field => $action){
+					$sql .= " " . $attribute . " " . $field . " " . $action . "";
+				}
+			}
+		}
+
+        $st = db()->prepare($sql);
         $st->execute();
         $list = array();
         while($row = $st->fetch(PDO::FETCH_ASSOC)) {
@@ -144,8 +167,6 @@ class Model {
 		if (property_exists(get_class($this), $varName))
 		return $this->$varName;
 		else {
-			print(get_class($this));
-			print($varName);
 			throw new Exception("Unknown variable: ".$fieldName);
 		}
 	}
