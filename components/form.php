@@ -19,9 +19,14 @@
                     name='$key'
                     id='$key'
                     class='form-control'
-                    placeholder='Entrer votre $key'
-                    required
-                    />");
+                    placeholder='Entrer votre $key'");
+                if(isset($value['value'])){
+                    print("value='" . $value['value'] . "' ");
+                }
+                if(!isset($value['!required'])){
+                    print("required");
+                }
+                print("/>");
                 break;
 
             case "text-area":
