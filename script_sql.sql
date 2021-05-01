@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS individualevaluation;
 DROP TABLE IF EXISTS prestation;
 DROP TABLE IF EXISTS peoplegroup;
-DROP TABLE IF EXISTS belong;
+DROP TABLE IF EXISTS belonggroup;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS compose;
 DROP TABLE IF EXISTS jury;

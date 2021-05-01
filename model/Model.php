@@ -151,6 +151,8 @@ class Model {
 			}
 		}
 
+		print_r($sql);
+
         $st = db()->prepare($sql);
         $st->execute();
         $list = array();
