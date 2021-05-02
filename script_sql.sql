@@ -130,16 +130,16 @@ CREATE TABLE IF NOT EXISTS classroom (
 );
 
 INSERT INTO classroom(idclassroom,name_classroom,building_classroom,capacity_classroom) VALUES
-(1,"B14","Bâtiment B","200 places assises"),
-(2,"B120","Bâtiment B","200 places assises"),
-(3,"C204","Bâtiment C","30 places assises"),
-(4,"C205","Bâtiment C","30 places assises"),
-(5,"C206","Bâtiment C","30 places assises"),
-(6,"C207","Bâtiment C","30 places assises"),
-(7,"C208","Bâtiment C","30 places assises"),
-(8,"A202","Bâtiment A","25 places assises"),
-(9,"A203","Bâtiment A","25 places assises"),
-(10,"A204","Bâtiment A","25 places assises");
+(1,"B14","Batiment B","200 places assises"),
+(2,"B120","Batiment B","200 places assises"),
+(3,"C204","Batiment C","30 places assises"),
+(4,"C205","Batiment C","30 places assises"),
+(5,"C206","Batiment C","30 places assises"),
+(6,"C207","Batiment C","30 places assises"),
+(7,"C208","Batiment C","30 places assises"),
+(8,"A202","Batiment A","25 places assises"),
+(9,"A203","Batiment A","25 places assises"),
+(10,"A204","Batiment A","25 places assises");
 
 CREATE TABLE IF NOT EXISTS timeslot (
   idtimeslot int(11) NOT NULL AUTO_INCREMENT,
