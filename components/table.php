@@ -23,7 +23,11 @@ if (isset($actions)) {
 print("</tr>");
 if (isset($content)) {
     foreach ($content as $id => $row) {
-        print("<tr>");
+        if (isset($rowLink)) {
+            print("<tr onclick=\"document.location = '$rowLink&id=$id';\">");
+        } else {
+            print("<tr>");
+        }
         foreach($row as $content) {
             print("<td>$content</td>");
         }

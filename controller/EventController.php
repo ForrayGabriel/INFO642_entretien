@@ -21,7 +21,9 @@ class EventController extends Controller {
 
 		$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
 
-		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
+		$table_rowLink = "?r=prestation";
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink]);
 
 
 

@@ -49,5 +49,8 @@ function is_visitor(){
 }
 
 function go_back(){
-	return header('Location: ' . $_SERVER['HTTP_REFERER']);
+	if (isset($_SERVER['HTTP_REFERER'])) 
+		return header('Location: ' . $_SERVER['HTTP_REFERER']);
+
+	return header('Location: .');
 }

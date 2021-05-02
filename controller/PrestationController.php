@@ -4,16 +4,20 @@
         var $rolepermissions = [1,2,3];
 
         public function index() {
-            $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
-            if (is_student()) {
-                $student = Student::findOne(["idinternaluser" => $user->idinternaluser])[0];
-                $this->student($student, "comming");
-                die();
-            } else if (is_teacher()) {
-                $this->teacher($user, "comming");
+
+            if (isset(parameters()["id"])) {
+                die("Il faut afficher les informations d'une prestation");
             } else {
-                print("TODO");
-                die();
+                $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+                if (is_student()) {
+                    $student = Student::findOne(["idinternaluser" => $user->idinternaluser])[0];
+                    $this->student($student, "comming");
+                    die();
+                } else if (is_teacher()) {
+                    $this->teacher($user, "comming");
+                } else {
+                    go_back();
+                }
             }
         }
 
