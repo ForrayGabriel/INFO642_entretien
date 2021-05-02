@@ -68,8 +68,6 @@ class ClassroomController extends Controller {
 			$classroom->description_classroom = parameters()["description_classroom"];
 			$classroom->insert();
 			$this->index();
-		} else {
-			go_back();
 		}
 	}
 
