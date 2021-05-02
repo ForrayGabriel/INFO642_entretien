@@ -61,6 +61,16 @@
             case "file":
                 print("<label id='$key' for='$key'>$key</label>");
                 print("<input type='file' name='$key' />");
+                break;
+
+            case "date":
+                print("<p>".$value["title"]."</p>");
+                print("<div class='input-date'>");
+                print("<input class='box-input' type='date' name='".$key."_start'>");
+                print("<input class='box-input' type='date' name=".$key."_end'>");
+                print("</div>");
+                break;
+
 
         }
         print("</div>");
