@@ -9,6 +9,7 @@ class ClassroomController extends Controller {
 
 		$table_header = array("Numéro de la salle", "Bâtiment","Capacité", "Description");
     
+
 		foreach ($classrooms as &$classroom) {
 			$table_content[$classroom->idclassroom] = array(
 				"Numéro de la salle" => $classroom->name_classroom,
@@ -93,7 +94,6 @@ class ClassroomController extends Controller {
 
 	public function delete(){
 		if (isset(parameters()["id"])) {
-			echo "oleoee";
 			$classroom = new Classroom(parameters()["id"]);
 			$classroom->delete();
 		}
