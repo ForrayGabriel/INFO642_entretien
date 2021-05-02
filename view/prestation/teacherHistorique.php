@@ -1,6 +1,7 @@
 <img class="background-image" src="https://www.polytech.univ-smb.fr/fileadmin/_processed_/d/b/csm_Polytech_site_Annecy_vu_du_ciel_db27e8c54f.jpg">
 
 <?php 
+    $table_title = "Évènements passés";
     $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Note");
 
     foreach ($data as &$prestation) {
