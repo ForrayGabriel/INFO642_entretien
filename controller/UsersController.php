@@ -6,7 +6,7 @@ class UsersController extends Controller {
 
 	public function index() {
 
-		$users =Internaluser::findOne(["deleted" => 0]);
+		$users = Internaluser::findOne(["deleted" => 0]);
 
 		$table_header = array("Username", "Nom", "Prenom", "Email", "Role");
     

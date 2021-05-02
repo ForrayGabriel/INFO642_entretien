@@ -4,6 +4,7 @@
   $day_before_month = $calendar_date->format("w");
   if ($day_before_month == 0) $day_before_month = 7;
 ?>
+<h1>Veuillez indiquer vos disponibilités</h1>
 <link rel="stylesheet" type="text/css" href="./css/calendar.css"/>
 <script src="./js/calendar.js"></script>
 <div class="calendar">

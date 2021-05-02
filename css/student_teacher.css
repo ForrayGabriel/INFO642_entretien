@@ -76,6 +76,22 @@
 	margin-bottom: 10vh;
 }
 
+.link {
+	color: white;
+
+}
+
+.phrase{
+	text-align: center;
+	font-family: Verdana;
+	color:rgb(73,69,184);
+	font-size: 2vw;
+	font-weight: bold;
+}
+
+
+
+
 @media screen and (max-width: 700px) {
 	#entretiens {
 		width: 100vw;
@@ -88,15 +104,3 @@
 }
 
 
-.link {
-	color: white;
-
-}
-
-.phrase{
-	text-align: center;
-	font-family: Verdana;
-	color:rgb(73 69 184);
-	font-size: 2vw;
-	font-weight: bold;
-}

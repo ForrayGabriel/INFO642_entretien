@@ -100,18 +100,25 @@ class EventController extends Controller {
 			$teachers = InternalUser::findOne(["idrole" => 2]);
 			$options = array();
 
+
 			foreach ($teachers as &$teacher) {
-				$options[$teacher->nom." ".$teacher->prenom] = $teacher->idinternaluser;
+				$options[$teacher->nom . " " . $teacher->prenom] = $teacher->idinternaluser;
 			}
 
 			$form_content = array(
-				"Titre"=>array("type"=>"text"),
-				"Description"=>array("type"=>"text"),
-				"Enseignant responsable"=>array(
-					"type"=>"select", 
-					"desc"=>"Choisir enseignant responsable de l'évenment", 
-					"options"=>$options)
-				);
+				"Titre" => array("type" => "text"),
+				"Description" => array("type" => "text"),
+				"Enseignant responsable" => 
+					array(
+						"type"=>"select", 
+						"desc"=>"Choisir enseignant responsable de l'évenment", 
+						"options"=>$options
+					),
+				"Date" => array(
+					"type"=>"date",
+					"title"=>"Date de début et de fin"
+				)
+			);
 			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
         } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			// TODO
@@ -131,4 +138,6 @@ class EventController extends Controller {
 		}
 
 	}
+
+
 }

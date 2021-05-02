@@ -1,10 +1,13 @@
 <link rel="stylesheet" type="text/css" href="./css/table.css"/>
 <script src="./js/table.js"></script>
 
+<img class="background-image" src="https://www.polytech.univ-smb.fr/fileadmin/_processed_/d/b/csm_Polytech_site_Annecy_vu_du_ciel_db27e8c54f.jpg">
+
 <?php 
 
 extract($data);
 print("<div class='table-container'>");
+if (isset($table_title)) print("<h1>$table_title</h1>");
 print("<div id='headerBox'>");
 if (isset($addBtn)) {
     print("<a href='".$addBtn['url']."' id='addButton'>".$addBtn['text']."</a>");

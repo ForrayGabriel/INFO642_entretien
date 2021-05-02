@@ -3,6 +3,10 @@
     --case-size: 60px;
 }
 
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+}
 .green {
     background: #80b369 !important;
 }
