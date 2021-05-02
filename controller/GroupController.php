@@ -4,6 +4,11 @@ class GroupController extends Controller {
 
 	var $rolepermissions = [2,3];
 
+	public function test(){
+		$this->render("index");
+	}
+
+
 	public function import(){
 		if($_SERVER['REQUEST_METHOD'] == "GET") {
 
@@ -48,16 +53,31 @@ class GroupController extends Controller {
 							if(property_exists($student, '_' . $key))
 								$student->$key = $value;	
 						}
-
 						// INSERT OR UPDATE
 
+						if($student->num_INE){
+							$internal->password = $student->num_INE;
+						}else if($student->num_student){
+							$internal->password = $student->num_student;
+						}else if($internal->username){
+							$internal->password = $internal->username;
+						}else{
+							$internal->password = "password";
+						}
 
 						if(!InternalUser::findOne(['email' => $internal->email])){
 
-							// TODO : mot de passe numéro INE
 							if(isset($student->num_INE)){
 								$internal->password = $student->num_INE;
+							}else if(isset($student->num_student)){
+								$internal->password = $student->num_student;
+							}else if(isset($internal->username)){
+								$internal->password = $internal->username;
+							}else{
+								$internal->password = "password";
 							}
+
+							$internal->deleted = 0;
 
 							$get_id = $internal->insert();
 							$student->idinternaluser = $get_id;
@@ -70,8 +90,6 @@ class GroupController extends Controller {
 
 							$student->update();	
 						}
-
-						// INSERT GROUP BELONG
 
 						if(isset($_POST['Role_'])){
 							foreach($_POST['Role_'] as $group){
