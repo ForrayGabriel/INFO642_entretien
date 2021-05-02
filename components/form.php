@@ -70,16 +70,24 @@
             case "file":
                 print("<label id='$key' for='$key'>$key</label>");
                 print("<input type='file' name='$key' />");
-
+                break;
         }
         print("</div>");
     }
-
     ?>
     <div class="form-group">
       <button type="submit" id="submit" class="submit-button">
         Envoyer
       </button>
     </div>
+
+    <?php 
+    if (isset($message) && $message !== null) {
+        print("<div class='form-group'>");
+        print("<p class='message ".$message["type"]."'>".$message["content"]."</p>");
+        print("</div>");
+    }
+    ?>
+
     </form>
 </div>

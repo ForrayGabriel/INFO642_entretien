@@ -51,7 +51,6 @@ class EventController extends Controller {
 
 	public function update_event(){
 		if(isset(parameters()['idevent_creator']) and parameters()['idevent_creator']  != 0 and isset(parameters()['entitled_event']) and isset(parameters()['description_event']) and isset(parameters()['start_date']) and isset(parameters()['end_date']) and isset(parameters()['idevent'])){
-
 			$event = new Event(parameters()['idevent']);
 			$event->entitled_event = parameters()["entitled_event"];
 			$event->description_event = parameters()["description_event"];
@@ -66,28 +65,41 @@ class EventController extends Controller {
 	}
 
 	public function add(){
-		foreach(Role::findAll() as $role){
-			if($role->name_role == "Etudiant"){
-				$role_ban = $role->idrole;
+		if($_SERVER['REQUEST_METHOD'] == "GET") {
+            $form_title = "Ajouter un évenment";
+
+			$teachers = InternalUser::findOne(["idrole" => 2]);
+			$options = array();
+
+			foreach ($teachers as &$teacher) {
+				$options[$teacher->nom." ".$teacher->prenom] = $teacher->idinternaluser;
+			}
+
+			$form_content = array(
+				"Titre"=>array("type"=>"text"),
+				"Description"=>array("type"=>"text"),
+				"Enseignant responsable"=>array(
+					"type"=>"select", 
+					"desc"=>"Choisir enseignant responsable de l'évenment", 
+					"options"=>$options)
+				);
+			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
+        } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+			// TODO
+			die("a finir");
+			if (parametersExist(["Titre"])) {
+				$event = new Event();
+				$event->entitled_event = parameters()["Titre"];
+				$event->description_event = parameters()["Description"];
+				$event->start_date = parameters()["start_date"];
+				$event->end_date = parameters()["end_date"];
+				$event->idevent_creator = parameters()['Enseignant responsable'];
+				$event->insert();
+				header("Location: .?r=event");
+			} else {
+				go_back();
 			}
 		}
-		$this->render("add", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll(), 'role_ban' => $role_ban));
-	}
-
-	public function add_event(){
-		if(isset(parameters()['idevent_creator']) and parameters()['idevent_creator']  != 0 and isset(parameters()['entitled_event']) and isset(parameters()['description_event']) and isset(parameters()['start_date']) and isset(parameters()['end_date'])){
-
-			$event = new Event();
-			$event->entitled_event = parameters()["entitled_event"];
-			$event->description_event = parameters()["description_event"];
-			$event->start_date = parameters()["start_date"];
-			$event->end_date = parameters()["end_date"];
-			$event->idevent_creator = parameters()['idevent_creator'];
-			
-			$event->insert();
-		}
-		$this->render("index", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll()));
 
 	}
-
 }

@@ -45,7 +45,7 @@ class Model {
 		$fields = [];
 		$values = [];
 		foreach($this as $field=>$value) {
-			if (strtolower('_id'.get_class($this)) != $field) {
+			if (strtolower('_id'.get_class($this)) != $field && $this->$field !== null) {
 				$fields[] = substr($field, 1);
 				$values[] = $value;
 			}
@@ -54,6 +54,8 @@ class Model {
 		try{		
 			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
 			$request->execute();
+
+			var_dump($request);
 
 			return db()->lastInsertId();
 
