@@ -9,7 +9,7 @@
 	
 	$onglets = [
 		1 => [
-			"Entretient"=>"?r=prestation",
+			"Entretien"=>"?r=prestation",
 			"Résultats"=>".?r=prestation/resultat",
 			"Contact"=>"?r=contact"
 		],

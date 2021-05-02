@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS individualevaluation;
 DROP TABLE IF EXISTS prestation;
-DROP TABLE IF EXISTS peoplegroup;
 DROP TABLE IF EXISTS belonggroup;
+DROP TABLE IF EXISTS peoplegroup;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS compose;
 DROP TABLE IF EXISTS jury;
@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS internaluser (
   password varchar(100) NOT NULL,
   username varchar(100) NULL,
   idrole int(11) NULL,
+  deleted boolean NOT NULL default FALSE,
   PRIMARY KEY (idinternaluser),
   FOREIGN KEY (idrole) REFERENCES role(idrole)
 );
