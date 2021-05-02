@@ -18,21 +18,21 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(event)
         console.log("a");
         if (event.target.className != "day") return;
-        if (event.path[1].classList[1] == "today") return;
-        if (event.path[1].classList[1] == "inactive") return;
+        if (event.target.offsetParent.classList[1] == "today") return;
+        if (event.target.offsetParent.classList[1] == "inactive") return;
         if (btnIsEnabled) disableBtns();
 
         half_day = event.offsetX+event.offsetY < item_size ? "AM" : "PM";
-        focus_item = event.path[1].children[half_day == "AM" ? 1 : 2]
+        focus_item = event.target.offsetParent.children[half_day == "AM" ? 1 : 2]
         actual_color = focus_item.classList[1]
 
         if (colors.includes(actual_color)) {
             index_nextColor = parseInt(Object.keys(colors).find(key => colors[key] === actual_color))+1
             next_color = colors[index_nextColor%colors.length];
-            event.path[1].children[half_day == "AM" ? 1 : 2].classList.remove(...colors);
-            event.path[1].children[half_day == "AM" ? 1 : 2].classList.add(next_color);
-            updatedData[event.path[1].dataset.date + " " + half_day] = {
-                "date": event.path[1].dataset.date,
+            event.target.offsetParent.children[half_day == "AM" ? 1 : 2].classList.remove(...colors);
+            event.target.offsetParent.children[half_day == "AM" ? 1 : 2].classList.add(next_color);
+            updatedData[event.target.offsetParent.dataset.date + " " + half_day] = {
+                "date": event.target.offsetParent.dataset.date,
                 "meridiem": half_day,
                 "color": next_color
             }

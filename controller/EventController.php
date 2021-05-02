@@ -9,7 +9,22 @@ class EventController extends Controller {
 		$events = array_filter($events, function($event) {
 			return strtotime($event->end_date) > strtotime(date("Y-m-d H:i:s"));
 		});
-		$this->render("index", $events);
+
+		$table_header = array("Nom", "Description");
+
+		$table_content = array();
+		foreach ($events as &$event) {
+			$table_content[$event->idevent] = array(
+				"Nom" => $event->entitled_event,
+				"Desc" => $event->description_event);
+		}
+
+		$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
+
+
+
 	}
 
 	public function historique() {
@@ -17,7 +32,19 @@ class EventController extends Controller {
 		$events = array_filter($events, function($event) {
 			return strtotime($event->end_date) < strtotime(date("Y-m-d H:i:s"));
 		});
-		$this->render("index", $events);
+	
+		$table_header = array("Nom", "Description");
+
+		$table_content = array();
+		foreach ($events as &$event) {
+			$table_content[$event->idevent] = array(
+				"Nom" => $event->entitled_event,
+				"Desc" => $event->description_event);
+		}
+
+		$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
 	}
 
 	public function view() {
@@ -51,7 +78,6 @@ class EventController extends Controller {
 
 	public function update_event(){
 		if(isset(parameters()['idevent_creator']) and parameters()['idevent_creator']  != 0 and isset(parameters()['entitled_event']) and isset(parameters()['description_event']) and isset(parameters()['start_date']) and isset(parameters()['end_date']) and isset(parameters()['idevent'])){
-
 			$event = new Event(parameters()['idevent']);
 			$event->entitled_event = parameters()["entitled_event"];
 			$event->description_event = parameters()["description_event"];
@@ -68,50 +94,48 @@ class EventController extends Controller {
 	public function add_event(){
 		if(isset(parameters()['idevent_creator']) and parameters()['idevent_creator']  != 0 and isset(parameters()['entitled_event']) and isset(parameters()['description_event']) and isset(parameters()['start_date']) and isset(parameters()['end_date'])){
 
-			$event = new Event();
-			$event->entitled_event = parameters()["entitled_event"];
-			$event->description_event = parameters()["description_event"];
-			$event->start_date = parameters()["start_date"];
-			$event->end_date = parameters()["end_date"];
-			$event->idevent_creator = parameters()['idevent_creator'];
-			
-			$event->insert();
-		}
-		$this->render("index", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll()));
-
-	}
-
-	public function add() {
-
+	public function add(){
 		if($_SERVER['REQUEST_METHOD'] == "GET") {
-			$form_title = "Ajouter un évènement";
+            $form_title = "Ajouter un évenment";
 
-			$teachers = InternalUser::findOne(["idrole"=>2]);
+			$teachers = InternalUser::findOne(["idrole" => 2]);
 			$options = array();
+
+
 			foreach ($teachers as &$teacher) {
 				$options[$teacher->nom." ".$teacher->prenom] = $teacher->idinternaluser;
-				
 			}
-
 
 			$form_content = array(
 				"Titre"=>array("type"=>"text"),
 				"Description"=>array("type"=>"text"),
-				"Choix de l'enseignant responsable de l'évenement :"=>array(
-					"type"=>"select",
-					"desc"=>"Choisissez une option",
-					"options"=>$options),
+				"Enseignant responsable"=>array(
+					"type"=>"select", 
+					"desc"=>"Choisir enseignant responsable de l'évenment", 
+					"options"=>$options)
 				"Date"=>array(
 					"type"=>"date",
 					"title"=>"Date de début et de fin")
-						
-			);
+				);
 			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
-		} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-			var_dump(parameters());
+        } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+			// TODO
+			die("a finir");
+			if (parametersExist(["Titre"])) {
+				$event = new Event();
+				$event->entitled_event = parameters()["Titre"];
+				$event->description_event = parameters()["Description"];
+				$event->start_date = parameters()["start_date"];
+				$event->end_date = parameters()["end_date"];
+				$event->idevent_creator = parameters()['Enseignant responsable'];
+				$event->insert();
+				header("Location: .?r=event");
+			} else {
+				go_back();
+			}
 		}
 
-		
 	}
+
 
 }

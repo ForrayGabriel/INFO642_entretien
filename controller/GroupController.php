@@ -17,7 +17,7 @@ class GroupController extends Controller {
 				"Fichier" => array("type" => "file"),
 				"Role" => array("type" => "checkbox", "options" => $radio_group)
 			);
-			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
+			$this->renderComponent("form", ["title" => $form_title, "content" => $form_content]);
 
 		} else {
 			$fields_name = array();
@@ -51,16 +51,20 @@ class GroupController extends Controller {
 
 						// INSERT OR UPDATE
 
+
 						if(!InternalUser::findOne(['email' => $internal->email])){
+
+							// TODO : mot de passe numéro INE
+							if(isset($student->num_INE)){
+								$internal->password = $student->num_INE;
+							}
+
 							$get_id = $internal->insert();
 							$student->idinternaluser = $get_id;
 							$student->insert();	
 						}else{
 							$internal->update();
-
 							$internal_last_update = InternalUser::findOne(['email' => $internal->email]);
-
-
 							$get_id = $internal_last_update[0]->idinternaluser;
 							$student->idinternaluser = $get_id;
 
@@ -69,9 +73,9 @@ class GroupController extends Controller {
 
 						// INSERT GROUP BELONG
 
-						if(isset($_POST['group_id'])){
-							foreach($_POST['group_id'] as $group){
-								if(!BelongGroup::findOne(['idinternaluser' => $get_id, 'idpeoplegroupe' => $group])){
+						if(isset($_POST['Role_'])){
+							foreach($_POST['Role_'] as $group){
+								if(!BelongGroup::findOne(['idinternaluser' => $get_id, 'idpeoplegroup' => $group])){
 									$belong = new BelongGroup();
 									$belong->idinternaluser = $get_id;
 									$belong->idpeoplegroup = $group;
@@ -83,7 +87,9 @@ class GroupController extends Controller {
 					
 				}
 			}
+			go_back();
 		}
+
 	}
 
 }

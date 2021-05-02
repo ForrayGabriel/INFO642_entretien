@@ -22,7 +22,6 @@ class Model {
 					$classes_update[strtolower($value)] = $value;
 				}
 				foreach($row as $field => $value) {
-					
 					if (substr($field, 0,2) == "id") {
 						$linkedField = substr($field, 2);
 						if (strpos($linkedField, '_') !== false)
@@ -46,7 +45,7 @@ class Model {
 		$fields = [];
 		$values = [];
 		foreach($this as $field=>$value) {
-			if (strtolower('_id'.get_class($this)) != $field) {
+			if (strtolower('_id'.get_class($this)) != $field && $this->$field !== null) {
 				$fields[] = substr($field, 1);
 				$values[] = $value;
 			}
@@ -96,10 +95,21 @@ class Model {
 		}
 	}
 
-	public static function findAll() {
+	public static function findAll($params = null){
 		$class = get_called_class();
 		$table = strtolower($class);
-		$st = db()->prepare("select id$table from $table");
+
+		$sql = "select id$table from $table";
+
+		if($params){
+			foreach($params as $attribute => $element){
+				foreach($element as $field => $action){
+					$sql .= " " . $attribute . " " . $field . " " . $action . "";
+				}
+			}
+		}
+
+		$st = db()->prepare($sql);
 		$st->execute();
 		$list = array();
 		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
@@ -107,7 +117,8 @@ class Model {
 		}
 		return $list;
 	}
-	public static function findOne($data, $operator = null) {
+
+	public static function findOne($data, $operator = null, $params = null) {
         $class = get_called_class();
         $table = strtolower(get_called_class());
 
@@ -128,7 +139,18 @@ class Model {
             $res = implode(' and ', $data);
         }
 
-        $st = db()->prepare("select id$table from $table where $res");
+        $sql = "select id$table from $table where $res";
+
+
+		if($params){
+			foreach($params as $attribute => $element){
+				foreach($element as $field => $action){
+					$sql .= " " . $attribute . " " . $field . " " . $action . "";
+				}
+			}
+		}
+
+        $st = db()->prepare($sql);
         $st->execute();
         $list = array();
         while($row = $st->fetch(PDO::FETCH_ASSOC)) {
@@ -142,18 +164,16 @@ class Model {
 	public function __get($fieldName) {
 		$varName = "_".$fieldName;
 		if (property_exists(get_class($this), $varName))
-		return $this->$varName;
+			return $this->$varName;
 		else {
-			print(get_class($this));
-			print($varName);
-			throw new Exception("Unknown variable: ".$fieldName);
+			throw new Exception("Unknown variable: ".$fieldName." in ".get_class($this));
 		}
 	}
 
 
 	public function __set($fieldName, $value) {
 		$varName = "_".$fieldName;
-		if ($value != null) {
+		if ($value !== null) {
 			if (property_exists(get_class($this), $varName)) {
 				$this->$varName = $value;
 				$class = get_class($this);
@@ -170,8 +190,9 @@ class Model {
 				$id = "id".$table;
 				$st->bindValue(":id", $this->$id);
 				$st->execute();
-			} else
-				throw new Exception("Unknown variable: ".$fieldName);
+			} else {
+				throw 	new Exception("Unknown variable: ".$fieldName. " in ".get_class($this));
+			}
 		}
 	}
 

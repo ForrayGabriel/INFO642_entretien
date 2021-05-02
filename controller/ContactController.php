@@ -7,18 +7,42 @@ class ContactController extends Controller {
 	public function index() {
 		if (isset($_SESSION['user'])){
 			if ($_SESSION['user']['idrole'] == 3) {
-				$contacts = UserContact::findAll();
+				$contacts = UserContact::findAll(['ORDER BY' => ['date_contact' => 'DESC']]);
 			}else{
-				$contacts = UserContact::findOne(["iduser_requestor" => $_SESSION['user']['idinternaluser'],"iduser_receiver" => $_SESSION['user']['idinternaluser']],"or");
+				$contacts = UserContact::findOne(["idinternaluser_requestor" => $_SESSION['user']['idinternaluser'],"idinternaluser_receiver" => $_SESSION['user']['idinternaluser']],"or");
 			}
 		}
 
-		$this->render("index", $contacts);
+		$table_header = array("Object", "Envoyé par ?","Envoyé pour ?", "Erreur", "Date");
+    
+		$table_content = array();
+		foreach ($contacts as &$contact) {
+			$table_content[$contact->idusercontact] = array(
+				"Object" => $contact->title_contact,
+				"Qui" => $contact->idinternaluser_requestor->nom." ".$contact->idinternaluser_requestor->prenom,
+				"Pour" => $contact->idinternaluser_receiver->nom." ".$contact->idinternaluser_receiver->prenom,
+				"Erreur" => $contact->type_demande,
+				"Date" => $contact->date_contact,
+			);
+		}
+		
+		$table_addBtn = array("text" => "Contacter quelqu'un", "url" => "?r=contact/write");
+
+		$table_actions = array(
+			array("url" => "?r=contact/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
+			array("url" => "?r=", "desc"=>"fermer la conversation", "icon"=>"removeicon.png"));
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions]);
 	}
 
-	public function view() {
+	public function view($id = null) {
 		try {
-			$contact = new UserContact(parameters()["id"]);
+			if($id == null){
+				$id = parameters()["id"];
+			}
+
+			$contact = new UserContact($id);
+
 			$this->render("view", array('contact' => $contact, 'response' => ResponseContact::findAll(), 'internaluser' => InternalUser::findAll()));
 		} catch (Exception $e) {
 			(new SiteController())->render("index");
@@ -51,14 +75,20 @@ class ContactController extends Controller {
 			}else{
 
 				$user_list = array();
+				$group_list = array();
 
 				foreach(InternalUser::findAll() as $user){
 					$user_list[$user->nom . " " .  $user->prenom] = $user->idinternaluser;
 				}
 
+				foreach(PeopleGroup::findAll() as $group){
+					$group_list[$group->title_peoplegroup] = $group->idpeoplegroup;
+				}
+
 				$form_title = "Contacter un utilisateur";
 				$form_content = array(
-					"Utilisateur" => array("type" => "select", "options" => $user_list, "desc" => "Choisir un utilisateur"),
+					"Utilisateur" => array("type" => "select", "options" => $user_list, "desc" => "Choisir un utilisateur", "!required" => 1),
+					"Groupe Utilisateur" => array("type" => "select", "options" => $group_list, "desc" => "Choisir un groupe d'utilisateur", "!required" => 1),
 					"Titre du message"=>array("type" => "text"),
 					"Contenu du message"=>array("type" => "text-area")
 
@@ -68,34 +98,42 @@ class ContactController extends Controller {
 		}else{
 			if(isset($_POST['Titre_du_message']) && isset($_POST['Contenu_du_message'])){
 
-				$usercontact = new UserContact();
+				$receivers = array();
 
 				if(is_student() || is_visitor()){
 					foreach(InternalUser::findOne(['idrole' => 3]) as $admin){
-						$id_receiver = $admin->idinternaluser;
+						array_push($receivers, $id_receiver);
 					}
-					$usercontact->idinternaluser_receiver = $id_receiver;
 				}else{
 					if(isset($_POST['Utilisateur'])){
-						$usercontact->idinternaluser_receiver = $_POST['Utilisateur'];
+						array_push($receivers,$_POST['Utilisateur']);
+					}
+
+					if(isset($_POST['Groupe_Utilisateur'])){
+						$users = BelongGroup::findOne(['idpeoplegroup' => $_POST['Groupe_Utilisateur']]);
+						foreach($users as $user){
+							array_push($receivers,$user->idinternaluser->idinternaluser);
+						}
 					}
 				}
 
-				$usercontact->idinternaluser_requestor = get_id();
+				foreach($receivers as $receiver){
+					$usercontact = new UserContact();
+					$usercontact->idinternaluser_receiver = $receiver;
+					$usercontact->idinternaluser_requestor = get_id();
 
-				$usercontact->title_contact = $_POST['Titre_du_message'];
-				$usercontact->description_contact = $_POST['Contenu_du_message'];
-				$usercontact->date_contact = date("Y-m-d H:i:s");
+					$usercontact->title_contact = $_POST['Titre_du_message'];
+					$usercontact->description_contact = $_POST['Contenu_du_message'];
+					$usercontact->date_contact = date("Y-m-d H:i:s");
 
-
-				// Dorian : need to be update
-				$usercontact->type_demande = "basic";
-				$usercontact->have_response = 1;
-				$usercontact->is_close = 1;
-
-				$usercontact->insert();
-
-				go_back();
+					// Dorian : need to be update
+					$usercontact->type_demande = "basic";
+					$usercontact->have_response = 1;
+					$usercontact->is_close = 1;
+					$usercontact->insert();
+				}
+				
+				return $this->index();
 			}
 		}
 	}

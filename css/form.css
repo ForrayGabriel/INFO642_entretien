@@ -77,3 +77,18 @@
     
 }
 
+
+.form-container .form-group .message {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+}
+
+.form-container .form-group .info {
+    color: #72ff72;
+}
+
+.form-container .form-group .error {
+    color: #ff4f4f;
+}

@@ -19,9 +19,14 @@
                     name='$key'
                     id='$key'
                     class='form-control'
-                    placeholder='Entrer votre $key'
-                    required
-                    />");
+                    placeholder='Entrer votre $key'");
+                if(isset($value['value'])){
+                    print("value='" . $value['value'] . "' ");
+                }
+                if(!isset($value['!required'])){
+                    print("required");
+                }
+                print("/>");
                 break;
 
             case "text-area":
@@ -50,7 +55,11 @@
 
             case "select":
                 print("<p>$key</p>");
-                print("<select id='dropdown' name='$key' class='form-control' required=''>");
+                if(isset($value['!required'])){
+                    print("<select id='dropdown' name='$key' class='form-control'>");
+                }else{
+                    print("<select id='dropdown' name='$key' class='form-control' required=''>");
+                }
                 print("<option disabled selected value>".$value["desc"]."</option>");
                 foreach ($value["options"] as $value => $id) {
                     print("<option value='$id'>$value</option>");
@@ -62,6 +71,7 @@
                 print("<label id='$key' for='$key'>$key</label>");
                 print("<input type='file' name='$key' />");
                 break;
+
 
             case "date":
                 print("<p>".$value["title"]."</p>");
@@ -75,12 +85,20 @@
         }
         print("</div>");
     }
-
     ?>
     <div class="form-group">
       <button type="submit" id="submit" class="submit-button">
         Envoyer
       </button>
     </div>
+
+    <?php 
+    if (isset($message) && $message !== null) {
+        print("<div class='form-group'>");
+        print("<p class='message ".$message["type"]."'>".$message["content"]."</p>");
+        print("</div>");
+    }
+    ?>
+
     </form>
 </div>
