@@ -36,8 +36,7 @@ if (isset($content)) {
         }
         if (isset($actions)) {
             foreach($actions as &$action) {
-                $action["url"] = str_replace(":id", $id, $action["url"]);
-                print("<td class='no-padding'><a title='".$action["desc"]."' href='".$action["url"]."'><img src='./images/".$action["icon"]."'></a></td>");
+                print("<td class='no-padding'><a title='".$action["desc"]."' href='". str_replace(":id", $id, $action["url"]) ."'><img src='./images/".$action["icon"]."'></a></td>");
             }
         }
         print("</tr>");
