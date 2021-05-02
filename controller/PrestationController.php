@@ -6,7 +6,8 @@
         public function index() {
             $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
             if (is_student()) {
-                $this->student($user, "comming");
+                $student = Student::findOne(["idinternaluser" => $user->idinternaluser])[0];
+                $this->student($student, "comming");
                 die();
             } else if (is_teacher()) {
                 $this->teacher($user, "comming");
@@ -42,9 +43,9 @@
 
         }
 
-        public function student($user, $state) {
+        public function student($student, $state) {
             print("il faut changer pour mettre noter ou non plutot que faire le test par la date");
-            $prestations = Prestation::findOne(["idstudent" => $user->idinternaluser]);
+            $prestations = Prestation::findOne(["idstudent" => $student->idstudent]);
             if ($state == "comming") {
                 $prestations = array_filter($prestations, function($prestation) {
                     return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));

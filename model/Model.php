@@ -22,7 +22,6 @@ class Model {
 					$classes_update[strtolower($value)] = $value;
 				}
 				foreach($row as $field => $value) {
-					
 					if (substr($field, 0,2) == "id") {
 						$linkedField = substr($field, 2);
 						if (strpos($linkedField, '_') !== false)
@@ -151,8 +150,6 @@ class Model {
 			}
 		}
 
-		print_r($sql);
-
         $st = db()->prepare($sql);
         $st->execute();
         $list = array();
@@ -167,16 +164,16 @@ class Model {
 	public function __get($fieldName) {
 		$varName = "_".$fieldName;
 		if (property_exists(get_class($this), $varName))
-		return $this->$varName;
+			return $this->$varName;
 		else {
-			throw new Exception("Unknown variable: ".$fieldName);
+			throw new Exception("Unknown variable: ".$fieldName." in ".get_class($this));
 		}
 	}
 
 
 	public function __set($fieldName, $value) {
 		$varName = "_".$fieldName;
-		if ($value != null) {
+		if ($value !== null) {
 			if (property_exists(get_class($this), $varName)) {
 				$this->$varName = $value;
 				$class = get_class($this);
@@ -193,8 +190,9 @@ class Model {
 				$id = "id".$table;
 				$st->bindValue(":id", $this->$id);
 				$st->execute();
-			} else
-				throw new Exception("Unknown variable: ".$fieldName);
+			} else {
+				throw 	new Exception("Unknown variable: ".$fieldName. " in ".get_class($this));
+			}
 		}
 	}
 
