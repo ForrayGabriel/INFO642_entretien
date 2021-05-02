@@ -77,7 +77,7 @@
                 print("<p>".$value["title"]."</p>");
                 print("<div class='input-date'>");
                 print("<input class='box-input' type='date' name='".$key."_start'>");
-                print("<input class='box-input' type='date' name=".$key."_end'>");
+                print("<input class='box-input' type='date' name='".$key."_end'>");
                 print("</div>");
                 break;
 

@@ -9,7 +9,6 @@ class Event extends Model {
 	protected $_start_date;
 	protected $_end_date;
 
-
 	public function __toString() {
 		return get_class($this).": ".$this->entitled_event;
 	}
