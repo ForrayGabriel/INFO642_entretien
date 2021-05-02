@@ -50,17 +50,43 @@
                 $prestations = array_filter($prestations, function($prestation) {
                     return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
                 });
-                $this->render("student", $prestations);
+
+                    $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
+
+                    $table_content = array();
+                    foreach ($prestations as &$prestation) {
+                        $table_content[$prestation->idprestation] = array(
+                            "Evenement" => $prestation->idevent->entitled_event,
+                            "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
+                            "Salle" => $prestation->idjury->idclassroom->name_classroom,
+                            "Jury" => $prestation->idjury->name,
+                            "Date" => $prestation->date_prestation
+                        );
+                    }
             } else if ($state == "noted") {
                 $prestations = array_filter($prestations, function($prestation) {
                     return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
                 });
-                $this->render("studentNoted", $prestations);
+
+                $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
+
+                $table_content = array();
+                foreach ($prestations as &$prestation) {
+                    $table_content[$prestation->idprestation] = array(
+                        "Evenement" => $prestation->idevent->entitled_event,
+                        "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
+                        "Salle" => $prestation->idjury->idclassroom->name_classroom,
+                        "Jury" => $prestation->idjury->name,
+                        "Date" => $prestation->date_prestation
+                    );
+                }
             }
+            $this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content]);
         }
 
         public function teacher($user, $state) {
-            $prestations = $user->getEnseignantPrestations();
+            
+            $table_content = array();$prestations = $user->getEnseignantPrestations();
             foreach ($prestations as $key => $prestation) {
                 $prestations[$key] = new Prestation($prestation["idprestation"]);
             }
@@ -68,19 +94,64 @@
                 $prestations = array_filter($prestations, function($prestation) {
                     return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
                 });
-                $this->render("teacher", $prestations);
+
+                $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
+
+                $table_content = array();
+                foreach ($prestations as &$prestation) {
+                    $table_content[$prestation->idprestation] = array(
+                        "Evenement" => $prestation->idevent->entitled_event,
+                        "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
+                        "Salle" => $prestation->idjury->idclassroom->name_classroom,
+                        "Jury" => $prestation->idjury->name,
+                        "Date" => $prestation->date_prestation
+                    );
+                }
+            
+                $this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content]);
+
             } else if ($state == "wait_notation") {
                 print("Même page que Historique pour le moment car la gestions des notes n'est pas encore codé");
                 $prestations = array_filter($prestations, function($prestation) {
                     return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
                 });
-                $this->render("teacherHistorique", $prestations);
+
+                $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Note");
+
+                $table_content = array();
+                foreach ($prestations as &$prestation) {
+                    $table_content[$prestation->idprestation] = array(
+                        "Evenement" => $prestation->idevent->entitled_event,
+                        "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
+                        "Salle" => $prestation->idjury->idclassroom->name_classroom,
+                        "Jury" => $prestation->idjury->name,
+                        "Date" => $prestation->date_prestation,
+                        "Note" => "TODO"
+                    );
+                }
+            
+                $this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content]);
             } else if ($state == "history") {
                 print("Même page que Notations pour le moment car la gestions des notes n'est pas encore codé");
                 $prestations = array_filter($prestations, function($prestation) {
                     return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
                 });
-                $this->render("teacherHistorique", $prestations);
+
+                $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Note");
+
+                $table_content = array();
+                foreach ($prestations as &$prestation) {
+                    $table_content[$prestation->idprestation] = array(
+                        "Evenement" => $prestation->idevent->entitled_event,
+                        "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
+                        "Salle" => $prestation->idjury->idclassroom->name_classroom,
+                        "Jury" => $prestation->idjury->name,
+                        "Date" => $prestation->date_prestation,
+                        "Note" => "TODO"
+                    );
+                }
+            
+                $this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content]);
             }
 
         }

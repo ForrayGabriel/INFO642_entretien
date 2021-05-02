@@ -13,7 +13,26 @@ class ContactController extends Controller {
 			}
 		}
 
-		$this->render("index", $contacts);
+		$table_header = array("Object", "Envoyé par ?","Envoyé pour ?", "Erreur", "Date");
+    
+		$table_content = array();
+		foreach ($contacts as &$contact) {
+			$table_content[$contact->idusercontact] = array(
+				"Object" => $contact->title_contact,
+				"Qui" => $contact->idinternaluser_requestor->nom." ".$contact->idinternaluser_requestor->prenom,
+				"Pour" => $contact->idinternaluser_receiver->nom." ".$contact->idinternaluser_receiver->prenom,
+				"Erreur" => $contact->type_demande,
+				"Date" => $contact->date_contact,
+			);
+		}
+		
+		$table_addBtn = array("text" => "Contacter quelqu'un", "url" => "?r=contact/write");
+
+		$table_actions = array(
+			array("url" => "?r=contact/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
+			array("url" => "?r=", "desc"=>"fermer la conversation", "icon"=>"removeicon.png"));
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions]);
 	}
 
 	public function view($id = null) {

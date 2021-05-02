@@ -5,7 +5,27 @@ class ClassroomController extends Controller {
 	var $rolepermissions = [3];
 
 	public function index() {
-		$this->render("index", Classroom::findAll());
+		$classrooms = Classroom::findAll();
+
+		$table_header = array("Numéro de la salle", "Bâtiment","Capacité", "Description");
+    
+		foreach ($classrooms as &$classroom) {
+			$table_content[$classroom->idclassroom] = array(
+				"Numéro de la salle" => $classroom->name_classroom,
+				"Bâtiment" => $classroom->building_classroom,
+				"Capacité" => $classroom->capacity_classroom,
+				"Description" => $classroom->description_classroom,
+			);
+		}
+		
+	
+		$table_addBtn = array("text" => "Ajouter", "url" => "?r=classroom/add");
+	
+		$table_actions = array(
+			array("url" => "?r=classroom/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
+			array("url" => "?r=classroom/delete&id=:id", "desc"=>"Supprimer la salle", "icon"=>"removeicon.png"));
+	
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions]);
 	}
 
 	public function view() {

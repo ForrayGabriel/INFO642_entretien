@@ -9,7 +9,22 @@ class EventController extends Controller {
 		$events = array_filter($events, function($event) {
 			return strtotime($event->end_date) > strtotime(date("Y-m-d H:i:s"));
 		});
-		$this->render("index", $events);
+
+		$table_header = array("Nom", "Description");
+
+		$table_content = array();
+		foreach ($events as &$event) {
+			$table_content[$event->idevent] = array(
+				"Nom" => $event->entitled_event,
+				"Desc" => $event->description_event);
+		}
+
+		$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
+
+
+
 	}
 
 	public function historique() {
@@ -17,7 +32,19 @@ class EventController extends Controller {
 		$events = array_filter($events, function($event) {
 			return strtotime($event->end_date) < strtotime(date("Y-m-d H:i:s"));
 		});
-		$this->render("index", $events);
+	
+		$table_header = array("Nom", "Description");
+
+		$table_content = array();
+		foreach ($events as &$event) {
+			$table_content[$event->idevent] = array(
+				"Nom" => $event->entitled_event,
+				"Desc" => $event->description_event);
+		}
+
+		$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
 	}
 
 	public function view() {

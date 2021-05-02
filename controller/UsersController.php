@@ -5,8 +5,30 @@ class UsersController extends Controller {
 	var $rolepermissions = [3];
 
 	public function index() {
+
 		$users =Internaluser::findOne(["deleted" => 0]);
-		$this->render("index", $users);
+
+		$table_header = array("Username", "Nom", "Prenom", "Email", "Role");
+    
+		$table_content = array();
+		foreach ($users as &$user) {
+			$table_content[$user->idinternaluser] = array(
+				"Username" => $user->username,
+				"Nom" => $user->nom,
+				"Prenom" => $user->prenom,
+				"Email" => $user->email,
+				"Role" => $user->idrole->name_role
+			);
+		}
+	
+		$table_addBtn = array("text" => "Ajouter un membre", "url" => "?r=users/add");
+	
+		$table_actions = array(
+			array("url" => "?r=", "desc"=>"update password", "icon"=>"updatepasswordicon.png"),
+			array("url" => "?r=users/delete&id=:id", "desc"=>"delete member", "icon"=>"removeicon.png")
+		);
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions]);
 	}
 
 	public function add() {
