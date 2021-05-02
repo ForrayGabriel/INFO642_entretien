@@ -22,6 +22,11 @@ function get_role(){
 	return -999;
 }
 
+function parametersExist($parameters) {
+	$intersect = array_intersect($parameters, array_keys(parameters()));
+	return count($intersect) == count($parameters);
+}
+
 function get_id(){
 	if(isset($_SESSION["user"]["idinternaluser"])){
 		return $_SESSION["user"]["idinternaluser"];
