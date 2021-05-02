@@ -1,5 +1,5 @@
 .form-container {
-    max-width: 720px;
+    max-width: 600px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -62,3 +62,18 @@
     border: none;
     color: white;
 }
+
+.form-container .form-group .input-date {
+    display: flex;
+    margin-bottom: 30px;
+    width: 60%;
+    justify-content: space-between;
+    
+}
+
+.form-container .form-group .input-date *{
+    width: 40%;
+    padding: 6px 10px;
+    
+}
+
