@@ -29,6 +29,23 @@
                 print("/>");
                 break;
 
+            case "number":
+                print("<label id='$key' for='$key'>$key</label>");
+                print("<input
+                    type='number'
+                    name='$key'
+                    id='$key'
+                    class='form-control'
+                    placeholder='Entrer votre $key'");
+                if(isset($value['value'])){
+                    print("value='" . $value['value'] . "' ");
+                }
+                if(!isset($value['!required'])){
+                    print("required");
+                }
+                print("/>");
+                break;
+    
             case "text-area":
                 print("<label id='$key' for='$key'>$key</label>");
                 print("<textarea class='form-control' placeholder='Entrer le contenu du message' name='$key' style='resize: none;height: 100px;width: 100%;''></textarea>");

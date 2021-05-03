@@ -22,7 +22,7 @@ class EventController extends Controller {
 				);
 			}
 			// Todo
-			$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
+			$table_addBtn = array("text" => "Générer les prestations", "url" => "?r=event/generate&id=".parameters()["id"]);
 
 			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
 		} else {
@@ -47,6 +47,69 @@ class EventController extends Controller {
 			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink]);
 		}
 	}
+
+	public function generate() {
+
+		if($_SERVER['REQUEST_METHOD'] == "GET") {
+
+
+			
+			$event = new Event(parameters()["id"]);
+			$timeslots = TimeSlot::timeslotDisponible($event->start_date,$event->end_date);
+			$meridiems = array();
+
+			foreach ($timeslots as &$timeslot) {
+				if (isset($meridiems[$timeslot->meridiem]))
+					$meridiems[$timeslot->meridiem] += 1;
+				else
+					$meridiems[$timeslot->meridiem] = 1;
+			}
+
+			$half_day = 0;
+			foreach ($meridiems as &$meridiem) {
+				$half_day += floor($meridiem/2);
+			}
+
+            $form_title = "Générer les prestations de l'évènement ".$event->entitled_event;
+
+			$groups = PeopleGroup::findAll();
+			$options_groups = array();
+			foreach ($groups as &$group) {
+				$options_groups[$group->title_peoplegroup] = $group->idpeoplegroup;
+			}
+
+			$form_content = array(
+				"Groupe" => 
+					array(
+						"type"=>"select", 
+						"desc"=>"Choisir groupe", 
+						"options"=>$options_groups,
+					),
+				"Nombre de prestations dans une demi-journée" => array(
+					"type"=>"number",
+				)
+			);
+			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
+        } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+			if (parametersExist(["Titre", "Description", "Date_start", "Date_end", "Enseignant_responsable"])) {
+				$event = new Event();
+				$event->entitled_event = parameters()["Titre"];
+				$event->description_event = parameters()["Description"];
+				$event->start_date = parameters()["Date_start"];
+				$event->end_date = parameters()["Date_end"];
+				$event->idevent_creator = parameters()['Enseignant_responsable'];
+				$event->insert();
+				header("Location: .?r=event");
+			} else {
+				// go_back();
+				die("ok");
+			}
+		}
+
+
+
+	}
+
 
 	public function historique() {
 		$events = Event::findAll();
