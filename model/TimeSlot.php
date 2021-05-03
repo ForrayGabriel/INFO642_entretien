@@ -26,6 +26,19 @@ class TimeSlot extends Model {
         }
         return $list;
 	}
+
+	public static function timeslotDisponible($start_date, $end_date) {
+		$st = db()->prepare("select idtimeslot, disponibility, meridiem from timeslot where meridiem between :start_date and :end_date and disponibility = 3");
+		$st->bindValue(":start_date", $start_date);
+		$st->bindValue(":end_date", $end_date);
+		$st->execute();
+
+        $list = array();
+		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
+			$list[] = new TimeSlot($row["idtimeslot"]);
+		}
+        return $list;
+	}
 }
 
 
