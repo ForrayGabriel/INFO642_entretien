@@ -21,6 +21,8 @@ class EventController extends Controller {
 					"Date" => $prestation->date_prestation
 				);
 			}
+			// Todo
+			$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
 
 			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
 		} else {

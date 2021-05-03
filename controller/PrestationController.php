@@ -15,11 +15,6 @@
             }
         }
 
-        public function resultat() {
-            $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
-            $this->student($user, "noted");
-        }
-
         public function historique() {
             $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
             if (is_student()) {
@@ -32,6 +27,11 @@
             }
         }
 
+        public function resultat() {
+            $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
+            $this->student($user, "noted");
+        }
+
         public function notation() {
             $user = new InternalUser($_SESSION["user"]["idinternaluser"]);
             $this->teacher($user, "wait_notation");
@@ -42,8 +42,8 @@
         }
 
         public function student($student, $state) {
-            print("il faut changer pour mettre noter ou non plutot que faire le test par la date");
-            $prestations = Prestation::findOne(["idstudent" => $student->idstudent]);
+            print_r($student);
+            $prestations = Prestation::findOne(["idstudent" => $student->idinternaluser]);
             if ($state == "comming") {
                 $prestations = array_filter($prestations, function($prestation) {
                     return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
