@@ -17,7 +17,6 @@
 		2 => [
 			"Préstations"=>"?r=prestation",
 			"Disponibilités"=>"?r=disponibilite",
-			"Notations"=>".?r=prestation/notation",
 			"Historique"=>".?r=prestation/historique",
 			"Contact"=>"?r=contact"
 		],
@@ -26,6 +25,7 @@
 			"Évènements"=>"?r=event",
 			"Historique"=>"?r=event/historique",
 			"Salles"=>"?r=classroom",
+			"Prestation" => "?r=prestation",
 			"Groupe" => "?r=group/import",
 			"Utilisateurs" => "?r=users",
 			"Contact"=>"?r=contact",
