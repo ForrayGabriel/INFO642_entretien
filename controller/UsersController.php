@@ -60,9 +60,19 @@ class UsersController extends Controller {
 				$user->prenom = parameters()["Prenom"];
 				$user->idrole = parameters()["Role"];
 				$user->email = parameters()['Email'];
-				$user->password = $pass;
-				$message = ["type"=>"info", "content"=>"Le mots de passe aléatoire de $user->nom $user->prenom est $pass"];
+				$user->password = password_hash($pass, PASSWORD_DEFAULT);
+				$message = ["type"=>"info", "content"=>"Le mots de passe aléatoire de $user->username est $pass"];
 				$user->insert();
+
+				if (parameters()["Role"] == 1) {
+					$user = InternalUser::findOne(["username" => $user->username, "nom" => $user->nom, "prenom" => $user->prenom, "email" => $user->email])[0];
+		
+					$student = new Student();
+					$student->idinternaluser = $user->idinternaluser;
+					$student->insert();
+				}
+
+
 			} else {
 				$message = ["type"=>"error", "content"=>"Erreur lors de l'insertion"];
 			}
