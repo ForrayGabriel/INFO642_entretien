@@ -55,7 +55,7 @@ class InternalUser extends Model {
 		$st = db()->prepare($sql);
 		$st->bindValue(":idinternaluser", $this->idinternaluser);
 		$st->execute();
-		return $st->fetchAll();;
+		return $st->fetchAll();
 	}
 }
 
