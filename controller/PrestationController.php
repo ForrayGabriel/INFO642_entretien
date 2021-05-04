@@ -60,7 +60,7 @@
 
             $table_content = array();
             foreach ($prestations as &$prestation) {
-                $table_content[$prestation->idprestation] = array(
+                $table_content[$prestation->0] = array(
                     "Evenement" => $prestation->idevent->entitled_event,
                     "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
                     "Salle" => $prestation->idjury->idclassroom->name_classroom,
@@ -77,19 +77,34 @@
         }
 
         public function notation(){
+            id_or_back(parameters());
+
             $prestation = new Prestation(parameters()['id']);
             $id_event = $prestation->idevent->idevent;
             $evaluations_criterias = EvaluationCriteria::findOne(['idevent' => $id_event]);
 
-            $form_title = "Noter une prestation";
-            $form_content = array();
+            if($_SERVER['REQUEST_METHOD'] == "GET"){ 
 
-            foreach($evaluations_criterias as $criteria){
-                    $form_content[$criteria->description_criteria] = array("type" => "text", "placeholder" => $criteria->scale_criteria);
+                $form_title = "Noter une prestation";
+
+                $form_content = array();
+
+                foreach($evaluations_criterias as $criteria){
+
+                    $individual_evaluation = IndividualEvaluation::findOne(['idevaluationcriteria' => $criteria->idevaluationcriteria]);
+                    
+                    if($individual_evaluation && $individual_evaluation[0]->idcompose->idinternaluser->idinternaluser == get_id()){
+                        $form_content[$criteria->description_criteria] = array("type" => "text", "placeholder" => $individual_evaluation[0]->individual_note, "value" => $individual_evaluation[0]->individual_note);
+                    }else{
+                        $form_content[$criteria->description_criteria] = array("type" => "text", "placeholder" => $criteria->scale_criteria);
+                    }
+                }
+
+                $this->renderComponent("form", ["title" => $form_title, "content" => $form_content]);
+            }else{
+                
+                print_r(parameters());
             }
-
-            $this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
-
         }
 
     }
