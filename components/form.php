@@ -18,8 +18,12 @@
                     type='text'
                     name='$key'
                     id='$key'
-                    class='form-control'
-                    placeholder='Entrer votre $key'");
+                    class='form-control'");
+                if(isset($value['placeholder'])){
+                    print("placeholder='" . $value['placeholder'] . "'");
+                }else{
+                    print("placeholder='Entrer votre $key'");
+                }
                 if(isset($value['value'])){
                     print("value='" . $value['value'] . "' ");
                 }
