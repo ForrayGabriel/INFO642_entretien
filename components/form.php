@@ -10,6 +10,9 @@
     print("<form action='' method='post' enctype='multipart/form-data'>");
     
     foreach ($content as $key => $value) {
+
+        $key = str_replace(["'"], "" , $key);
+
         print("<div class='form-group'>");
         switch ($value["type"]) {
             case "text":
