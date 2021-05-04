@@ -36,6 +36,8 @@ class EvaluationcriteriaController extends Controller {
 	public function add(){
 		id_or_back(parameters());
 
+		$id_event = parameters()['id'];
+
 		if($_SERVER['REQUEST_METHOD'] == "GET") {
 			$event = Event::findOne(['idevent' => $id_event]);
 
