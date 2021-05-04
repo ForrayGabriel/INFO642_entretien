@@ -9,7 +9,7 @@
                 $student = Student::findOne(["idinternaluser" => $user->idinternaluser])[0];
                 $this->student($student);
             } else if (is_teacher() || is_admin()) {
-                $this->teacher($user);
+                $this->corrector($user);
             } else {
                 go_back();
             }
@@ -40,10 +40,14 @@
             $this->renderComponent("table", ["header" => $table_header, "content" => $table_content]);
         }
 
-        public function teacher($user) {
-            
-            $table_content = array();
-            $prestations = $user->getEnseignantPrestations();
+        public function corrector($user) {
+            if(is_teacher()){
+                $prestations = $user->getEnseignantPrestations();
+            }else if(is_admin()){
+                // TODO : select if admin
+                $prestations = $user->getEnseignantPrestations();
+            }
+
             foreach ($prestations as $key => $prestation) {
                 $prestations[$key] = new Prestation($prestation["idprestation"]);
             }
@@ -74,19 +78,14 @@
 
         public function notation(){
             $prestation = new Prestation(parameters()['id']);
-            $event = new Event($prestation->idprestation);
-            $evaluations_criterias = EvaluationCriteria::findOne(['idevent' => $event->idevent]);
+            $id_event = $prestation->idevent->idevent;
+            $evaluations_criterias = EvaluationCriteria::findOne(['idevent' => $id_event]);
 
-
-            $object = new Prestation();
             $form_title = "Noter une prestation";
-            $form_content = array(
-                "Nom du critère" => array("type" => "text"),
-                "Echelle du critère" => array("type" => "text")
-            );
+            $form_content = array();
 
             foreach($evaluations_criterias as $criteria){
-                    //TODO
+                    $form_content[$criteria->description_criteria] = array("type" => "text", "placeholder" => $criteria->scale_criteria);
             }
 
             $this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
