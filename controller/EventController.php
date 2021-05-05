@@ -75,7 +75,8 @@ class EventController extends Controller {
 			$groups = PeopleGroup::findAll();
 			$options_groups = array();
 			foreach ($groups as &$group) {
-				$options_groups[$group->title_peoplegroup] = $group->idpeoplegroup;
+				$people = count(BelongGroup::findOne(["idpeoplegroup"=>$group->idpeoplegroup]));
+				$options_groups[$group->title_peoplegroup." - ".$people." personnes"] = $group->idpeoplegroup;
 			}
 
 			$form_content = array(

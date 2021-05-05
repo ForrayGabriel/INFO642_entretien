@@ -9,5 +9,3 @@ class PeopleGroup extends Model {
 		return get_class($this).": ".$this->title_peoplegroup;
 	}
 }
-
-
