@@ -91,7 +91,7 @@
                 foreach($evaluations_criterias as $criteria){
 
                     $individual_evaluation = IndividualEvaluation::findOne(['idevaluationcriteria' => $criteria->idevaluationcriteria, 'idprestation' => parameters()['id']]);
-                    
+
                     if($individual_evaluation && $individual_evaluation[0]->idcompose->idinternaluser->idinternaluser == get_id()){
                         $form_content[$criteria->description_criteria] = array("type" => "text", "placeholder" => $individual_evaluation[0]->individual_note, "value" => $individual_evaluation[0]->individual_note);
                     }else{
@@ -117,6 +117,7 @@
 
                         $individual_evaluation = IndividualEvaluation::findOne(['idprestation' => parameters()['id'], 'idevaluationcriteria' => $data[$key], 'idcompose' => $compose[0]->idcompose]);
 
+                        $insert = 0;
                         if(!$individual_evaluation){
                             $insert = 1;
                             $individual_evaluation = new IndividualEvaluation();
@@ -128,11 +129,14 @@
                         $individual_evaluation->idevaluationcriteria = $data[$key];
                         $individual_evaluation->idcompose = $compose[0]->idcompose;
                         $individual_evaluation->individual_note = $value;
-                        if($insert){
+                        $individual_evaluation->individual_comment = "void";
+
+                        if($insert == 1){
                             $individual_evaluation->insert();
                         }else{
                             $individual_evaluation->update();
                         }
+
                         print_r($individual_evaluation);
                         print("<br>");
                     }
