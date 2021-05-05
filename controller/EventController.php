@@ -88,12 +88,12 @@ class EventController extends Controller {
 			$form_content = array(
 				"Groupe" => 
 					array(
-						"type"=>"select", 
-						"desc"=>"Choisir groupe", 
-						"options"=>$options_groups,
+						"type" => "select", 
+						"desc" => "Choisir groupe", 
+						"options" => $options_groups,
 					),
 				"Nombre de prestations dans une demi-journée" => array(
-					"type"=>"number",
+					"type" => "number",
 				)
 			);
 			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
