@@ -4,61 +4,99 @@ class EvaluationcriteriaController extends Controller {
 
 	var $rolepermissions = [1,2,3];
 
-	public function index() {
-		$this->render("index", Evaluationcriteria::findAll());
+	public function view() {
+		id_or_back(parameters());
+
+		$id_event = parameters()['id'];
+
+		$evaluation_criterias = EvaluationCriteria::findOne(['idevent' => $id_event]);
+
+		$table_header = array("Description", "Scale");
+
+        $table_content = array();
+        foreach ($evaluation_criterias as &$criteria) {
+            $table_content[$criteria->idevaluationcriteria] = array(
+                "Description" => $criteria->description_criteria,
+                "Scale" => $criteria->scale_criteria
+            );
+        }
+
+        $table_actions = array(
+			array("url" => "?r=evaluationcriteria/update&id=:id", "desc" => "", "icon" => "updatepasswordicon.png"),
+			array("url" => "?r=evaluationcriteria/delete&id=:id", "desc" => "", "icon" => "removeicon.png")
+		);
+
+        $table_addBtn = array("text" => "Ajouter un critère", "url" => "?r=evaluationcriteria/add&id=".$id_event);
+
+
+        $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "addBtn" => $table_addBtn, "actions" => $table_actions]);
+	
 	}
 
-	public function view() {
-		if(isset(parameters()["delete"])){
-			$b = new Evaluationcriteria(parameters()["id"]);
-			$b->delete(parameters()["id"]);
-			$this->render("index", Evaluationcriteria::findAll());
-		}
-			
-		else{
-			try {
-				$b = new Evaluationcriteria(parameters()["id"]);
-				$c = new Event($b->idevent);
-				$this->render("view", ["evaluationcriteria" => $b,"event" => $c]);
+	public function add(){
+		id_or_back(parameters());
 
-			} catch (Exception $e) {
-				(new SiteController())->render("index");
+		$id_event = parameters()['id'];
+
+		if($_SERVER['REQUEST_METHOD'] == "GET") {
+			$event = Event::findOne(['idevent' => $id_event]);
+
+			$form_title = "Ajouter un critère pour l'évenement " . $event[0]->entitled_event;
+			$options = array();
+
+			$form_content = array(
+				"Nom du critère" => array("type" => "text"),
+				"Echelle du critère" => array("type" => "text")
+			
+			);
+			$this->renderComponent("form", ["title" => $form_title, "content" => $form_content]);
+		}else{
+			if (parametersExist(["Nom_du_critère", "Echelle_du_critère"])) {
+				$evaluation_crtieria = new EvaluationCriteria();
+				$evaluation_crtieria->description_criteria = parameters()['Nom_du_critère'];
+				$evaluation_crtieria->scale_criteria = parameters()['Echelle_du_critère'];
+				$evaluation_crtieria->idevent = $id_event;
+				$insert = $evaluation_crtieria->insert();
+
+				$this->view();
 			}
 		}
-		
 	}
 
+	public function update(){
+		id_or_back(parameters());
 
-	public function add() {
-		if (isset(parameters()["idevent"]) and isset(parameters()["description_criteria"]) and isset(parameters()["scale_criteria"])) {
-			$evalcriteria = new Evaluationcriteria();
-			$evalcriteria->idevent = parameters()["idevent"];
-			$evalcriteria->description_criteria = parameters()["description_criteria"];
-			$evalcriteria->scale_criteria = parameters()["scale_criteria"];
-			$evalcriteria->insert();
-			$this->render("index", Evaluationcriteria::findAll());
-		} else {
-			$this->render("add", Event::findAll());
+		if($_SERVER['REQUEST_METHOD'] == "GET") {
+			$object = new EvaluationCriteria(parameters()["id"]);
+			$form_title = "Modifier un critère d'évaluation";
+			$form_content = array(
+				"Nom du critère" => array("type" => "text", "value" => $object->description_criteria),
+				"Echelle du critère" => array("type" => "text", "value" => $object->scale_criteria)
+			);
+			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
+		}else{
+			if (parametersExist(["Nom_du_critère", "Echelle_du_critère"])) {
+				$evaluationcriteria = new EvaluationCriteria(parameters()["id"]);
+				$evaluationcriteria->description_criteria = parameters()['Nom_du_critère'];
+				$evaluationcriteria->scale_criteria = parameters()['Echelle_du_critère'];
+				$evaluationcriteria->update();
+				$this->view();
+			}else{
+				go_back();
+			}
 		}
 	}
 
-	public function update() {
-		if(isset(parameters()["idevent"]) and isset(parameters()["description_criteria"]) and isset(parameters()["scale_criteria"])) {
-			$evalcriteria = new Evaluationcriteria(parameters()["id"]);
-			$evalcriteria->idevent = parameters()["idevent"];
-			$evalcriteria->description_criteria = parameters()["description_criteria"];
-			$evalcriteria->scale_criteria = parameters()["scale_criteria"];
-			$evalcriteria->update();
-			$this->render("index", Evaluationcriteria::findAll());
-		}
-		else{
-			$b = new Evaluationcriteria(parameters()["id"]);
-			$c = Event::findAll();
-			$this->render("update", ["evaluationcriteria" => $b,"event" => $c]);
-		}
-		
-	}
+	public function delete(){
+		id_or_back(parameters());
 
+		if(isset(parameters()['id'])){
+			$evaluation_criteria = new EvaluationCriteria(parameters()['id']);
+			$evaluation_criteria->delete();
+		}
+
+		go_back();
+	}
 }
 
 

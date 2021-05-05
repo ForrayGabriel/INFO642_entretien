@@ -10,6 +10,9 @@
     print("<form action='' method='post' enctype='multipart/form-data'>");
     
     foreach ($content as $key => $value) {
+
+        $key = str_replace(["'"], "" , $key);
+
         print("<div class='form-group'>");
         switch ($value["type"]) {
             case "text":
@@ -18,8 +21,12 @@
                     type='text'
                     name='$key'
                     id='$key'
-                    class='form-control'
-                    placeholder='Entrer votre $key'");
+                    class='form-control'");
+                if(isset($value['placeholder'])){
+                    print("placeholder='" . $value['placeholder'] . "'");
+                }else{
+                    print("placeholder='Entrer votre $key'");
+                }
                 if(isset($value['value'])){
                     print("value='" . $value['value'] . "' ");
                 }
@@ -93,7 +100,7 @@
             case "date":
                 print("<p>".$value["title"]."</p>");
                 print("<div class='input-date'>");
-                print("<input class='box-input' type='date' name='".$key."_start'>");
+                print("<input class='box-input' min=' " . date("Y-m-d H:i:s") ."' type='date' name='".$key."_start'>");
                 print("<input class='box-input' type='date' name='".$key."_end'>");
                 print("</div>");
                 break;

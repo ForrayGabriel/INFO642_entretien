@@ -24,14 +24,14 @@ class EventController extends Controller {
 			// Todo
 			$table_addBtn = array("text" => "Générer les prestations", "url" => "?r=event/generate&id=".parameters()["id"]);
 
-			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
+			$this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "addBtn" => $table_addBtn]);
 		} else {
 			$events = Event::findAll();
 			$events = array_filter($events, function($event) {
 				return strtotime($event->end_date) > strtotime(date("Y-m-d H:i:s"));
 			});
 
-			$table_header = array("Nom", "Description");
+			$table_header = array("Nom", "Description","Critères");
 
 			$table_content = array();
 			foreach ($events as &$event) {
@@ -44,7 +44,14 @@ class EventController extends Controller {
 
 			$table_rowLink = "?r=event";
 
-			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink]);
+
+
+			$table_actions = array(
+				array("url" => "?r=evaluationcriteria/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png")
+			);
+	
+
+			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink, "actions"=>$table_actions]);
 		}
 	}
 
@@ -163,13 +170,13 @@ class EventController extends Controller {
 				"Description" => array("type" => "text"),
 				"Enseignant responsable" => 
 					array(
-						"type"=>"select", 
-						"desc"=>"Choisir enseignant responsable de l'évenment", 
-						"options"=>$options
+						"type" => "select", 
+						"desc" => "Choisir enseignant responsable de l'évenment", 
+						"options" => $options
 					),
 				"Date" => array(
-					"type"=>"date",
-					"title"=>"Date de début et de fin"
+					"type" => "date",
+					"title" => "Date de début et de fin"
 				)
 			);
 			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
@@ -184,8 +191,7 @@ class EventController extends Controller {
 				$event->insert();
 				header("Location: .?r=event");
 			} else {
-				// go_back();
-				die("ok");
+				go_back();
 			}
 		}
 

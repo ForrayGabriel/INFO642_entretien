@@ -54,3 +54,9 @@ function go_back(){
 
 	return header('Location: .');
 }
+
+function id_or_back($data){
+	if(!isset($data['id'])){
+		go_back();
+	}
+}
