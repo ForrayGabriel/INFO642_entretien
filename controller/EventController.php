@@ -109,8 +109,7 @@ class EventController extends Controller {
 				$event->insert();
 				header("Location: .?r=event");
 			} else {
-				// go_back();
-				die("ok");
+				go_back();
 			}
 		}
 
