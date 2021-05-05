@@ -9,6 +9,20 @@ body {
 	min-height: 100vh;
 }
 
+.button {
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #2fb3e4;
+}
+
+
 header {
 	width: 100%;
 	height: 100px;
@@ -39,7 +53,7 @@ header .header-container .wrapper_menu_logo .separator {
 }
 
 header .header-container .wrapper_menu_logo img {
-	height: 50px;
+	height: 3vw;
 	max-height: 80%;
 	max-width: 100%;
 	vertical-align: middle;
@@ -137,3 +151,4 @@ footer {
 	z-index: -1;
 	vertical-align: middle;
 }
+

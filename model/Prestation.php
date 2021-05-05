@@ -9,7 +9,8 @@ class Prestation extends Model {
 	protected $_date_prestation;
 	protected $_start_time;
 	protected $_end_time;
-	protected $_comment_jury;	
+	protected $_comment_jury;
+	protected $_idnotationstate;	
 
 	public function __toString() {
 		return get_class($this).": ".$this->start_time." ".$this->end_time." ".$this->comment_jury ;

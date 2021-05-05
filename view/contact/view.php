@@ -25,7 +25,7 @@ foreach($data['internaluser'] as $user){
 echo "<div class='container'>";
 echo "<img src='https://latelierduformateur.fr/wp-content/uploads/2018/03/avatar-1606916_960_720.png' alt='Avatar'>";
 echo "<p><b>De " . $display_name_requestor . "  : ". $data['contact']->title_contact ."  </b> </br></br> ". $data['contact']->description_contact ."</p>";
-echo "<span class='time-right'>". $data['contact']->date_contact ."</span>";
+echo "<span class='time-right'>". date_format(date_create($data['contact']->date_contact),'Y-m-d H:i:s') ."</span>";
 echo "</div>";
 
 
@@ -35,14 +35,14 @@ foreach($data['response'] as $response){
 			echo "<div class='container'>";
 			echo "<img src='https://latelierduformateur.fr/wp-content/uploads/2018/03/avatar-1606916_960_720.png' alt='Avatar'>";
 			echo "<p><b>De " . $response->idinternaluser_requestor->nom . " " . $response->idinternaluser_requestor->prenom . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
-			echo "<span class='time-right'>". $response->date_response ."</span>";
+			echo "<span class='time-right'>". date_format(date_create($response->date_response),'Y-m-d H:i:s') ."</span>";
 			echo "</br>";
 			echo "</div>";
 		}else{
 			echo "<div class='container darker'>";
 			echo "<img src='http://judowormhout.ovh/wp-content/uploads/2016/06/avatar7.png' alt='Avatar' class='right'>";
 			echo "<p><b>De " . $response->idinternaluser_receiver->nom . " " . $response->idinternaluser_receiver->prenom . "  : ". $response->title_response ."  </b> </br></br> ". $response->text_response ."</p>";
-			echo "<span class='time-left'>". $response->date_response ."</span>";
+			echo "<span class='time-left'>". date_format(date_create($response->date_response),'Y-m-d H:i:s') ."</span>";
 			echo "</div>";
 		}
 	}
