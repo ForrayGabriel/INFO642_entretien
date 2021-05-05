@@ -16,14 +16,14 @@
     
 
     foreach ($content as $key => $value) {
-
-        $key = str_replace(["'"], "" , $key);
+        $parameters_key = str_replace("'", "" , $key);
+        $parameters_key = str_replace(" ", "_" , $parameters_key);
 
         $formGroup = "<div class='form-group'>";
         switch ($value["type"]) {
             case "text":
             case "number":
-                $formGroup .= "\n<label id=':id' for=':id'>:id</label>";
+                $formGroup .= "\n<label id=':id' for=':id'>:label</label>";
                 $formGroup .= "\n<input 
                     type='".$value["type"]."' 
                     name=':id' 
@@ -34,21 +34,24 @@
                 break;
     
             case "text-area":
-                $formGroup .= "\n<label id=':id' for=':id'>:id</label>";
+                $formGroup .= "\n<label id=':id' for=':id'>:label</label>";
                 $formGroup .= "\n<textarea class='form-control' :placeholder name=':id' :required style='resize: none;height: 100px;width: 100%;''></textarea>";
                 break;
 
             case "file":
-                $formGroup .= "\n<label id=':id' for=':id'>:id</label>";
+                $formGroup .= "\n<label id=':id' for=':id'>:label</label>";
                 $formGroup .= "\n<input type='file' name=':id' :required/>";
                 break;
 
             case "date":
                 $formGroup .= "\n<p>".$value["title"]."</p>";
                 $formGroup .= "\n<div class='input-date'>";
-                $formGroup .= "\n<input class='box-input' min=' ".date("Y-m-d H:i:s")."' type='date' name=':id_start' :required>";
-                $formGroup .= "\n<input class='box-input' type='date' name=':id_end' :required>";
+                $formGroup .= "\n<input class='box-input' min=' ".date("Y-m-d H:i:s")."' type='date' name=':id_start' :required :value_start>";
+                $formGroup .= "\n<input class='box-input' type='date' name=':id_end' :required :value_end>";
                 $formGroup .= "\n</div>";
+                $formGroup = str_replace(":value_start", isset(parameters()[$parameters_key."_start"]) ? "value='".parameters()[$parameters_key."_start"]."'" : "", $formGroup);
+                $formGroup = str_replace(":value_end", isset(parameters()[$parameters_key."_end"]) ? "value='".parameters()[$parameters_key."_end"]."'" : "", $formGroup);
+
                 break;
 
             case "radio":
@@ -57,7 +60,7 @@
                 foreach ($value["options"] as $opt_value => $id) {
                     $formGroup .= "\n<label>";
                     $formGroup .= "\n<input name=':id' value='$id' type='".$value["type"]."' class='input-radio' :checked>$opt_value";
-                    $formGroup = str_replace(":checked", isset(parameters()[$key]) && parameters()[$key] == $id ? "checked" : "", $formGroup);
+                    $formGroup = str_replace(":checked", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $id ? "checked" : "", $formGroup);
                     $formGroup .= "\n</label>";
                 }
                 break;
@@ -68,17 +71,18 @@
                 $formGroup .= "\n<option disabled selected value>".$value["desc"]."</option>";
                 foreach ($value["options"] as $value => $id) {
                     $formGroup .= "\n<option value='$id' :selected>$value</option>";
-                    $formGroup = str_replace(":selected", isset(parameters()[$key]) && parameters()[$key] == $id ? "selected" : "", $formGroup);
+                    $formGroup = str_replace(":selected", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $id ? "selected" : "", $formGroup);
                 }
                 $formGroup .= "\n</select>";
                 break;
         }
 
         $formGroup .= "\n</div>";
-        $formGroup = str_replace(":id", $key, $formGroup);
+        $formGroup = str_replace(":label", $key, $formGroup);
+        $formGroup = str_replace(":id", $parameters_key, $formGroup);
         $formGroup = str_replace(":placeholder", isset($value['placeholder']) ? "placeholder:'".$value['placeholder']."'" : "", $formGroup);
         $formGroup = str_replace(":required", isset($value['!required']) ? "" : "required", $formGroup);
-        $formGroup = str_replace(":value",  isset(parameters()[$key]) ? "value='".parameters()[$key]."'" : "", $formGroup);
+        $formGroup = str_replace(":value",  isset(parameters()[$parameters_key]) ? "value='".parameters()[$parameters_key]."'" : "", $formGroup);
         print($formGroup);
     }
     ?>
