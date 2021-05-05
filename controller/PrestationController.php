@@ -111,6 +111,7 @@
                 }
 
                 foreach(parameters() as $key => $value){
+                    print_r(parameters());
                     if(!in_array($key,["r","id","Commentaire_global"])){
                         $compose = Compose::findOne(['idjury' => $prestation->idjury->idjury, 'idinternaluser' => get_id()]);
 
@@ -132,6 +133,8 @@
                         }else{
                             $individual_evaluation->update();
                         }
+                        print_r($individual_evaluation);
+                        print("<br>");
                     }
                     
                     go_back();
