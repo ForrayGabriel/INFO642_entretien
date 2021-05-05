@@ -53,7 +53,7 @@ async function sort(event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#searchBox").addEventListener("keyup", search);
-    document.querySelector("#table tr").addEventListener("click", sort);
+    // document.querySelector("#table tr").addEventListener("click", sort);
 });
 
 

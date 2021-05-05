@@ -69,7 +69,7 @@ class ContactController extends Controller {
 				$form_title = "Contacter un administrateur";
 				$form_content = array(
 					"Titre du message" => array("type" => "text"),
-					"Contenu du message" => array("type" => "text-area")
+					"Contenu du message" => array("type" => "text-area", "placeholder" => "Entrer le contenu du message")
 				);
 				$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
 			}else{
@@ -90,7 +90,7 @@ class ContactController extends Controller {
 					"Utilisateur" => array("type" => "select", "options" => $user_list, "desc" => "Choisir un utilisateur", "!required" => 1),
 					"Groupe Utilisateur" => array("type" => "select", "options" => $group_list, "desc" => "Choisir un groupe d'utilisateur", "!required" => 1),
 					"Titre du message"=>array("type" => "text"),
-					"Contenu du message"=>array("type" => "text-area")
+					"Contenu du message"=>array("type" => "text-area", "placeholder" => "Entrer le contenu du message")
 
 				);
 				$this->renderComponent("form", ["title" => $form_title, "content" => $form_content]);

@@ -23,7 +23,8 @@ function get_role(){
 }
 
 function parametersExist($parameters) {
-	$intersect = array_intersect($parameters, array_keys(parameters()));
+	$tmp = array_filter(parameters(), function($var){return $var != null;} );
+	$intersect = array_intersect($parameters, array_keys($tmp));
 	return count($intersect) == count($parameters);
 }
 

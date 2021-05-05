@@ -8,106 +8,78 @@
     extract($data);
     print("<h1 id='title' class='text-center'>$title</h1>");
     print("<form action='' method='post' enctype='multipart/form-data'>");
+    if (isset($message) && $message !== null) {
+        print("<div class='form-group'>");
+        print("<p class='message ".$message["type"]."'>".$message["content"]."</p>");
+        print("</div>");
+    }
     
+
     foreach ($content as $key => $value) {
 
         $key = str_replace(["'"], "" , $key);
 
-        print("<div class='form-group'>");
+        $formGroup = "<div class='form-group'>";
         switch ($value["type"]) {
             case "text":
-                print("<label id='$key' for='$key'>$key</label>");
-                print("<input
-                    type='text'
-                    name='$key'
-                    id='$key'
-                    class='form-control'");
-                if(isset($value['placeholder'])){
-                    print("placeholder='" . $value['placeholder'] . "'");
-                }else{
-                    print("placeholder='Entrer votre $key'");
-                }
-                if(isset($value['value'])){
-                    print("value='" . $value['value'] . "' ");
-                }
-                if(!isset($value['!required'])){
-                    print("required");
-                }
-                print("/>");
-                break;
-
             case "number":
-                print("<label id='$key' for='$key'>$key</label>");
-                print("<input
-                    type='number'
-                    name='$key'
-                    id='$key'
-                    class='form-control'
-                    placeholder='Entrer votre $key'");
-                if(isset($value['value'])){
-                    print("value='" . $value['value'] . "' ");
-                }
-                if(!isset($value['!required'])){
-                    print("required");
-                }
-                print("/>");
+                $formGroup .= "\n<label id=':id' for=':id'>:id</label>";
+                $formGroup .= "\n<input 
+                    type='".$value["type"]."' 
+                    name=':id' 
+                    id=':id' 
+                    class='form-control' 
+                    :required :placeholder :value";
+                $formGroup .= "\n/>";
                 break;
     
             case "text-area":
-                print("<label id='$key' for='$key'>$key</label>");
-                print("<textarea class='form-control' placeholder='Entrer le contenu du message' name='$key' style='resize: none;height: 100px;width: 100%;''></textarea>");
+                $formGroup .= "\n<label id=':id' for=':id'>:id</label>";
+                $formGroup .= "\n<textarea class='form-control' :placeholder name=':id' :required style='resize: none;height: 100px;width: 100%;''></textarea>";
                 break;
 
+            case "file":
+                $formGroup .= "\n<label id=':id' for=':id'>:id</label>";
+                $formGroup .= "\n<input type='file' name=':id' :required/>";
+                break;
+
+            case "date":
+                $formGroup .= "\n<p>".$value["title"]."</p>";
+                $formGroup .= "\n<div class='input-date'>";
+                $formGroup .= "\n<input class='box-input' min=' ".date("Y-m-d H:i:s")."' type='date' name=':id_start' :required>";
+                $formGroup .= "\n<input class='box-input' type='date' name=':id_end' :required>";
+                $formGroup .= "\n</div>";
+                break;
 
             case "radio":
-                print("<p>$key</p>");
-                foreach ($value["options"] as $value => $id) {
-                    print("<label>");
-                    print("<input name='$key' value='$id' type='radio' class='input-radio' checked=''>$value");
-                    print("</label>");
-                }
-                break;
-
             case "checkbox":
-                print("<p>$key</p>");
-                foreach ($value["options"] as $value => $id) {
-                    print("<label>");
-                    print("<input name='$key.[]' value='$id' type='checkbox' class='input-radio'>$value");
-                    print("</label>");
+                $formGroup .= "\n<p>:id</p>";
+                foreach ($value["options"] as $opt_value => $id) {
+                    $formGroup .= "\n<label>";
+                    $formGroup .= "\n<input name=':id' value='$id' type='".$value["type"]."' class='input-radio' :checked>$opt_value";
+                    $formGroup = str_replace(":checked", isset(parameters()[$key]) && parameters()[$key] == $id ? "checked" : "", $formGroup);
+                    $formGroup .= "\n</label>";
                 }
                 break;
 
             case "select":
-                print("<p>$key</p>");
-                if(isset($value['!required'])){
-                    print("<select id='dropdown' name='$key' class='form-control'>");
-                }else{
-                    print("<select id='dropdown' name='$key' class='form-control' required=''>");
-                }
-                print("<option disabled selected value>".$value["desc"]."</option>");
+                $formGroup .= "\n<p>:id</p>";
+                $formGroup .= "\n<select id='dropdown' name=':id' class='form-control' :required>";
+                $formGroup .= "\n<option disabled selected value>".$value["desc"]."</option>";
                 foreach ($value["options"] as $value => $id) {
-                    print("<option value='$id'>$value</option>");
+                    $formGroup .= "\n<option value='$id' :selected>$value</option>";
+                    $formGroup = str_replace(":selected", isset(parameters()[$key]) && parameters()[$key] == $id ? "selected" : "", $formGroup);
                 }
-                print("</select>");
+                $formGroup .= "\n</select>";
                 break;
-
-            case "file":
-                print("<label id='$key' for='$key'>$key</label>");
-                print("<input type='file' name='$key' />");
-                break;
-
-
-            case "date":
-                print("<p>".$value["title"]."</p>");
-                print("<div class='input-date'>");
-                print("<input class='box-input' min=' " . date("Y-m-d H:i:s") ."' type='date' name='".$key."_start'>");
-                print("<input class='box-input' type='date' name='".$key."_end'>");
-                print("</div>");
-                break;
-
-
         }
-        print("</div>");
+
+        $formGroup .= "\n</div>";
+        $formGroup = str_replace(":id", $key, $formGroup);
+        $formGroup = str_replace(":placeholder", isset($value['placeholder']) ? "placeholder:'".$value['placeholder']."'" : "", $formGroup);
+        $formGroup = str_replace(":required", isset($value['!required']) ? "" : "required", $formGroup);
+        $formGroup = str_replace(":value",  isset(parameters()[$key]) ? "value='".parameters()[$key]."'" : "", $formGroup);
+        print($formGroup);
     }
     ?>
     <div class="form-group">
@@ -115,14 +87,5 @@
         Envoyer
       </button>
     </div>
-
-    <?php 
-    if (isset($message) && $message !== null) {
-        print("<div class='form-group'>");
-        print("<p class='message ".$message["type"]."'>".$message["content"]."</p>");
-        print("</div>");
-    }
-    ?>
-
     </form>
 </div>
