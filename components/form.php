@@ -27,7 +27,7 @@
                 $formGroup .= "\n<input 
                     type='".$value["type"]."' 
                     name=':id' 
-                    id=':id' 
+                    id=':id'
                     class='form-control' 
                     :required :placeholder :value";
                 $formGroup .= "\n/>";
@@ -82,7 +82,13 @@
         $formGroup = str_replace(":id", $parameters_key, $formGroup);
         $formGroup = str_replace(":placeholder", isset($value['placeholder']) ? "placeholder='".$value['placeholder']."'" : "", $formGroup);
         $formGroup = str_replace(":required", isset($value['!required']) ? "" : "required", $formGroup);
-        $formGroup = str_replace(":value",  isset(parameters()[$parameters_key]) ? "value='".parameters()[$parameters_key]."'" : "", $formGroup);
+        if(isset(parameters()[$parameters_key])){
+            $formGroup = str_replace(":value",  isset(parameters()[$parameters_key]) ? "value='".parameters()[$parameters_key]."'" : "", $formGroup);
+        }else{
+            $formGroup = str_replace(":value",  isset($value['value']) ? "value='".$value['value']."'" : "", $formGroup);
+
+        }
+        
         print($formGroup);
     }
     ?>
