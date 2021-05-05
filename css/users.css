@@ -6,10 +6,25 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-collapse: collapse;
   font-family: sans-serif;
-  width: 1200px;
+  width: 700px;
   position: relative;
   left: 50%;
   top: 30px;
   margin-bottom: 60px;
   transform: translate(-50%);
+}
+
+#delete{
+  text-align: center;
+  padding: 20px;
+}
+
+#btn-form-delete{
+  padding: 12px;
+  background-color: #4b4b4b;
+  cursor: pointer;
+  border-radius: 2px;
+  border: none;
+  margin: 20px;
+  color: white;
 }
