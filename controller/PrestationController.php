@@ -53,7 +53,7 @@
             }
 
             $prestations = array_filter($prestations, function($prestation) {
-                return strtotime($prestation->date_prestation. ' + 1 days') > strtotime(date("Y-m-d H:i:s"));
+                return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
             });
 
             $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
