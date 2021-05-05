@@ -1,6 +1,6 @@
 <?php
 
-class PrestationState extends Model {
+class NotationState extends Model {
 
 	protected $_idnotationstate;
 	protected $_state;
