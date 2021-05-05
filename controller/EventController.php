@@ -17,8 +17,8 @@ class EventController extends Controller {
 					"Evenement" => $prestation->idevent->entitled_event,
 					"Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
 					"Salle" => $prestation->idjury->idclassroom->name_classroom,
-					"Jury" => $prestation->idjury->name,
-					"Date" => $prestation->date_prestation
+					"Jury" => $prestation->idjury->name_jury,
+					"Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
 				);
 			}
 
@@ -29,13 +29,14 @@ class EventController extends Controller {
 				return strtotime($event->end_date) > strtotime(date("Y-m-d H:i:s"));
 			});
 
-			$table_header = array("Nom", "Description","Critères");
+			$table_header = array("Nom", "Description", "Date");
 
 			$table_content = array();
 			foreach ($events as &$event) {
 				$table_content[$event->idevent] = array(
 					"Nom" => $event->entitled_event,
-					"Desc" => $event->description_event);
+					"Desc" => $event->description_event,
+					"Date" => date_format(date_create($event->start_date),'d/m/y'). " au " . date_format(date_create($event->end_date),'d/m/y'));
 			}
 
 			$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
@@ -52,69 +53,6 @@ class EventController extends Controller {
 			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink, "actions"=>$table_actions]);
 		}
 	}
-
-	
-	
-	static public function generate() {
-
-		if($_SERVER['REQUEST_METHOD'] == "GET") {
-
-			$event = new Event(parameters()["id"]);
-			$timeslots = TimeSlot::timeslotDisponible($event->start_date,$event->end_date);
-			$meridiems = array();
-
-			foreach ($timeslots as &$timeslot) {
-				if (isset($meridiems[$timeslot->meridiem]))
-					$meridiems[$timeslot->meridiem] += 1;
-				else
-					$meridiems[$timeslot->meridiem] = 1;
-			}
-
-			$half_day = 0;
-			foreach ($meridiems as &$meridiem) {
-				$half_day += floor($meridiem/2);
-			}
-
-            $form_title = "Générer les prestations de l'évènement ".$event->entitled_event;
-
-			$groups = PeopleGroup::findAll();
-			$options_groups = array();
-			foreach ($groups as &$group) {
-				$people = count(BelongGroup::findOne(["idpeoplegroup"=>$group->idpeoplegroup]));
-				$options_groups[$group->title_peoplegroup." - ".$people." personnes"] = $group->idpeoplegroup;
-			}
-
-			$form_content = array(
-				"Groupe" => 
-					array(
-						"type" => "select", 
-						"desc" => "Choisir groupe", 
-						"options" => $options_groups,
-					),
-				"Nombre de prestations dans une demi-journée" => array(
-					"type" => "number",
-				)
-			);
-			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
-        } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-			if (parametersExist(["Titre", "Description", "Date_start", "Date_end", "Enseignant_responsable"])) {
-				$event = new Event();
-				$event->entitled_event = parameters()["Titre"];
-				$event->description_event = parameters()["Description"];
-				$event->start_date = parameters()["Date_start"];
-				$event->end_date = parameters()["Date_end"];
-				$event->idevent_creator = parameters()['Enseignant_responsable'];
-				$event->insert();
-				header("Location: .?r=event");
-			} else {
-				go_back();
-			}
-		}
-
-
-
-	}
-
 
 	public function historique() {
 		$events = Event::findAll();
@@ -209,9 +147,9 @@ class EventController extends Controller {
 				foreach ($timeslots as &$timeslot) {
 					if (isset($teachers_disponibility[$timeslot->meridiem])) {
 						$teachers_disponibility[$timeslot->meridiem]["number"] += 1;
-						$teachers_disponibility[$timeslot->meridiem]["teachers"][] = $timeslot->idinternaluser;
+						$teachers_disponibility[$timeslot->meridiem]["timeslot"][] = $timeslot;
 					} else {
-						$teachers_disponibility[$timeslot->meridiem] = ["number" => 1, "teachers"=>[$timeslot->idinternaluser]];
+						$teachers_disponibility[$timeslot->meridiem] = ["number" => 1, "timeslot"=>[$timeslot]];
 					}
 				}
 
@@ -253,12 +191,15 @@ class EventController extends Controller {
 							$jury = new Jury($jury->insert());
 
 							$composes = array();
-							for ($j=0; $j < parameters()["Nombre_denseignant_par_jury"]; $j++) { 
-								$jury->name .= $teacher_disponibility["teachers"][$i+$j]->nom." ";
+							for ($j=0; $j < parameters()["Nombre_denseignant_par_jury"]; $j++) {
+								$jury->name_jury .= $teacher_disponibility["timeslot"][$i+$j]->idinternaluser->nom." ";
 								$compose = new Compose();
 								$compose->idjury = $jury->idjury;
-								$compose->idinternaluser = $teacher_disponibility["teachers"][$j]->idinternaluser;
+								$compose->idinternaluser = $teacher_disponibility["timeslot"][$i+$j]->idinternaluser->idinternaluser;
 								$compose->insert();
+
+								$teacher_disponibility["timeslot"][$i+$j]->disponibility = 4;
+								$teacher_disponibility["timeslot"][$i+$j]->update();
 							}
 							$jury->update();
 
