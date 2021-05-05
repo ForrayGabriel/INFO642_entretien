@@ -17,9 +17,9 @@ class DisponibiliteController extends Controller {
 				$timeslot->idinternaluser = $_SESSION["user"]["idinternaluser"];
 				$timeslot->disponibility = $colors[$date["color"]];
 				if ($date["meridiem"] == "AM")
-					$timeslot->meridiem = $date["date"]." 00:00:00";
+					$timeslot->meridiem = $date["date"]." 08:00:00";
 				else
-					$timeslot->meridiem = $date["date"]." 12:00:00";
+					$timeslot->meridiem = $date["date"]." 14:00:00";
 				$timeslot->insert();
 			}
 		}

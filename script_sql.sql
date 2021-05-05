@@ -150,24 +150,25 @@ CREATE TABLE IF NOT EXISTS timeslot (
 );
 
 INSERT INTO timeslot (idtimeslot,idinternaluser,disponibility,meridiem) VALUES
-(1,1,1,NOW()),
-(2,2,2,NOW()),
-(3,2,3,NOW()-INTERVAL 1 DAY),
-(4,2,4,NOW()+INTERVAL 1 DAY);
+(1,9,3,NOW()),
+(2,10,3,NOW()),
+(3,9,3,NOW()-INTERVAL 1 DAY),
+(4,10,3,NOW()-INTERVAL 1 DAY),
+(5,9,3,NOW()+INTERVAL 1 DAY),
+(6,10,3,NOW()+INTERVAL 1 DAY);
 
 CREATE TABLE IF NOT EXISTS jury (
   idjury int(11) NOT NULL AUTO_INCREMENT,
   idclassroom int(11) NOT NULL,
-  idtimeslot int(11) NOT NULL,
   name_jury varchar(2048) NULL,
+  meridiem DATETIME NOT NULL,
   PRIMARY KEY (idjury),
-  FOREIGN KEY (idclassroom) REFERENCES classroom(idclassroom),
-  FOREIGN KEY (idtimeslot) REFERENCES timeslot(idtimeslot)
+  FOREIGN KEY (idclassroom) REFERENCES classroom(idclassroom)
 );
 
-INSERT INTO jury(idjury,idclassroom,idtimeslot,name_jury) VALUES
-(1,1,1,"Jury A"),
-(2,2,2,"Jury B");
+INSERT INTO jury(idjury,idclassroom,name_jury,meridiem) VALUES
+(1,1,"Jury A",NOW()-INTERVAL 1 DAY),
+(2,2,"Jury B",NOW()+INTERVAL 1 DAY);
 
 CREATE TABLE IF NOT EXISTS event (
   idevent int(11) NOT NULL AUTO_INCREMENT,
