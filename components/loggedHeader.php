@@ -10,20 +10,20 @@
 	$onglets = [
 		1 => [
 			"Entretien"=>"?r=prestation",
-			"Résultats"=>".?r=prestation/resultat",
+			"Résultats"=>".?r=resultat",
 			"Contact"=>"?r=contact"
 		],
 
 		2 => [
 			"Préstations"=>"?r=prestation",
 			"Disponibilités"=>"?r=disponibilite",
-			"Historique"=>".?r=prestation/historique",
+			"Historique"=>".?r=resultat",
 			"Contact"=>"?r=contact"
 		],
 
 		3 => [
 			"Évènements"=>"?r=event",
-			"Historique"=>"?r=event/historique",
+			"Historique"=>"?r=resultat",
 			"Salles"=>"?r=classroom",
 			"Prestation" => "?r=prestation",
 			"Groupe" => "?r=group/import",
