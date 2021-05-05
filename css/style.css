@@ -39,7 +39,7 @@ header .header-container .wrapper_menu_logo .separator {
 }
 
 header .header-container .wrapper_menu_logo img {
-	height: 50px;
+	height: 3vw;
 	max-height: 80%;
 	max-width: 100%;
 	vertical-align: middle;
