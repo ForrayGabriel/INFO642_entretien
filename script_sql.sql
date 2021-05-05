@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS evaluationcriteria (
 );
 
 INSERT INTO evaluationcriteria(idevaluationcriteria,idevent,description_criteria,scale_criteria) VALUES
-(1,1,"Contenu du diaporama","{A,B,C}"),
+(1,1,"Contenu du diaporama","{0:20}"),
 (2,1,"Communication","{0:20}");
 
 
@@ -267,8 +267,8 @@ CREATE TABLE IF NOT EXISTS individualevaluation (
 
 
 INSERT INTO individualevaluation(idindividualevaluation,idprestation,idevaluationcriteria,idcompose,individual_note,individual_comment) VALUES
-(1,1,2,1,"20","Un peu lent dans la présentation"),
-(2,1,1,1,"A","Finalement, surpris de ce sujet oral");
+(1,1,2,1,"14","Un peu lent dans la présentation"),
+(2,1,1,1,"17","Finalement, surpris de ce sujet oral");
 
 
 CREATE TABLE IF NOT EXISTS usercontact (
