@@ -6,7 +6,8 @@ class DisponibiliteController extends Controller {
 
 	public function index() {
 		
-		$colors = ["neutral"=>1, "red"=>2, "green"=>3, "orange"=>4];
+		$colors = ["neutral"=>1, "green"=>3, "orange"=>4];
+		$access_color = ["neutral"=>1, "green"=>3];
 
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$data = json_decode(parameters()["data"], true);
@@ -34,7 +35,7 @@ class DisponibiliteController extends Controller {
 			$date = new DateTime();
 		}
 		$data = TimeSlot::timeslotInMonth($date);
-		$this->render("index", ["date"=>$date, "data"=>$data, "colors"=>array_flip($colors), "now"=>$now]);
+		$this->renderComponent("calendar", ["date"=>$date, "data"=>$data, "accessColors"=>array_flip($access_color), "colors"=>array_flip($colors), "now"=>$now]);
 	}
     
 }

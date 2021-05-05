@@ -4,11 +4,12 @@
   $day_before_month = $calendar_date->format("w");
   if ($day_before_month == 0) $day_before_month = 7;
 ?>
+<img class="background-image" src="https://www.polytech.univ-smb.fr/fileadmin/_processed_/d/b/csm_Polytech_site_Annecy_vu_du_ciel_db27e8c54f.jpg">
 <h1>Veuillez indiquer vos disponibilités</h1>
 <link rel="stylesheet" type="text/css" href="./css/calendar.css"/>
 <script src="./js/calendar.js"></script>
 <div class="calendar">
-    <script>let colors = <?php echo json_encode($colors); ?></script>
+    <script>let colors = <?php echo json_encode($accessColors); ?></script>
   <div class="header">
     <?php
       $calendar_date->modify('-1 month');
@@ -97,10 +98,8 @@
   </div>
   <div class="footer">
     <div class="legend">
-      <div><div class="box grey"></div>past</div>
-      <div><div class="box red"></div>red</div>
-      <div><div class="box green"></div>green</div>
-      <div><div class="box orange"></div>orange</div>
+      <div><div class="box green"></div>Disponible</div>
+      <div><div class="box orange"></div>Assigné</div>
     </div>
     <div class="btns">
       <button>Annuler</button>
