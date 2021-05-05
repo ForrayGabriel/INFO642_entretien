@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS individualevaluation;
 DROP TABLE IF EXISTS prestation;
+DROP TABLE IF EXISTS notationstate;
 DROP TABLE IF EXISTS belonggroup;
 DROP TABLE IF EXISTS peoplegroup;
 DROP TABLE IF EXISTS student;
@@ -202,11 +203,11 @@ CREATE TABLE IF NOT EXISTS prestation (
   FOREIGN KEY (idnotationstate) REFERENCES notationstate(idnotationstate)
 );
 
-INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,start_time,end_time,comment_jury) VALUES
-(1,1,1,1,"2021-04-22","","","Très bonne présentation"),
-(2,1,1,1,"2021-04-26","","","Manque de sérieux"),
-(3,2,1,2,"2021-05-5","","","Présentation correcte"),
-(4,2,1,2,"2021-06-10","","","Clair et précis");
+INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,start_time,end_time,comment_jury,idnotationstate) VALUES
+(1,1,1,1,"2021-04-22","","","Très bonne présentation",2),
+(2,1,1,1,"2021-04-26","","","Manque de sérieux",2),
+(3,2,1,2,"2021-05-5","","","Présentation correcte",2),
+(4,2,1,2,"2021-06-10","","","Clair et précis",2);
 
 
 CREATE TABLE IF NOT EXISTS notationstate (
