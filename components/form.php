@@ -80,7 +80,7 @@
         $formGroup .= "\n</div>";
         $formGroup = str_replace(":label", $key, $formGroup);
         $formGroup = str_replace(":id", $parameters_key, $formGroup);
-        $formGroup = str_replace(":placeholder", isset($value['placeholder']) ? "placeholder:'".$value['placeholder']."'" : "", $formGroup);
+        $formGroup = str_replace(":placeholder", isset($value['placeholder']) ? "placeholder='".$value['placeholder']."'" : "", $formGroup);
         $formGroup = str_replace(":required", isset($value['!required']) ? "" : "required", $formGroup);
         $formGroup = str_replace(":value",  isset(parameters()[$parameters_key]) ? "value='".parameters()[$parameters_key]."'" : "", $formGroup);
         print($formGroup);
