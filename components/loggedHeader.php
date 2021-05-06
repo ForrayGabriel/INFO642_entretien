@@ -25,7 +25,7 @@
 			"Évènements"=>"?r=event",
 			"Historique"=>"?r=event/historique",
 			"Salles"=>"?r=classroom",
-			"Prestation" => "?r=prestation",
+			// "Prestation" => "?r=prestation",
 			"Groupe" => "?r=group/import",
 			"Utilisateurs" => "?r=users",
 			"Contact"=>"?r=contact",

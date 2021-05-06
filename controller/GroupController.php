@@ -53,30 +53,18 @@ class GroupController extends Controller {
 							if(property_exists($student, '_' . $key))
 								$student->$key = $value;	
 						}
-						// INSERT OR UPDATE
 
 						if($student->num_INE){
-							$internal->password = $student->num_INE;
+							$internal->password = md5($student->num_INE);
 						}else if($student->num_student){
-							$internal->password = $student->num_student;
+							$internal->password = md5($student->num_student);
 						}else if($internal->username){
-							$internal->password = $internal->username;
-						}else{
-							$internal->password = "password";
+							$internal->password = md5($internal->username);
 						}
 
+						$internal->deleted = 0;
+
 						if(!InternalUser::findOne(['email' => $internal->email])){
-
-							if(isset($student->num_INE)){
-								$internal->password = $student->num_INE;
-							}else if(isset($student->num_student)){
-								$internal->password = $student->num_student;
-							}else if(isset($internal->username)){
-								$internal->password = $internal->username;
-							}else{
-								$internal->password = "password";
-							}
-
 							$internal->deleted = 0;
 
 							$get_id = $internal->insert();

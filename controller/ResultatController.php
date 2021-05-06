@@ -75,7 +75,7 @@ class ResultatController extends Controller {
                     "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
                 );
 
-                $table_content[$prestation->idprestation]['button'] = "<a style='text-decoration: none;' href='?r=resultat/report&id=" . $prestation->idprestation . "'><button class='button' type='button'>Les résultats</button></a> ";
+                $table_content[$prestation->idprestation]['button'] = "<a style='text-decoration: none;' href='?r=resultat/report&id=" . $prestation->idprestation . "'><button class='button' type='button'>Résultats</button></a> ";
 
             }
 
@@ -95,6 +95,7 @@ class ResultatController extends Controller {
 
         $data = array();
         $count = array();
+        $comment = array();
         $sum = 0;
 
         foreach($evaluations as $evaluation){
@@ -102,8 +103,10 @@ class ResultatController extends Controller {
                 $data[$evaluation->idevaluationcriteria->description_criteria] = 0;
                 $count[$evaluation->idevaluationcriteria->description_criteria] = 0;
             }
-            $data[$evaluation->idevaluationcriteria->description_criteria] += $evaluation->individual_note;
-            $count[$evaluation->idevaluationcriteria->description_criteria]++;
+            if($evaluation->individual_note){
+                $data[$evaluation->idevaluationcriteria->description_criteria] += (int) $evaluation->individual_note;
+                $count[$evaluation->idevaluationcriteria->description_criteria]++;
+            }
         }
 
         foreach($data as $key => $value){

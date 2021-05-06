@@ -8,7 +8,7 @@ class EventController extends Controller {
 		if (isset(parameters()["id"])) {
 			$prestations = Prestation::findOne(["idevent" => parameters()["id"]]);
 
-			$table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
+			$table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Action");
 
 			$table_content = array();
 			foreach ($prestations as &$prestation) {
@@ -19,6 +19,8 @@ class EventController extends Controller {
 					"Jury" => $prestation->idjury->name_jury,
 					"Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
 				);
+
+				$table_content[$prestation->idprestation]['button'] = "<a style='text-decoration: none;' href='?r=resultat/report&id=" . $prestation->idprestation . "'><button class='button' type='button'>Les résultats</button></a> ";
 			}
 
 			$no_data = "Aucune prestation pour cet événement";
@@ -49,7 +51,7 @@ class EventController extends Controller {
 			);
 	
 			$no_data = "Aucun événement à venir";
-			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink, "actions"=>$table_actions, "no_data"=>$no_data]);
+			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink, "actions"=>$table_actions, "no_data" => $no_data]);
 		}
 	}
 
