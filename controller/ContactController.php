@@ -44,7 +44,7 @@ class ContactController extends Controller {
 
 			$contact = new UserContact($id);
 
-			$this->render("view", array('contact' => $contact, 'response' => ResponseContact::findAll(), 'internaluser' => InternalUser::findAll()));
+			$this->render("view", array('contact' => $contact, 'response' => ResponseContact::findOne(['idusercontact' => $id]), 'internaluser' => InternalUser::findAll()));
 		} catch (Exception $e) {
 			(new SiteController())->render("index");
 		}
@@ -54,11 +54,17 @@ class ContactController extends Controller {
 		if (isset(parameters()['answer_iduser_requestor']) and isset(parameters()['answer_iduser_receiver']) and isset(parameters()['answer_idcontact']) and isset(parameters()['answer_title']) and isset(parameters()['answer_text'])){
 			$responsecontact = new ResponseContact();
 			$responsecontact->idusercontact = parameters()['answer_idcontact'];
-			$responsecontact->idinternaluser_requestor = parameters()['answer_iduser_requestor'];
-			$responsecontact->idinternaluser_receiver = parameters()['answer_iduser_receiver'];
+			$responsecontact->idinternaluser_requestor = get_id();
+
+			if(parameters()['answer_iduser_requestor'] == get_id()){
+				$responsecontact->idinternaluser_receiver = parameters()['answer_iduser_receiver'];
+			}else{
+				$responsecontact->idinternaluser_receiver = parameters()['answer_iduser_requestor'];
+			}
+			
 			$responsecontact->title_response = parameters()['answer_title'];
 			$responsecontact->text_response = parameters()['answer_text'];
-			$responsecontact->date_response = date("Y-m-d H:i:s");
+			$responsecontact->date_response = date("d-m-Y H:i:s");
 			$responsecontact->insert();
 		}
 		go_back();
@@ -125,7 +131,7 @@ class ContactController extends Controller {
 
 					$usercontact->title_contact = $_POST['Titre_du_message'];
 					$usercontact->description_contact = $_POST['Contenu_du_message'];
-					$usercontact->date_contact = date("Y-m-d H:i:s");
+					$usercontact->date_contact = date("d-m-Y H:i:s");
 
 					// Dorian : need to be update
 					$usercontact->type_demande = "basic";
