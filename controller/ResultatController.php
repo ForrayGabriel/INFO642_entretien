@@ -20,14 +20,13 @@ class ResultatController extends Controller {
     	$prestations = Prestation::findOne(["idstudent" => $student->idinternaluser->idinternaluser]);
 
         $prestations = array_filter($prestations, function($prestation) {
-            return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
+            return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d"));
         });
 
         $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Etat","Action");
 
         $table_content = array();
         foreach ($prestations as &$prestation) {
-
 
             $table_content[$prestation->idprestation] = array(
                 "Evenement" => $prestation->idevent->entitled_event,
@@ -61,7 +60,7 @@ class ResultatController extends Controller {
             }
 
             $prestations = array_filter($prestations, function($prestation) {
-                return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d H:i:s"));
+                return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d"));
             });
 
             $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Action");

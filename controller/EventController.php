@@ -26,7 +26,7 @@ class EventController extends Controller {
 		} else {
 			$events = Event::findAll();
 			$events = array_filter($events, function($event) {
-				return strtotime($event->end_date) > strtotime(date("Y-m-d H:i:s"));
+				return strtotime($event->end_date) >= strtotime(date("Y-m-d"));
 			});
 
 			$table_header = array("Nom", "Description", "Date");
@@ -57,7 +57,7 @@ class EventController extends Controller {
 	public function historique() {
 		$events = Event::findAll();
 		$events = array_filter($events, function($event) {
-			return strtotime($event->end_date) < strtotime(date("Y-m-d H:i:s"));
+			return strtotime($event->end_date) < strtotime(date("Y-m-d"));
 		});
 	
 		$table_header = array("Nom", "Description");

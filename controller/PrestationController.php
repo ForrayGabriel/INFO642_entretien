@@ -21,7 +21,7 @@
             $prestations = Prestation::findOne(["idstudent" => $student->idinternaluser->idinternaluser]);
 
             $prestations = array_filter($prestations, function($prestation) {
-                return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
+                return strtotime($prestation->date_prestation) >= strtotime(date("Y-m-d"));
             });
 
             $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
@@ -51,9 +51,9 @@
             foreach ($prestations as $key => $prestation) {
                 $prestations[$key] = new Prestation($prestation["idprestation"]);
             }
-
+            
             $prestations = array_filter($prestations, function($prestation) {
-                return strtotime($prestation->date_prestation) > strtotime(date("Y-m-d H:i:s"));
+                return strtotime($prestation->date_prestation) >= strtotime(date("Y-m-d"));
             });
 
             $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
