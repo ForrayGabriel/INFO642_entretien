@@ -27,7 +27,7 @@ async function sort(event) {
 
     // S'il s'agit de la colonne actions, on ne fait rien
     if (column == 5) return;
-    if (document.querySelectorAll("#table tr").length === 1) return;
+    if (document.querySelectorAll("#table tr").length <= 2) return;
 
     do{
         var switching = false;
@@ -53,7 +53,7 @@ async function sort(event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#searchBox").addEventListener("keyup", search);
-    // document.querySelector("#table tr").addEventListener("click", sort);
+    document.querySelector("#table tr").addEventListener("click", sort);
 });
 
 
