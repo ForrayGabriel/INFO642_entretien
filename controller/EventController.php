@@ -5,7 +5,6 @@ class EventController extends Controller {
 	var $rolepermissions = [1,2,3];
 
 	public function index() {
-
 		if (isset(parameters()["id"])) {
 			$prestations = Prestation::findOne(["idevent" => parameters()["id"]]);
 
@@ -45,12 +44,60 @@ class EventController extends Controller {
 			$table_rowLink = "?r=event";
 
 			$table_actions = array(
-				array("url" => "?r=evaluationcriteria/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png")
+				array("url" => "?r=evaluationcriteria/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
+				array("url" => "?r=event/update&id=:id", "desc"=>"", "icon"=>"update.png")
 			);
 	
 			$no_data = "Aucun événement à venir";
 			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink, "actions"=>$table_actions, "no_data"=>$no_data]);
 		}
+	}
+
+	public function update() {
+		id_or_back(parameters());
+		$event = new Event(parameters()["id"]);
+		$message = null;
+
+		$form_title = "Modifier un évenement";
+		
+		$teachers = InternalUser::findOne(["idrole" => 2]);
+		$options_enseignants = array();
+		foreach ($teachers as &$teacher) {
+			$options_enseignants[$teacher->nom . " " . $teacher->prenom] = $teacher->idinternaluser;
+		}
+
+		$form_content = array(
+			"Titre" => array("type" => "text", "value"=>$event->entitled_event),
+			"Description" => array("type" => "text", "value"=>$event->description_event),
+			"Enseignant responsable" => 
+				array(
+					"type" => "select", 
+					"desc" => "Choisir enseignant responsable de l'évenement", 
+					"value" => $event->idevent_creator,
+					"options" => $options_enseignants
+				),
+			"Date" => array(
+				"type" => "date",
+				"title" => "Date de début et de fin",
+				"value_start" => $event->start_date,
+				"value_end" => $event->end_date
+			)
+		);
+
+		if($_SERVER['REQUEST_METHOD'] == "POST") {
+			if (parametersExist(["Titre", "Description", "Date_start", "Date_end", "Enseignant_responsable"])) {
+				$event->entitled_event = parameters()["Titre"];
+				$event->description_event = parameters()["Description"];
+				$event->idevent_creator = parameters()["Enseignant_responsable"];
+				$event->start_date = parameters()["Date_start"];
+				$event->end_date = parameters()["Date_end"];
+				$event->update();
+				return header('Location: .?r=event');
+			}else{
+				$message = ["type"=>"error", "content"=>"Erreur lors de la modification"];
+			}
+		}
+		$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content, "message"=>$message]);
 	}
 
 	public function historique() {
@@ -74,23 +121,9 @@ class EventController extends Controller {
 		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "no_data"=>$no_data]);
 	}
 
-
-	public function update_event(){
-		if(isset(parameters()['idevent_creator']) and parameters()['idevent_creator']  != 0 and isset(parameters()['entitled_event']) and isset(parameters()['description_event']) and isset(parameters()['start_date']) and isset(parameters()['end_date']) and isset(parameters()['idevent'])){
-			$event = new Event(parameters()['idevent']);
-			$event->entitled_event = parameters()["entitled_event"];
-			$event->description_event = parameters()["description_event"];
-			$event->start_date = parameters()["start_date"];
-			$event->end_date = parameters()["end_date"];
-			$event->idevent_creator = parameters()['idevent_creator'];
-			$event->update();
-		}
-		$this->render("index", array('event' => Event::findAll(),'classroom' => Classroom::findAll(), 'internaluser' => InternalUser::findAll()));
-	}
-
 	public function add(){
 		$message = null;
-		$form_title = "Ajouter un évenment";
+		$form_title = "Ajouter un évenement";
 		$groups = PeopleGroup::findAll();
 		$options_groups = array();
 		foreach ($groups as &$group) {
@@ -110,7 +143,7 @@ class EventController extends Controller {
 			"Enseignant responsable" => 
 				array(
 					"type" => "select", 
-					"desc" => "Choisir enseignant responsable de l'évenment", 
+					"desc" => "Choisir enseignant responsable de l'évenement", 
 					"options" => $options_enseignants
 				),
 			"Date" => array(
