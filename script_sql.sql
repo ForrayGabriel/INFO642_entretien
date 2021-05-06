@@ -167,8 +167,8 @@ CREATE TABLE IF NOT EXISTS jury (
 );
 
 INSERT INTO jury(idjury,idclassroom,name_jury,meridiem) VALUES
-(1,3,"ALLOUI | VALET",CONCAT(CAST(Now()-INTERVAL 1 DAY as date)," 14:00:00")),
-(2,3,"ALLOUI | VALET",CONCAT(CAST(Now() as date)," 14:00:00"));
+(1,3,"ALLOUI VALET",CONCAT(CAST(Now()-INTERVAL 1 DAY as date)," 14:00:00")),
+(2,3,"ALLOUI VALET",CONCAT(CAST(Now() as date)," 14:00:00"));
 
 CREATE TABLE IF NOT EXISTS event (
   idevent int(11) NOT NULL AUTO_INCREMENT,

@@ -15,7 +15,7 @@
             }
         }
 
-        // STUDENT 
+        // STUDENT
 
         public function student($student) {
             $prestations = Prestation::findOne(["idstudent" => $student->idinternaluser->idinternaluser]);
@@ -33,7 +33,7 @@
                     "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
                     "Salle" => $prestation->idjury->idclassroom->name_classroom,
                     "Jury" => $prestation->idjury->name_jury,
-                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time,
+                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . substr($prestation->start_time,0,5)  . " à " . substr($prestation->end_time,0,5),
                     "Convocation" => "<a target='_blank' style='text-decoration: none;' href='?r=convocation/generate&id=" . $prestation->idprestation . "'><button class='button' type='button'>📋 Ma convocation</button></a> "
                 );
             }
@@ -53,7 +53,7 @@
             foreach ($prestations as $key => $prestation) {
                 $prestations[$key] = new Prestation($prestation["idprestation"]);
             }
-            
+
             $prestations = array_filter($prestations, function($prestation) {
                 return strtotime($prestation->date_prestation) >= strtotime(date("Y-m-d"));
             });
@@ -66,7 +66,7 @@
                     "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
                     "Salle" => $prestation->idjury->idclassroom->name_classroom,
                     "Jury" => $prestation->idjury->name_jury,
-                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
+                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . substr($prestation->start_time,0,5)  . " à " . substr($prestation->end_time,0,5)
                 );
 
                 if($prestation->idnotationstate->idnotationstate == 3){
@@ -79,9 +79,9 @@
             $table_actions = array(
                 array("url" => "?r=prestation/notation&id=:id", "desc" => "", "icon" => "evaluationicon.png")
             );
-        
+
             $no_data = "Aucune prestation à venir";
-            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "actions" => $table_actions, "no_data"=> $no_data]);    
+            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "actions" => $table_actions, "no_data"=> $no_data]);
         }
 
         public function notation(){
@@ -91,7 +91,7 @@
             $id_event = $prestation->idevent->idevent;
             $evaluations_criterias = EvaluationCriteria::findOne(['idevent' => $id_event]);
 
-            if($_SERVER['REQUEST_METHOD'] == "GET"){ 
+            if($_SERVER['REQUEST_METHOD'] == "GET"){
 
                 $form_title = "Noter une prestation";
 
@@ -160,7 +160,7 @@
                             $individual_evaluation->update();
                         }
                     }
-                    
+
                     go_back();
 
                 }
@@ -175,6 +175,3 @@
             go_back();
         }
     }
-
-
-
