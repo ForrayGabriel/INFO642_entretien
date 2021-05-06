@@ -33,7 +33,7 @@
                     "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
                     "Salle" => $prestation->idjury->idclassroom->name_classroom,
                     "Jury" => $prestation->idjury->name_jury,
-                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
+                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . substr($prestation->start_time,0,5)  . " à " . substr($prestation->end_time,0,5)
                 );
             }
 
@@ -65,7 +65,7 @@
                     "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
                     "Salle" => $prestation->idjury->idclassroom->name_classroom,
                     "Jury" => $prestation->idjury->name_jury,
-                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
+                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . substr($prestation->start_time,0,5)  . " à " . substr($prestation->end_time,0,5)
                 );
 
                 if($prestation->idnotationstate->idnotationstate == 3){

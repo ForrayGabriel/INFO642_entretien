@@ -26,11 +26,14 @@ class ContactController extends Controller {
 			);
 		}
 		
-		$table_addBtn = array("text" => "Contacter quelqu'un", "url" => "?r=contact/write");
+		if (is_student()) {
+			$table_addBtn = array("text" => "Contacter administrateur", "url" => "?r=contact/write");
+		} else if (is_teacher() || is_admin()) {
+			$table_addBtn = array("text" => "Contacter une personne / un groupe", "url" => "?r=contact/write");
+		}
 
 		$table_actions = array(
 			array("url" => "?r=contact/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png")
-			// array("url" => "?r=", "desc"=>"fermer la conversation", "icon"=>"removeicon.png")
 		);
 
 		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions]);

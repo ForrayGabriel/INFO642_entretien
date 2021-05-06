@@ -212,6 +212,8 @@ class EventController extends Controller {
 				$idevent = $event->insert();
 				
 				$classrooms = Classroom::findAll();
+
+				
 				while ($nb_jury_needs > 0) {
 					
 					// Création des jury
@@ -224,22 +226,23 @@ class EventController extends Controller {
 							$jury->name_jury = "";
 							$jury->meridiem = $date;
 							$jury = new Jury($jury->insert());
-
+							
 							$composes = array();
 							for ($j=0; $j < parameters()["Nombre_denseignant_par_jury"]; $j++) {
 								$jury->name_jury .= $teacher_disponibility["timeslot"][$i+$j]->idinternaluser->nom." ";
+								
 								$compose = new Compose();
 								$compose->idjury = $jury->idjury;
 								$compose->idinternaluser = $teacher_disponibility["timeslot"][$i+$j]->idinternaluser->idinternaluser;
 								$compose->insert();
-
+								
 								$teacher_disponibility["timeslot"][$i+$j]->disponibility = 4;
 								$teacher_disponibility["timeslot"][$i+$j]->update();
 							}
 							$jury->update();
-
+							
 							$prestation_duration = 4*60*60 / parameters()["Nombre_de_prestation_dans_une_demi-journée"];
-
+							
 							for ($j=0; $j < parameters()["Nombre_de_prestation_dans_une_demi-journée"]; $j++) { 
 								$prestation = new Prestation();
 								$prestation->idstudent = array_pop($students)->idinternaluser->idinternaluser;
@@ -248,8 +251,8 @@ class EventController extends Controller {
 								$prestation->date_prestation = $date;
 								$prestation->start_time = date('H:i:s', strtotime(substr($date,11))+$prestation_duration*$j);
 								$prestation->end_time = date('H:i:s', strtotime(substr($date,11))+$prestation_duration*($j+1));
+								$prestation->idnotationstate = 1;
 								$prestation->insert();
-
 								if ($students == null) {
 									header("Location: .?r=event");
 									return;

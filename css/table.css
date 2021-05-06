@@ -15,7 +15,7 @@
 	font-size: 16px; /* Increase font-size */
 }
 
-.table-container h1{
+.table-container h1 {
 	margin-bottom: 30px;
 }
 
@@ -62,7 +62,7 @@
 }
 
 #table th, #table td {
-	text-align: left; /* Left-align text */
+	text-align: center; /* Left-align text */
 	padding: 12px; /* Add padding */
 }
 
@@ -93,9 +93,8 @@ tr:nth-child(odd) {
 }
 
 #table a {
+	margin: auto;
 	height: 44px;
-	display: flex;
-	align-items: center;
 }
 
 #table a img {
