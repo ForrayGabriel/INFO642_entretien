@@ -49,18 +49,20 @@
                 $formGroup .= "\n<input class='box-input' min=' ".date("Y-m-d H:i:s")."' type='date' name=':id_start' :required :value_start>";
                 $formGroup .= "\n<input class='box-input' type='date' name=':id_end' :required :value_end>";
                 $formGroup .= "\n</div>";
-                $formGroup = str_replace(":value_start", isset(parameters()[$parameters_key."_start"]) ? "value='".parameters()[$parameters_key."_start"]."'" : "", $formGroup);
-                $formGroup = str_replace(":value_end", isset(parameters()[$parameters_key."_end"]) ? "value='".parameters()[$parameters_key."_end"]."'" : "", $formGroup);
-
+                $formGroup = str_replace(":value_start", isset(parameters()[$parameters_key."_start"]) ? "value='".parameters()[$parameters_key."_start"]."'" : ":value_start", $formGroup);
+                $formGroup = str_replace(":value_start", isset($value["value_start"]) ? "value='".substr($value["value_start"],0,10)."'" : "", $formGroup);
+                $formGroup = str_replace(":value_end", isset(parameters()[$parameters_key."_end"]) ? "value='".parameters()[$parameters_key."_end"]."'" : ":value_end", $formGroup);
+                $formGroup = str_replace(":value_end", isset($value["value_end"]) ? "value='".substr($value["value_end"],0,10)."'" : "", $formGroup);
                 break;
 
             case "radio":
             case "checkbox":
                 $formGroup .= "\n<p>:id</p>";
-                foreach ($value["options"] as $opt_value => $id) {
+                foreach ($value["options"] as $opt_value => $opt_id) {
                     $formGroup .= "\n<label>";
-                    $formGroup .= "\n<input name=':id' value='$id' type='".$value["type"]."' class='input-radio' :checked>$opt_value";
-                    $formGroup = str_replace(":checked", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $id ? "checked" : "", $formGroup);
+                    $formGroup .= "\n<input name=':id' value='$opt_id' type='".$value["type"]."' class='input-radio' :checked>$opt_value";
+                    $formGroup = str_replace(":checked", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $id ? "checked" : ":checked", $formGroup);
+                    $formGroup = str_replace(":checked", isset($value['value']) && $value['value'] == $opt_id ? "checked" : "", $formGroup);
                     $formGroup .= "\n</label>";
                 }
                 break;
@@ -69,9 +71,10 @@
                 $formGroup .= "\n<p>:id</p>";
                 $formGroup .= "\n<select id='dropdown' name=':id' class='form-control' :required>";
                 $formGroup .= "\n<option disabled selected value>".$value["desc"]."</option>";
-                foreach ($value["options"] as $value => $id) {
-                    $formGroup .= "\n<option value='$id' :selected>$value</option>";
-                    $formGroup = str_replace(":selected", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $id ? "selected" : "", $formGroup);
+                foreach ($value["options"] as $opt_value => $opt_id) {
+                    $formGroup .= "\n<option value='$opt_id' :selected>$opt_value</option>";
+                    $formGroup = str_replace(":selected", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $opt_id ? "selected" : ":selected", $formGroup);
+                    $formGroup = str_replace(":selected", isset($value['value']) && $value['value'] == $opt_id ? "selected" : "", $formGroup);
                 }
                 $formGroup .= "\n</select>";
                 break;

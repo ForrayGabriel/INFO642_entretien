@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS event (
 );
 
 INSERT INTO event(idevent,entitled_event,description_event,idevent_creator,start_date,end_date) VALUES
-(1,"Soutenance d'INFO642","Présentation des projets réalisés",11,CAST(Now()-INTERVAL 1 DAY as date), CAST(Now() as date));
+(1,"Soutenance d'INFO642","Présentation des projets réalisés",10,CAST(Now()-INTERVAL 1 DAY as date), CAST(Now() as date));
 
 CREATE TABLE IF NOT EXISTS notationstate (
   idnotationstate int(11) NOT NULL AUTO_INCREMENT,

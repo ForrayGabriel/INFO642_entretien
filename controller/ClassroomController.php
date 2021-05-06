@@ -23,14 +23,15 @@ class ClassroomController extends Controller {
 		$table_addBtn = array("text" => "Ajouter une salle", "url" => "?r=classroom/add");
 	
 		$table_actions = array(
-			array("url" => "?r=classroom/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
+			array("url" => "?r=classroom/update&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
 			array("url" => "?r=classroom/delete&id=:id", "desc"=>"Supprimer la salle", "icon"=>"removeicon.png"));
 		
 		$no_data = "Aucune salle n'existe, vous pouvez en créer en cliquant sur le bouton ajouter";
 		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions, "no_data"=>$no_data]);
 	}
 
-	public function view() {
+	public function update() {
+		id_or_back(parameters());
 		if($_SERVER['REQUEST_METHOD'] == "GET") {
 			$classroom = new Classroom(parameters()["id"]);
 			$form_title = "Modifier une salle";
@@ -42,8 +43,7 @@ class ClassroomController extends Controller {
 			);
 			$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
 		}else{
-			if(isset(parameters()["Nom_de_la_salle"]) and isset(parameters()["Nom_du_bâtiment"]) and isset(parameters()["Capacité_de_la_classe"]) and isset(parameters()["Description"])) {
-
+			if(!parametersExist(["Nom_de_la_salle", "Nom_du_bâtiment", "Capacité_de_la_classe", "Description"])) {
 				$classroom = new Classroom(parameters()["id"]);
 				$classroom->name_classroom = parameters()["Nom_de_la_salle"];
 				$classroom->building_classroom = parameters()["Nom_du_bâtiment"];
