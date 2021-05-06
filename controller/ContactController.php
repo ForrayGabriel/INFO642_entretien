@@ -139,13 +139,13 @@ class ContactController extends Controller {
 					$usercontact->is_close = 1;
 
 
-					print_r($usercontact);
+					
 
 					$usercontact->insert();
 
 				}
+				header("Location: .?r=contact");
 				
-				return $this->index();
 			}
 		}
 	}
