@@ -9,8 +9,9 @@
     print("<h1 id='title' class='text-center'>$title</h1>");
     print("<form action='' method='post' enctype='multipart/form-data'>");
     if (isset($message) && $message !== null) {
-        print("<div class='form-group'>");
-        print("<p class='message ".$message["type"]."'>".$message["content"]."</p>");
+        print("<div class='form-group message ".$message["type"]."'>");
+        print("<label>".$message["type"]."</label>");
+        print("<p>".$message["content"]."</p>");
         print("</div>");
     }
     
@@ -57,18 +58,18 @@
 
             case "radio":
             case "checkbox":
-                $formGroup .= "\n<p>:id</p>";
+                $formGroup .= "\n<p>:label</p>";
                 foreach ($value["options"] as $opt_value => $opt_id) {
                     $formGroup .= "\n<label>";
                     $formGroup .= "\n<input name=':id' value='$opt_id' type='".$value["type"]."' class='input-radio' :checked>$opt_value";
-                    $formGroup = str_replace(":checked", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $id ? "checked" : ":checked", $formGroup);
+                    $formGroup = str_replace(":checked", isset(parameters()[$parameters_key]) && parameters()[$parameters_key] == $opt_id ? "checked" : ":checked", $formGroup);
                     $formGroup = str_replace(":checked", isset($value['value']) && $value['value'] == $opt_id ? "checked" : "", $formGroup);
                     $formGroup .= "\n</label>";
                 }
                 break;
 
             case "select":
-                $formGroup .= "\n<p>:id</p>";
+                $formGroup .= "\n<p>:label</p>";
                 $formGroup .= "\n<select id='dropdown' name=':id' class='form-control' :required>";
                 $formGroup .= "\n<option disabled selected value>".$value["desc"]."</option>";
                 foreach ($value["options"] as $opt_value => $opt_id) {

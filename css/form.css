@@ -76,18 +76,26 @@
     
 }
 
-
-.form-container .form-group .message {
+.message {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    font-weight: 600;
+    border: 5px solid white;
+    background-color: white;
+    border-radius: 5px;
 }
 
-.form-container .form-group .info {
-    color: #72ff72;
+.message label, .message p {
+    display: block !important;
+    color: black !important;
+    text-align: center;
 }
 
-.form-container .form-group .error {
-    color: #ff4f4f;
+.message label {
+    font-size: 1.4em !important;
+    font-weight: bold !important;
+}
+
+.Erreur label {
+    color: #ff4f4f !important;
 }

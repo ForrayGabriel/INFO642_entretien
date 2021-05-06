@@ -23,7 +23,7 @@ class ClassroomController extends Controller {
 		$table_addBtn = array("text" => "Ajouter une salle", "url" => "?r=classroom/add");
 	
 		$table_actions = array(
-			array("url" => "?r=classroom/update&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
+			array("url" => "?r=classroom/update&id=:id", "desc"=>"", "icon"=>"update.png"),
 			array("url" => "?r=classroom/delete&id=:id", "desc"=>"Supprimer la salle", "icon"=>"removeicon.png"));
 		
 		$no_data = "Aucune salle n'existe, vous pouvez en créer en cliquant sur le bouton ajouter";
