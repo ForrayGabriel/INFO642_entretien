@@ -62,7 +62,7 @@
 }
 
 #table th, #table td {
-	text-align: left; /* Left-align text */
+	text-align: center; /* Left-align text */
 	padding: 12px; /* Add padding */
 }
 
