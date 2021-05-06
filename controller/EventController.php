@@ -96,7 +96,7 @@ class EventController extends Controller {
 				$event->update();
 				return header('Location: .?r=event');
 			}else{
-				$message = ["type"=>"error", "content"=>"Erreur lors de la modification"];
+				$message = ["type"=>"Erreur", "content"=>"Erreur lors de la modification"];
 			}
 		}
 		$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content, "message"=>$message]);
@@ -169,7 +169,7 @@ class EventController extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			if (!parametersExist(["Titre", "Description", "Date_start", "Date_end", "Enseignant_responsable", 
 				"Groupe", "Nombre_denseignant_par_jury", "Nombre_de_prestation_dans_une_demi-journée"])) {
-				$message = ["type"=>"error", "content"=>"Erreur lors de l'insertion"];
+				$message = ["type"=>"Erreur", "content"=>"Erreur lors de l'insertion"];
 			}
 
 			if ($message === null) {
@@ -198,7 +198,7 @@ class EventController extends Controller {
 				$nb_jury_needs = ceil(count($students) / parameters()["Nombre_de_prestation_dans_une_demi-journée"]);
 
 				if ($jury_disponibility < $nb_jury_needs)
-					$message = ["type"=>"error", "content"=>"Nombre de professeurs disponibles insuffisants"];
+					$message = ["type"=>"Erreur", "content"=>"Nombre de professeurs disponibles insuffisants"];
 			}
 
 			if ($message === null) {
