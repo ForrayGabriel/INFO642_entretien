@@ -8,7 +8,6 @@ class UserContact extends Model {
 	protected $_title_contact;
 	protected $_description_contact;
 	protected $_date_contact;
-	protected $_type_demande;
 	protected $_have_response;	
 	protected $_is_close;								
 

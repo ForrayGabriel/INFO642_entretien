@@ -13,7 +13,7 @@ class ContactController extends Controller {
 			}
 		}
 
-		$table_header = array("Object", "Envoyé par ?","Envoyé pour ?", "Erreur", "Date");
+		$table_header = array("Object", "Envoyé par ?","Envoyé pour ?", "Date");
     
 		$table_content = array();
 		foreach ($contacts as &$contact) {
@@ -21,7 +21,6 @@ class ContactController extends Controller {
 				"Object" => $contact->title_contact,
 				"Qui" => $contact->idinternaluser_requestor->nom." ".$contact->idinternaluser_requestor->prenom,
 				"Pour" => $contact->idinternaluser_receiver->nom." ".$contact->idinternaluser_receiver->prenom,
-				"Erreur" => $contact->type_demande,
 				"Date" => $contact->date_contact,
 			);
 		}
@@ -78,7 +77,7 @@ class ContactController extends Controller {
 			if(is_student() || is_visitor()){
 				$form_title = "Contacter un administrateur";
 				$form_content = array(
-					"Titre du message" => array("type" => "text"),
+					"Titre du message" => array("type" => "text", "placeholder" => "Object de votre demande"),
 					"Contenu du message" => array("type" => "text-area", "placeholder" => "Entrer le contenu du message")
 				);
 				$this->renderComponent("form", ["title"=>$form_title, "content"=>$form_content]);
@@ -99,7 +98,7 @@ class ContactController extends Controller {
 				$form_content = array(
 					"Utilisateur" => array("type" => "select", "options" => $user_list, "desc" => "Choisir un utilisateur", "!required" => 1),
 					"Groupe Utilisateur" => array("type" => "select", "options" => $group_list, "desc" => "Choisir un groupe d'utilisateur", "!required" => 1),
-					"Titre du message"=>array("type" => "text"),
+					"Titre du message"=>array("type" => "text", "placeholder" => "Object de votre demande"),
 					"Contenu du message"=>array("type" => "text-area", "placeholder" => "Entrer le contenu du message")
 
 				);
@@ -112,7 +111,7 @@ class ContactController extends Controller {
 
 				if(is_student() || is_visitor()){
 					foreach(InternalUser::findOne(['idrole' => 3]) as $admin){
-						array_push($receivers, $id_receiver);
+						array_push($receivers, $admin->idinternaluser);
 					}
 				}else{
 					if(isset($_POST['Utilisateur'])){
@@ -134,13 +133,16 @@ class ContactController extends Controller {
 
 					$usercontact->title_contact = $_POST['Titre_du_message'];
 					$usercontact->description_contact = $_POST['Contenu_du_message'];
-					$usercontact->date_contact = date("d-m-Y H:i:s");
+					$usercontact->date_contact = date("Y-m-d H:i:s");
 
-					// Dorian : need to be update
-					$usercontact->type_demande = "basic";
 					$usercontact->have_response = 1;
 					$usercontact->is_close = 1;
+
+
+					print_r($usercontact);
+
 					$usercontact->insert();
+
 				}
 				
 				return $this->index();

@@ -273,7 +273,6 @@ CREATE TABLE IF NOT EXISTS usercontact (
   title_contact varchar(2046) NULL,
   description_contact varchar(2046) NULL,
   date_contact DATETIME NULL,
-  type_demande varchar(1000) NULL,
   have_response boolean NULL,
   is_close boolean NULL,
   PRIMARY KEY (idusercontact),
@@ -281,8 +280,8 @@ CREATE TABLE IF NOT EXISTS usercontact (
   FOREIGN KEY (idinternaluser_receiver) REFERENCES internaluser(idinternaluser)
 );
 
-INSERT INTO usercontact (idusercontact, idinternaluser_requestor,idinternaluser_receiver,title_contact,description_contact,date_contact,type_demande,have_response,is_close) VALUES
-(1,1,11,"Erreur sur le site","Erreur quand je clique sur le bouton logout",CAST(Now()-INTERVAL 5 DAY as date),"Erreur",1,0);
+INSERT INTO usercontact (idusercontact, idinternaluser_requestor,idinternaluser_receiver,title_contact,description_contact,date_contact,have_response,is_close) VALUES
+(1,1,11,"Erreur sur le site","Erreur quand je clique sur le bouton logout",CAST(Now()-INTERVAL 5 DAY as date),1,0);
 
 CREATE TABLE IF NOT EXISTS responsecontact (
   idresponsecontact int(11) NOT NULL AUTO_INCREMENT,
