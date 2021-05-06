@@ -5,6 +5,7 @@
 
 h1{
     text-align: center;
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 .green {
@@ -36,6 +37,7 @@ h1{
   text-align: center;
   font-size: 1.1em;
   user-select:none;
+  margin-bottom: 30px;
 }
 
 .calendar .header {
