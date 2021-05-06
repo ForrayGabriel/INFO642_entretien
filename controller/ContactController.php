@@ -58,7 +58,7 @@ class ContactController extends Controller {
 			$responsecontact->idinternaluser_receiver = parameters()['answer_iduser_receiver'];
 			$responsecontact->title_response = parameters()['answer_title'];
 			$responsecontact->text_response = parameters()['answer_text'];
-			$responsecontact->date_response = date("Y-m-d H:i:s");
+			$responsecontact->date_response = date("d-m-Y H:i:s");
 			$responsecontact->insert();
 		}
 		go_back();
@@ -125,7 +125,7 @@ class ContactController extends Controller {
 
 					$usercontact->title_contact = $_POST['Titre_du_message'];
 					$usercontact->description_contact = $_POST['Contenu_du_message'];
-					$usercontact->date_contact = date("Y-m-d H:i:s");
+					$usercontact->date_contact = date("d-m-Y H:i:s");
 
 					// Dorian : need to be update
 					$usercontact->type_demande = "basic";
