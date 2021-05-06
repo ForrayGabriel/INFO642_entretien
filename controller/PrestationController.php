@@ -24,7 +24,7 @@
                 return strtotime($prestation->date_prestation) >= strtotime(date("Y-m-d"));
             });
 
-            $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
+            $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Convocation");
 
             $table_content = array();
             foreach ($prestations as &$prestation) {
@@ -33,7 +33,8 @@
                     "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
                     "Salle" => $prestation->idjury->idclassroom->name_classroom,
                     "Jury" => $prestation->idjury->name_jury,
-                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
+                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time,
+                    "Convocation" => "<a target='_blank' style='text-decoration: none;' href='?r=convocation/generate&id=" . $prestation->idprestation . "'><button class='button' type='button'>📋 Ma convocation</button></a> "
                 );
             }
 
@@ -71,7 +72,7 @@
                 if($prestation->idnotationstate->idnotationstate == 3){
                     $table_content[$prestation->idprestation]["Etat"] = "✅ Résultat validé";
                 }else{
-                    $table_content[$prestation->idprestation]["Etat"] = "<a style='text-decoration: none;' href='?r=prestation/validate&id=" . $prestation->idprestation . "'><button class='button' type='button'>❌ Résultat non validé</button></a> ";;
+                    $table_content[$prestation->idprestation]["Etat"] = "<a style='text-decoration: none;' href='?r=prestation/validate&id=" . $prestation->idprestation . "'><button class='button' type='button'>❌ Résultat non validé</button></a> ";
                 }
             }
 
