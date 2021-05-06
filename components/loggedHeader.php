@@ -23,7 +23,7 @@
 
 		3 => [
 			"Évènements"=>"?r=event",
-			"Historique"=>"?r=resultat",
+			"Historique"=>"?r=event/historique",
 			"Salles"=>"?r=classroom",
 			"Prestation" => "?r=prestation",
 			"Groupe" => "?r=group/import",

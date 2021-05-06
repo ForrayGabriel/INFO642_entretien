@@ -9,7 +9,7 @@ class ClassroomController extends Controller {
 
 		$table_header = array("Numéro de la salle", "Bâtiment","Capacité", "Description");
     
-
+		$table_content = array();
 		foreach ($classrooms as &$classroom) {
 			$table_content[$classroom->idclassroom] = array(
 				"Numéro de la salle" => $classroom->name_classroom,
@@ -20,13 +20,14 @@ class ClassroomController extends Controller {
 		}
 		
 	
-		$table_addBtn = array("text" => "Ajouter", "url" => "?r=classroom/add");
+		$table_addBtn = array("text" => "Ajouter une salle", "url" => "?r=classroom/add");
 	
 		$table_actions = array(
 			array("url" => "?r=classroom/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png"),
 			array("url" => "?r=classroom/delete&id=:id", "desc"=>"Supprimer la salle", "icon"=>"removeicon.png"));
-	
-		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions]);
+		
+		$no_data = "Aucune salle n'existe, vous pouvez en créer en cliquant sur le bouton ajouter";
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions, "no_data"=>$no_data]);
 	}
 
 	public function view() {

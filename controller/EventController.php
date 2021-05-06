@@ -22,7 +22,8 @@ class EventController extends Controller {
 				);
 			}
 
-			$this->renderComponent("table", ["header" => $table_header, "content" => $table_content]);
+			$no_data = "Aucune prestation pour cet événement";
+			$this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "no_data"=>$no_data]);
 		} else {
 			$events = Event::findAll();
 			$events = array_filter($events, function($event) {
@@ -43,14 +44,12 @@ class EventController extends Controller {
 
 			$table_rowLink = "?r=event";
 
-
-
 			$table_actions = array(
 				array("url" => "?r=evaluationcriteria/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png")
 			);
 	
-
-			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink, "actions"=>$table_actions]);
+			$no_data = "Aucun événement à venir";
+			$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "rowLink"=>$table_rowLink, "actions"=>$table_actions, "no_data"=>$no_data]);
 		}
 	}
 
@@ -71,7 +70,8 @@ class EventController extends Controller {
 
 		$table_addBtn = array("text" => "Ajouter un évènement", "url" => "?r=event/add");
 
-		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn]);
+		$no_data = "Aucun événement passé";
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "no_data"=>$no_data]);
 	}
 
 

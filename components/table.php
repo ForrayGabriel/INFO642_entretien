@@ -17,14 +17,14 @@ print("</div>");
 
 print("<table id='table'>");
 print("<tr class='table-header'>");
-foreach ($header as &$header) {
-    print("<th>$header</th>");
+foreach ($header as &$header_name) {
+    print("<th>$header_name</th>");
 }
 if (isset($actions)) {
     print("<th colspan='".count($actions)."'>Actions</th>");
 }
 print("</tr>");
-if (isset($content)) {
+if (count($content) > 0) {
     foreach ($content as $id => $row) {
         if (isset($rowLink)) {
             print("<tr onclick=\"document.location = '$rowLink&id=$id';\">");
@@ -41,6 +41,12 @@ if (isset($content)) {
         }
         print("</tr>");
     }
+} else {
+    $colspan = count($header);
+    if (isset($actions)) $colspan++;
+    print("<tr>");
+    print("<td colspan=\"".$colspan."\">".(isset($no_data) ? $no_data : "Aucune donnée disponible")."</td>");
+    print("</tr>");
 }
 
 ?>

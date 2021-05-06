@@ -44,7 +44,8 @@ class ResultatController extends Controller {
             }
         }
 
-        $this->renderComponent("table", ["header" => $table_header, "content" => $table_content]);
+        $no_data = "Aucun résultat disponible";
+        $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "no_data" => $no_data]);
     }
 
     public function corrector($user){
@@ -77,8 +78,9 @@ class ResultatController extends Controller {
                 $table_content[$prestation->idprestation]['button'] = "<a style='text-decoration: none;' href='?r=resultat/report&id=" . $prestation->idprestation . "'><button class='button' type='button'>Les résultats</button></a> ";
 
             }
-        
-            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content]);   
+
+            $no_data = "Aucune prestation passé";
+            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "no_data" => $no_data]);   
     }
 
     public function report(){

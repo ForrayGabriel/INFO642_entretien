@@ -37,7 +37,8 @@
                 );
             }
 
-            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content]);
+            $no_data = "Aucune prestation à venir";
+            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "no_data"=>$no_data]);
         }
 
         public function corrector($user) {
@@ -58,21 +59,22 @@
 
             $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date");
             $table_content = array();
-            foreach ($prestations as &$prestation) {
-                $table_content[$prestation->idprestation] = array(
-                    "Evenement" => $prestation->idevent->entitled_event,
-                    "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
-                    "Salle" => $prestation->idjury->idclassroom->name_classroom,
-                    "Jury" => $prestation->idjury->name_jury,
-                    "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
-                );
-            }
+            // foreach ($prestations as &$prestation) {
+            //     $table_content[$prestation->idprestation] = array(
+            //         "Evenement" => $prestation->idevent->entitled_event,
+            //         "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
+            //         "Salle" => $prestation->idjury->idclassroom->name_classroom,
+            //         "Jury" => $prestation->idjury->name_jury,
+            //         "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . $prestation->start_time . " à " . $prestation->end_time
+            //     );
+            // }
 
             $table_actions = array(
                 array("url" => "?r=prestation/notation&id=:id", "desc" => "", "icon" => "updatepasswordicon.png")
             );
         
-            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "actions" => $table_actions]);    
+            $no_data = "Aucune prestation à venir";
+            $this->renderComponent("table", ["header" => $table_header, "content" => $table_content, "actions" => $table_actions, "no_data"=>$no_data]);    
         }
 
         public function notation(){

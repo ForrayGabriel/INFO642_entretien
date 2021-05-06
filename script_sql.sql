@@ -81,8 +81,7 @@ CREATE TABLE IF NOT EXISTS peoplegroup (
 INSERT INTO peoplegroup (idpeoplegroup,title_peoplegroup,description_peoplegroup) VALUES
 (1,"IDU3",""),
 (2,"IDU3-G1",""),
-(3,"IDU3-G2",""),
-(4,"Groupe Projet 1","");
+(3,"IDU3-G2","");
 
 CREATE TABLE IF NOT EXISTS belonggroup (
   idbelonggroup int(11) NOT NULL AUTO_INCREMENT,
@@ -110,16 +109,7 @@ INSERT INTO belonggroup (idbelonggroup, idinternaluser,idpeoplegroup) VALUES
 (13,5,2),
 (14,6,3),
 (15,7,3),
-(16,8,2),
-
-(17,1,4),
-(18,2,4),
-(19,3,4),
-(20,4,4),
-(21,5,4),
-(22,6,4),
-(23,7,4),
-(24,8,4);
+(16,8,2);
 
 CREATE TABLE IF NOT EXISTS classroom (
   idclassroom int(11) NOT NULL AUTO_INCREMENT,
@@ -177,8 +167,8 @@ CREATE TABLE IF NOT EXISTS jury (
 );
 
 INSERT INTO jury(idjury,idclassroom,name_jury,meridiem) VALUES
-(1,3,"ALLOUI VALET",CONCAT(CAST(Now()-INTERVAL 1 DAY as date)," 14:00:00")),
-(2,3,"ALLOUI VALET",CONCAT(CAST(Now() as date)," 14:00:00"));
+(1,3,"ALLOUI | VALET",CONCAT(CAST(Now()-INTERVAL 1 DAY as date)," 14:00:00")),
+(2,3,"ALLOUI | VALET",CONCAT(CAST(Now() as date)," 14:00:00"));
 
 CREATE TABLE IF NOT EXISTS event (
   idevent int(11) NOT NULL AUTO_INCREMENT,
@@ -225,9 +215,9 @@ CREATE TABLE IF NOT EXISTS prestation (
 INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,start_time,end_time,comment_jury,idnotationstate) VALUES
 (1,1,1,1,CAST(Now()-INTERVAL 1 DAY as date),"14:00:00","14:20:00","Très bonne présentation",3),
 (2,2,1,1,CAST(Now()-INTERVAL 1 DAY as date),"14:20:00","14:40:00","Contenu de la présentation respectée",2),
-(3,3,2,1,CAST(Now() as date),"14:00:00","14:20:00","Présentation correcte",1),
-(4,5,2,1,CAST(Now() as date),"14:20:00","14:40:00","sublissime",1),
-(5,8,2,1,CAST(Now() as date),"14:40:00","15:00:00","Absent (ski)",1);
+(3,3,2,1,CAST(Now() as date),"14:00:00","14:20:00","",1),
+(4,5,2,1,CAST(Now() as date),"14:20:00","14:40:00","",1),
+(5,8,2,1,CAST(Now() as date),"14:40:00","15:00:00","",1);
 
 CREATE TABLE IF NOT EXISTS compose (
   idcompose int(11) NOT NULL AUTO_INCREMENT,
