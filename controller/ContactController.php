@@ -89,7 +89,8 @@ class ContactController extends Controller {
 				$group_list = array();
 
 				foreach(InternalUser::findAll() as $user){
-					$user_list["Utilisateur : ".$user->nom . " " .  $user->prenom] = "user-".$user->idinternaluser;
+					if ($user->idinternaluser != get_id())
+						$user_list["Utilisateur : ".$user->nom . " " .  $user->prenom] = "user-".$user->idinternaluser;
 				}
 
 				foreach(PeopleGroup::findAll() as $group){
