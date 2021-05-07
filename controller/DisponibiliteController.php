@@ -13,14 +13,28 @@ class DisponibiliteController extends Controller {
 			$data = json_decode(parameters()["data"], true);
 
 			foreach($data as $date) {
-				$timeslot = new TimeSlot();
+
+				if ($date["meridiem"] == "AM") {
+					$meridiem = $date["date"]." 08:00:00";
+				} else {
+					$meridiem = $date["date"]." 14:00:00";
+				}
+
+				$timeslots = TimeSlot::findOne(["meridiem"=>$meridiem, "idinternaluser"=>get_id()]);
+				if (count($timeslots) == 0)
+					$timeslot = new TimeSlot();
+				else
+					$timeslot = $timeslots[0];
+
 				$timeslot->idinternaluser = $_SESSION["user"]["idinternaluser"];
 				$timeslot->disponibility = $colors[$date["color"]];
-				if ($date["meridiem"] == "AM")
-					$timeslot->meridiem = $date["date"]." 08:00:00";
+				$timeslot->meridiem = $meridiem;
+
+				if (count($timeslots) == 0)
+					$timeslot->insert();
 				else
-					$timeslot->meridiem = $date["date"]." 14:00:00";
-				$timeslot->insert();
+					$timeslot->update();
+				
 			}
 		}
 
