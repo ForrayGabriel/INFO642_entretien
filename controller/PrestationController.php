@@ -18,11 +18,7 @@
         // STUDENT
 
         public function student($student) {
-            $prestations = Prestation::findOne(["idstudent" => $student->idinternaluser->idinternaluser]);
-
-            $prestations = array_filter($prestations, function($prestation) {
-                return strtotime($prestation->date_prestation) >= strtotime(date("Y-m-d"));
-            });
+            $prestations = Prestation::findOne(["idstudent" => $student->idinternaluser->idinternaluser, "idnotationstate" => "1"]);
 
             $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Convocation");
 
@@ -61,6 +57,7 @@
             $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Etat");
             $table_content = array();
             foreach ($prestations as &$prestation) {
+
                 $table_content[$prestation->idprestation] = array(
                     "Evenement" => $prestation->idevent->entitled_event,
                     "Eleve" => $prestation->idstudent->idinternaluser->nom." ".$prestation->idstudent->idinternaluser->prenom,
@@ -68,6 +65,7 @@
                     "Jury" => $prestation->idjury->name_jury,
                     "Date" => date_format(date_create($prestation->date_prestation),'d/m/y'). " de " . substr($prestation->start_time,0,5)  . " à " . substr($prestation->end_time,0,5)
                 );
+
 
                 if($prestation->idnotationstate->idnotationstate == 3){
                     $table_content[$prestation->idprestation]["Etat"] = "✅ Résultat validé";
@@ -161,7 +159,7 @@
                         }
                     }
 
-                    go_back();
+                   header("Location: .?r=prestation");
 
                 }
             }
@@ -170,8 +168,14 @@
         public function validate(){
             id_or_back(parameters());
             $prestation = new Prestation(parameters()['id']);
-            $prestation->idnotationstate = 3;
-            $prestation->update();
+
+            $individual_evaluation = IndividualEvaluation::findOne(['idprestation' => parameters()['id']]);
+
+            if($individual_evaluation){
+                $prestation->idnotationstate = 3;
+                $prestation->update();
+            }
+
             go_back();
         }
     }

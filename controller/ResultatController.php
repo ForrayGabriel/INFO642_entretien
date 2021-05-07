@@ -17,11 +17,11 @@ class ResultatController extends Controller {
     }
 
     public function student($student){
-    	$prestations = Prestation::findOne(["idstudent" => $student->idinternaluser->idinternaluser]);
+    	$prestations = Prestation::findOne(["idstudent" => $student->idinternaluser->idinternaluser, "idnotationstate" => "3"]);
 
-        $prestations = array_filter($prestations, function($prestation) {
-            return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d"));
-        });
+        // $prestations = array_filter($prestations, function($prestation) {
+        //     return strtotime($prestation->date_prestation) < strtotime(date("Y-m-d"));
+        // });
 
         $table_header = array("Evenement", "Eleve", "Salle", "Jury", "Date","Etat","Action");
 

@@ -1,3 +1,5 @@
+set NAMES 'UTF8';
+
 DROP TABLE IF EXISTS individualevaluation;
 DROP TABLE IF EXISTS prestation;
 DROP TABLE IF EXISTS notationstate;
@@ -216,7 +218,7 @@ CREATE TABLE IF NOT EXISTS prestation (
 
 INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,start_time,end_time,comment_jury,idnotationstate) VALUES
 (1,1,1,1,CAST(Now()-INTERVAL 1 DAY as date),"14:00:00","14:20:00","Très bonne présentation",3),
-(2,2,1,1,CAST(Now()-INTERVAL 1 DAY as date),"14:20:00","14:40:00","Contenu de la présentation respectée",2),
+(2,2,1,1,CAST(Now()-INTERVAL 1 DAY as date),"14:20:00","14:40:00","Contenu de la présentation respectée",3),
 (3,3,2,1,CAST(Now() as date),"14:00:00","14:20:00","",1),
 (4,5,2,1,CAST(Now() as date),"14:20:00","14:40:00","",1),
 (5,8,2,1,CAST(Now() as date),"14:40:00","15:00:00","",1),
