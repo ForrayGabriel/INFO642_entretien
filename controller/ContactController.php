@@ -35,7 +35,9 @@ class ContactController extends Controller {
 			array("url" => "?r=contact/view&id=:id", "desc"=>"", "icon"=>"evaluationicon.png")
 		);
 
-		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions"=>$table_actions]);
+
+
+		$this->renderComponent("table", ["header"=>$table_header, "content"=>$table_content, "addBtn"=>$table_addBtn, "actions" => $table_actions, "no_data" => "Aucune demande de contact en cours"]);
 	}
 
 	public function view($id = null) {
@@ -66,7 +68,7 @@ class ContactController extends Controller {
 			
 			$responsecontact->title_response = parameters()['answer_title'];
 			$responsecontact->text_response = parameters()['answer_text'];
-			$responsecontact->date_response = date("d-m-Y H:i:s");
+			$responsecontact->date_response = date("Y-m-d H:i:s");
 			$responsecontact->insert();
 		}
 		go_back();
@@ -138,8 +140,6 @@ class ContactController extends Controller {
 					$usercontact->have_response = 1;
 					$usercontact->is_close = 1;
 
-
-					
 
 					$usercontact->insert();
 

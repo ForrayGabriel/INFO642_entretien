@@ -51,7 +51,7 @@ foreach($data['response'] as $response){
 ?>
 
 
-<h2>Repondre</h2>
+<h2>Répondre</h2>
 
 </center>
 
