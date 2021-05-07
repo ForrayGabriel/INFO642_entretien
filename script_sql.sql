@@ -168,7 +168,8 @@ CREATE TABLE IF NOT EXISTS jury (
 
 INSERT INTO jury(idjury,idclassroom,name_jury,meridiem) VALUES
 (1,3,"ALLOUI VALET",CONCAT(CAST(Now()-INTERVAL 1 DAY as date)," 14:00:00")),
-(2,3,"ALLOUI VALET",CONCAT(CAST(Now() as date)," 14:00:00"));
+(2,3,"ALLOUI VALET",CONCAT(CAST(Now() as date)," 14:00:00")),
+(3,3,"ALLOUI VALET",CONCAT(CAST(Now()-INTERVAL 1 MONTH as date)," 14:00:00"));
 
 CREATE TABLE IF NOT EXISTS event (
   idevent int(11) NOT NULL AUTO_INCREMENT,
@@ -182,7 +183,8 @@ CREATE TABLE IF NOT EXISTS event (
 );
 
 INSERT INTO event(idevent,entitled_event,description_event,idevent_creator,start_date,end_date) VALUES
-(1,"Soutenance d'INFO642","Présentation des projets réalisés",10,CAST(Now()-INTERVAL 1 DAY as date), CAST(Now() as date));
+(1,"Soutenance d'INFO642","Présentation des projets réalisés",10,CAST(Now()-INTERVAL 1 DAY as date), CAST(Now() as date)),
+(2,"Soutenance d'INFO635","Présentation des projets réalisés",10,CAST(Now()-INTERVAL 1 MONTH-INTERVAL 1 DAY as date), CAST(Now()-INTERVAL 1 MONTH as date));
 
 CREATE TABLE IF NOT EXISTS notationstate (
   idnotationstate int(11) NOT NULL AUTO_INCREMENT,
@@ -217,7 +219,8 @@ INSERT INTO prestation(idprestation,idstudent,idjury,idevent,date_prestation,sta
 (2,2,1,1,CAST(Now()-INTERVAL 1 DAY as date),"14:20:00","14:40:00","Contenu de la présentation respectée",2),
 (3,3,2,1,CAST(Now() as date),"14:00:00","14:20:00","",1),
 (4,5,2,1,CAST(Now() as date),"14:20:00","14:40:00","",1),
-(5,8,2,1,CAST(Now() as date),"14:40:00","15:00:00","",1);
+(5,8,2,1,CAST(Now() as date),"14:40:00","15:00:00","",1),
+(6,5,3,2,CAST(Now()-INTERVAL 1 MONTH as date),"14:00:00","15:00:00","",3);
 
 CREATE TABLE IF NOT EXISTS compose (
   idcompose int(11) NOT NULL AUTO_INCREMENT,
@@ -232,7 +235,9 @@ INSERT INTO compose(idcompose,idinternaluser,idjury) VALUES
 (1,9,1),
 (2,10,1),
 (3,9,2),
-(4,10,2);
+(4,10,2),
+(5,9,3),
+(6,10,3);
 
 CREATE TABLE IF NOT EXISTS evaluationcriteria (
   idevaluationcriteria int(11) NOT NULL AUTO_INCREMENT,
@@ -264,7 +269,9 @@ INSERT INTO individualevaluation(idindividualevaluation,idprestation,idevaluatio
 (1,1,1,1,"12","Diaporama trop rempli"),
 (2,1,2,2,"18","Surpris par les termes avancés utilisés dans sont oral"),
 (3,2,1,1,"16","Magnifique diaporama"),
-(4,2,2,2,"14","En retrait durant la présentation orale");
+(4,2,2,2,"14","En retrait durant la présentation orale"),
+(5,6,1,1,"14","Diaporama bien réalisé"),
+(6,6,2,1,"15","Bonne présentation dans l'ensemble");
 
 CREATE TABLE IF NOT EXISTS usercontact (
   idusercontact int(11) NOT NULL AUTO_INCREMENT,
