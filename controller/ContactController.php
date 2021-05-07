@@ -89,17 +89,16 @@ class ContactController extends Controller {
 				$group_list = array();
 
 				foreach(InternalUser::findAll() as $user){
-					$user_list[$user->nom . " " .  $user->prenom] = $user->idinternaluser;
+					$user_list["Utilisateur : ".$user->nom . " " .  $user->prenom] = "user-".$user->idinternaluser;
 				}
 
 				foreach(PeopleGroup::findAll() as $group){
-					$group_list[$group->title_peoplegroup] = $group->idpeoplegroup;
+					$group_list["Groupe : ".$group->title_peoplegroup] = "group-".$group->idpeoplegroup;
 				}
 
 				$form_title = "Contacter un utilisateur";
 				$form_content = array(
-					"Utilisateur" => array("type" => "select", "options" => $user_list, "desc" => "Choisir un utilisateur", "!required" => 1),
-					"Groupe Utilisateur" => array("type" => "select", "options" => $group_list, "desc" => "Choisir un groupe d'utilisateur", "!required" => 1),
+					"Utilisateur / Groupe" => array("type" => "select", "options" => array_merge($group_list, $user_list), "desc" => "Choisir un utilisateur ou un groupe d'utilisateur"),
 					"Titre du message"=>array("type" => "text", "placeholder" => "Object de votre demande"),
 					"Contenu du message"=>array("type" => "text-area", "placeholder" => "Entrer le contenu du message")
 
@@ -107,24 +106,22 @@ class ContactController extends Controller {
 				$this->renderComponent("form", ["title" => $form_title, "content" => $form_content]);
 			}
 		}else{
-			if(isset($_POST['Titre_du_message']) && isset($_POST['Contenu_du_message'])){
-
+			if(isset($_POST['Titre_du_message']) && isset($_POST['Contenu_du_message']) && isset(parameters()['Utilisateur_/_Groupe'])){
 				$receivers = array();
-
 				if(is_student() || is_visitor()){
 					foreach(InternalUser::findOne(['idrole' => 3]) as $admin){
 						array_push($receivers, $admin->idinternaluser);
 					}
 				}else{
-					if(isset($_POST['Utilisateur'])){
-						array_push($receivers,$_POST['Utilisateur']);
-					}
-
-					if(isset($_POST['Groupe_Utilisateur'])){
-						$users = BelongGroup::findOne(['idpeoplegroup' => $_POST['Groupe_Utilisateur']]);
+					if(substr(parameters()['Utilisateur_/_Groupe'],0,4) == "user"){
+						array_push($receivers,substr(parameters()['Utilisateur_/_Groupe'],5));
+					} else if (substr(parameters()['Utilisateur_/_Groupe'],0,5) == "group") {
+						$users = BelongGroup::findOne(['idpeoplegroup' => substr(parameters()['Utilisateur_/_Groupe'],6)]);
 						foreach($users as $user){
 							array_push($receivers,$user->idinternaluser->idinternaluser);
 						}
+					} else {
+						go_back();
 					}
 				}
 
