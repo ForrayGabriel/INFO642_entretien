@@ -54,7 +54,6 @@ class Model {
 		try{		
 			$request = db()->prepare("INSERT INTO " . strtolower(get_class($this)) . "(" . implode(',',$fields) .") VALUES (\"" . implode('","',$values) . "\")");
 			$request->execute();
-			print_r($request);
 			return db()->lastInsertId();
 
 		} catch(PDOException $e) {
