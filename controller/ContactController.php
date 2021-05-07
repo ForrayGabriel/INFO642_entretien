@@ -98,7 +98,7 @@ class ContactController extends Controller {
 
 				$form_title = "Contacter un utilisateur";
 				$form_content = array(
-					"Utilisateur / Groupe" => array("type" => "select", "options" => array_merge($group_list, $user_list), "desc" => "Choisir un utilisateur ou un groupe d'utilisateur"),
+					"Utilisateur / Groupe" => array("type" => "select", "options" => array_merge($group_list, $user_list), "desc" => "Choisir un groupe d'utilisateurs ou un utilisateur"),
 					"Titre du message"=>array("type" => "text", "placeholder" => "Object de votre demande"),
 					"Contenu du message"=>array("type" => "text-area", "placeholder" => "Entrer le contenu du message")
 
