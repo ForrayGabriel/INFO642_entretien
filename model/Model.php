@@ -148,7 +148,6 @@ class Model {
 				}
 			}
 		}
-
         $st = db()->prepare($sql);
         $st->execute();
         $list = array();
